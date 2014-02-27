@@ -10,7 +10,7 @@ project(gui_application)
 ##############################################################################
 
 # qt_build provides the qt cmake glue, roscpp the comms for a default talker
-find_package(catkin REQUIRED COMPONENTS qt_build roscpp)
+find_package(catkin REQUIRED COMPONENTS qt_build roscpp api_application)
 include_directories(${catkin_INCLUDE_DIRS})
 # Use this to define what the package will export (e.g. libs, headers).
 # Since the default here is to produce only a binary, we don't worry about
@@ -48,6 +48,10 @@ file(GLOB_RECURSE QT_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINK
 ##############################################################################
 
 add_executable(gui_application ${QT_SOURCES} ${QT_RESOURCES_CPP} ${QT_FORMS_HPP} ${QT_MOC_HPP})
-target_link_libraries(gui_application ${QT_LIBRARIES} ${catkin_LIBRARIES})
+target_link_libraries(gui_application
+  ${QT_LIBRARIES}
+  ${catkin_LIBRARIES}
+  api_application
+)
 install(TARGETS gui_application RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
