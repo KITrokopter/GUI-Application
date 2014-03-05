@@ -14,9 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    quadcoptermodel.cpp
+    quadcoptermodel.cpp \
+    quadcopterdebugdialog.cpp
 
 HEADERS  += mainwindow.hpp \
-    quadcoptermodel.hpp
+    quadcoptermodel.hpp \
+    quadcopterdebugdialog.hpp
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    quadcopterdebugdialog.ui
