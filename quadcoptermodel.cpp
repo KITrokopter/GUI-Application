@@ -34,3 +34,21 @@ QVariant QuadcopterModel::data(const QModelIndex &index, int role) const
     }
 
 }
+
+QVariant QuadcopterModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (orientation == Qt::Horizontal) {
+        switch (section) {
+        case QUADCOPTER_NAME:
+            return QString("Name");
+        case QUADCOPTER_STATUS:
+            return QString("Status");
+        case QUADCOPTER_BATTERY:
+            return QString("Battery");
+        case QUADCOPTER_CONNECTION:
+            return QString("Connection");
+        }
+    }
+    // Invalid column or vertical header.
+    return QVariant();
+}
