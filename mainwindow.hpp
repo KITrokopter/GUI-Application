@@ -5,6 +5,7 @@
 
 #include "quadcoptermodel.hpp"
 #include "quadcopterdebugdialog.hpp"
+#include "quadcoptertrackedfilter.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +26,8 @@ private:
     Ui::MainWindow *ui;
     QuadcopterModel *quadcopterModel;
     QuadcopterDebugDialog *quadcopterDebugDialog;
+    QuadcopterTrackedFilter *trackedFilter, *untrackedFilter;
+
 };
 
 #endif // MAINWINDOW_HPP

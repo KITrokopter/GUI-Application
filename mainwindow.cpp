@@ -4,10 +4,19 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    quadcopterModel(new QuadcopterModel),
-    quadcopterDebugDialog(0)
+    quadcopterModel(new QuadcopterModel(this)),
+    quadcopterDebugDialog(0),
+    trackedFilter(new QuadcopterTrackedFilter(this)),
+    untrackedFilter(new QuadcopterTrackedFilter(this))
 {
     ui->setupUi(this);
+
+    trackedFilter->setSourceModel(quadcopterModel);
+    untrackedFilter->setSourceModel(quadcopterModel);
+    trackedFilter->filterTracked();
+    untrackedFilter->filterUntracked();
+    ui->trackedList->setModel(trackedFilter);
+    ui->untrackedList->setModel(untrackedFilter);
 
     connect(ui->actionQuadcopters, SIGNAL(triggered()), this, SLOT(openQuadcopterDebugDialog()));
 }
@@ -15,9 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete quadcopterModel;
-    if (quadcopterDebugDialog)
-        delete quadcopterDebugDialog;
 }
 
 void MainWindow::openQuadcopterDebugDialog()

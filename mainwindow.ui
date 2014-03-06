@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>384</width>
-    <height>293</height>
+    <width>500</width>
+    <height>351</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,19 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QTableView" name="tableView"/>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>Quadcopters</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QTableView" name="trackedList"/>
+       </item>
+       <item>
+        <widget class="QTableView" name="untrackedList"/>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -25,7 +37,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>384</width>
+     <width>500</width>
      <height>21</height>
     </rect>
    </property>
