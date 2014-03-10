@@ -16,12 +16,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     quadcoptermodel.cpp \
     quadcopterdebugdialog.cpp \
-    quadcoptertrackedfilter.cpp
+    quadcoptertrackedfilter.cpp \
+    quadcopterdetaildialog.cpp
 
 HEADERS  += mainwindow.hpp \
     quadcoptermodel.hpp \
     quadcopterdebugdialog.hpp \
-    quadcoptertrackedfilter.hpp
+    quadcoptertrackedfilter.hpp \
+    quadcopterdetaildialog.hpp
 
 FORMS    += mainwindow.ui \
-    quadcopterdebugdialog.ui
+    quadcopterdebugdialog.ui \
+    quadcopterdetaildialog.ui

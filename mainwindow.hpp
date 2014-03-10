@@ -21,6 +21,7 @@ public:
 
 public slots:
     void openQuadcopterDebugDialog();
+    void openQuadcopterDetailDialog(QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;

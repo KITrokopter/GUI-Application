@@ -1,5 +1,6 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
+#include "quadcopterdetaildialog.hpp"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->untrackedList->setModel(untrackedFilter);
 
     connect(ui->actionQuadcopters, SIGNAL(triggered()), this, SLOT(openQuadcopterDebugDialog()));
+    connect(ui->trackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex&)));
 }
 
 MainWindow::~MainWindow()
@@ -35,4 +37,13 @@ void MainWindow::openQuadcopterDebugDialog()
     quadcopterDebugDialog->show();
     quadcopterDebugDialog->raise();
     quadcopterDebugDialog->activateWindow();
+}
+
+void MainWindow::openQuadcopterDetailDialog(QModelIndex &index)
+{
+    QuadcopterDetailDialog *dialog = new QuadcopterDetailDialog(this);
+    dialog->setSourceModel(quadcopterModel, index.row());
+    dialog->show();
+    dialog->raise();
+    dialog->activateWindow();
 }
