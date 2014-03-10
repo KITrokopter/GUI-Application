@@ -1,4 +1,5 @@
 #include "quadcoptermodel.hpp"
+#include <QColor.h>
 
 int QuadcopterModel::rowCount(const QModelIndex &parent) const
 {
@@ -13,26 +14,35 @@ int QuadcopterModel::columnCount(const QModelIndex &parent) const
 /**
  * @brief Provides fake data about Quadcopters.
  * @param index model index
- * @param role ignored for now
+ * @param role Qt::DisplayRole or Qt::DecorationRole
  * @return fake data
  */
 QVariant QuadcopterModel::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
-    switch (index.column()) {
-    case QUADCOPTER_NAME:
-        return QString("Q") + QString::number(row);
-    case QUADCOPTER_STATUS:
-        return row % 2 ? QString("tracked") : QString("untracked");
-    case QUADCOPTER_BATTERY:
-        return QString::number(row * 5);
-    case QUADCOPTER_CONNECTION:
-        return QString::number(row * 7);
+    switch (role) {
+    // "The key data to be rendered in the form of text"
+    case Qt::DisplayRole:
+        switch (index.column()) {
+        case QUADCOPTER_NAME:
+            return QString("Q") + QString::number(row);
+        case QUADCOPTER_STATUS:
+            return row % 2 ? QString("tracked") : QString("untracked");
+        case QUADCOPTER_BATTERY:
+            return QString::number(row * 5);
+        case QUADCOPTER_CONNECTION:
+            return QString::number(row * 7);
+        default:
+            // Invalid column.
+            return QVariant();
+        }
+    // "The data to be rendered as a decoration in the form of an icon"
+    case Qt::DecorationRole:
+        return QColor(row * 20, row * 50, row * 30);
     default:
-        // Invalid column.
+        // We don't implement other display roles.
         return QVariant();
     }
-
 }
 
 QVariant QuadcopterModel::headerData(int section, Qt::Orientation orientation, int role) const
