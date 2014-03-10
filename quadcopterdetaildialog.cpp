@@ -5,7 +5,8 @@
 
 QuadcopterDetailDialog::QuadcopterDetailDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::QuadcopterDetailDialog)
+    ui(new Ui::QuadcopterDetailDialog),
+    model(NULL)
 {
     ui->setupUi(this);
 }
@@ -17,9 +18,12 @@ QuadcopterDetailDialog::~QuadcopterDetailDialog()
 
 void QuadcopterDetailDialog::setSourceModel(QuadcopterModel *model, int row)
 {
+    if (this->model)
+        disconnect(this->model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(renderModel()));
     this->model = model;
     this->row = row;
     renderModel();
+    connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(renderModel()));
 }
 
 void QuadcopterDetailDialog::renderModel()

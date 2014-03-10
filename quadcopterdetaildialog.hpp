@@ -18,10 +18,10 @@ public:
 
     void setSourceModel(QuadcopterModel *model, int row);
 
-private:
-
+private slots:
     void renderModel();
 
+private:
     Ui::QuadcopterDetailDialog *ui;
 
     QuadcopterModel *model;
