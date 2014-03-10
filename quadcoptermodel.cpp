@@ -1,5 +1,5 @@
 #include "quadcoptermodel.hpp"
-#include <QColor.h>
+#include <QColor>
 
 int QuadcopterModel::rowCount(const QModelIndex &parent) const
 {
