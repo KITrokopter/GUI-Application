@@ -15,7 +15,8 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QFormLayout" name="attributes"/>
+     <layout class="QGridLayout" name="attributes">
+     </layout>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">

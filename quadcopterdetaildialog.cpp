@@ -34,8 +34,8 @@ void QuadcopterDetailDialog::renderModel()
         } else {
             label = new QLabel(this);
             content = new QLabel(this);
-            ui->attributes->addWidget(label);
-            ui->attributes->addWidget(content);
+            ui->attributes->addWidget(label, col, 0);
+            ui->attributes->addWidget(content, col, 1);
         }
         QModelIndex index = model->index(row, col);
         label->setText(model->headerData(col, Qt::Horizontal, Qt::DisplayRole).toString());
