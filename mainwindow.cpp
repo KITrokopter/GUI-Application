@@ -8,7 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     quadcopterModel(new QuadcopterModel(this)),
     quadcopterDebugDialog(0),
     trackedFilter(new QuadcopterTrackedFilter(this)),
-    untrackedFilter(new QuadcopterTrackedFilter(this))
+    untrackedFilter(new QuadcopterTrackedFilter(this)),
+    calibrationDialog(0)
 {
     ui->setupUi(this);
 
@@ -22,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionQuadcopters, SIGNAL(triggered()), this, SLOT(openQuadcopterDebugDialog()));
     connect(ui->trackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));
     connect(ui->untrackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));
+
+    connect(ui->calibrateCamerasButton, SIGNAL(clicked()), this, SLOT(openCalibrationDialog()));
 }
 
 MainWindow::~MainWindow()
@@ -48,4 +51,14 @@ void MainWindow::openQuadcopterDetailDialog(const QModelIndex &index)
     dialog->show();
     dialog->raise();
     dialog->activateWindow();
+}
+
+void MainWindow::openCalibrationDialog()
+{
+    if (!calibrationDialog) {
+        calibrationDialog = new CalibrationDialog(this);
+    }
+    calibrationDialog->show();
+    calibrationDialog->raise();
+    calibrationDialog->activateWindow();
 }

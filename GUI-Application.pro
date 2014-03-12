@@ -17,14 +17,20 @@ SOURCES += main.cpp\
     quadcoptermodel.cpp \
     quadcopterdebugdialog.cpp \
     quadcoptertrackedfilter.cpp \
-    quadcopterdetaildialog.cpp
+    quadcopterdetaildialog.cpp \
+    calibrationdialog.cpp \
+    singlecalibrationwidget.cpp
 
 HEADERS  += mainwindow.hpp \
     quadcoptermodel.hpp \
     quadcopterdebugdialog.hpp \
     quadcoptertrackedfilter.hpp \
-    quadcopterdetaildialog.hpp
+    quadcopterdetaildialog.hpp \
+    calibrationdialog.hpp \
+    singlecalibrationwidget.hpp
 
 FORMS    += mainwindow.ui \
     quadcopterdebugdialog.ui \
-    quadcopterdetaildialog.ui
+    quadcopterdetaildialog.ui \
+    calibrationdialog.ui \
+    singlecalibrationwidget.ui

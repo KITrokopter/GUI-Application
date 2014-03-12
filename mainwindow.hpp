@@ -7,6 +7,8 @@
 #include "quadcopterdebugdialog.hpp"
 #include "quadcoptertrackedfilter.hpp"
 
+#include "calibrationdialog.hpp"
+
 namespace Ui {
 class MainWindow;
 }
@@ -20,14 +22,23 @@ public:
     ~MainWindow();
 
 public slots:
+    // Quadcopter dialogs
     void openQuadcopterDebugDialog();
     void openQuadcopterDetailDialog(const QModelIndex &index);
 
+    // Camera calibration dialogs
+    void openCalibrationDialog();
+
 private:
     Ui::MainWindow *ui;
+
+    // Quadcopter handling
     QuadcopterModel *quadcopterModel;
     QuadcopterDebugDialog *quadcopterDebugDialog;
     QuadcopterTrackedFilter *trackedFilter, *untrackedFilter;
+
+    // Calibration
+    CalibrationDialog *calibrationDialog;
 
 };
 
