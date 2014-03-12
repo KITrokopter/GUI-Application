@@ -45,4 +45,7 @@ void QuadcopterDetailDialog::renderModel()
         label->setText(model->headerData(col, Qt::Horizontal, Qt::DisplayRole).toString());
         content->setText(model->data(index, Qt::DisplayRole).toString());
     }
+
+    // Set Dialog title to the quadcopter's name.
+    setWindowTitle(model->data(model->index(row, 0)).toString());
 }
