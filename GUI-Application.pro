@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     quadcoptertrackedfilter.cpp \
     quadcopterdetaildialog.cpp \
     calibrationdialog.cpp \
-    singlecalibrationwidget.cpp
+    singlecalibrationwidget.cpp \
+    cameramodel.cpp
 
 HEADERS  += mainwindow.hpp \
     quadcoptermodel.hpp \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.hpp \
     quadcoptertrackedfilter.hpp \
     quadcopterdetaildialog.hpp \
     calibrationdialog.hpp \
-    singlecalibrationwidget.hpp
+    singlecalibrationwidget.hpp \
+    cameramodel.hpp
 
 FORMS    += mainwindow.ui \
     quadcopterdebugdialog.ui \

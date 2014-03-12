@@ -2,6 +2,7 @@
 #include "ui_calibrationdialog.h"
 
 #include "singlecalibrationwidget.hpp"
+#include "cameramodel.hpp"
 
 CalibrationDialog::CalibrationDialog(QWidget *parent) :
     QDialog(parent),
@@ -9,7 +10,8 @@ CalibrationDialog::CalibrationDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    SingleCalibrationWidget *widget = new SingleCalibrationWidget(this);
+    CameraModel *model = new CameraModel(this);
+    SingleCalibrationWidget *widget = new SingleCalibrationWidget(this, model);
     ui->tabWidget->addTab(widget, "Camera 1");
 }
 

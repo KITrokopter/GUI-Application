@@ -2,21 +2,26 @@
 #define SINGLECALIBRATIONWIDGET_HPP
 
 #include <QWidget>
+#include <QPixmap>
 
 namespace Ui {
 class SingleCalibrationWidget;
 }
+
+class CameraModel;
 
 class SingleCalibrationWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit SingleCalibrationWidget(QWidget *parent = 0);
+    SingleCalibrationWidget(QWidget *parent, CameraModel *model);
     ~SingleCalibrationWidget();
 
 private:
     Ui::SingleCalibrationWidget *ui;
+
+    CameraModel *model;
 };
 
 #endif // SINGLECALIBRATIONWIDGET_HPP
