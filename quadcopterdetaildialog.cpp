@@ -16,7 +16,7 @@ QuadcopterDetailDialog::~QuadcopterDetailDialog()
     delete ui;
 }
 
-void QuadcopterDetailDialog::setSourceModel(QuadcopterModel *model, int row)
+void QuadcopterDetailDialog::setSourceModel(const QAbstractItemModel *model, int row)
 {
     if (this->model)
         disconnect(this->model, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(renderModel()));

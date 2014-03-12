@@ -16,7 +16,7 @@ public:
     explicit QuadcopterDetailDialog(QWidget *parent = 0);
     ~QuadcopterDetailDialog();
 
-    void setSourceModel(QuadcopterModel *model, int row);
+    void setSourceModel(const QAbstractItemModel *model, int row);
 
 private slots:
     void renderModel();
@@ -24,7 +24,7 @@ private slots:
 private:
     Ui::QuadcopterDetailDialog *ui;
 
-    QuadcopterModel *model;
+    const QAbstractItemModel *model;
     int row;
 };
 

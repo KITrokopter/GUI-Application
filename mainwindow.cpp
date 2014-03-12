@@ -20,7 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->untrackedList->setModel(untrackedFilter);
 
     connect(ui->actionQuadcopters, SIGNAL(triggered()), this, SLOT(openQuadcopterDebugDialog()));
-    connect(ui->trackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex&)));
+    connect(ui->trackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));
+    connect(ui->untrackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));
 }
 
 MainWindow::~MainWindow()
@@ -39,10 +40,10 @@ void MainWindow::openQuadcopterDebugDialog()
     quadcopterDebugDialog->activateWindow();
 }
 
-void MainWindow::openQuadcopterDetailDialog(QModelIndex &index)
+void MainWindow::openQuadcopterDetailDialog(const QModelIndex &index)
 {
     QuadcopterDetailDialog *dialog = new QuadcopterDetailDialog(this);
-    dialog->setSourceModel(quadcopterModel, index.row());
+    dialog->setSourceModel(index.model(), index.row());
     dialog->show();
     dialog->raise();
     dialog->activateWindow();
