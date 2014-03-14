@@ -16,3 +16,8 @@ const QPixmap& CameraModel::image()
 {
     return m_image;
 }
+
+void CameraModel::setImageType(CameraImageType type)
+{
+    m_imageType = type;
+}
