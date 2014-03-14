@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>628</width>
-    <height>534</height>
+    <height>540</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -107,7 +107,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="ColumnCountSpinBox">
+            <widget class="QSpinBox" name="columnCountSpinBox">
              <property name="minimum">
               <number>2</number>
              </property>

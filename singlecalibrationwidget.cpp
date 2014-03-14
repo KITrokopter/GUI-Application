@@ -17,6 +17,9 @@ SingleCalibrationWidget::SingleCalibrationWidget(QWidget *parent, CameraModel *m
 
     connect(ui->showSourceRadio, SIGNAL(pressed()), this, SLOT(setSourceImageType()));
     connect(ui->showCorrectedRadio, SIGNAL(pressed()), this, SLOT(setCorrectedImageType()));
+
+    connect(ui->calibrateButton, SIGNAL(clicked()), this, SLOT(calibrate()));
+    connect(ui->deleteCalibrationButton, SIGNAL(clicked()), this, SLOT(deleteCalibration()));
 }
 
 SingleCalibrationWidget::~SingleCalibrationWidget()
@@ -32,4 +35,20 @@ void SingleCalibrationWidget::setSourceImageType()
 void SingleCalibrationWidget::setCorrectedImageType()
 {
     model->setImageType(CameraModel::CorrectedImage);
+}
+
+void SingleCalibrationWidget::calibrate()
+{
+    // Get calibration parameters.
+    int rowCount, columnCount, fieldWidth, fieldHeight;
+    rowCount = ui->rowCountSpinBox->value();
+    columnCount = ui->columnCountSpinBox->value();
+    fieldWidth = ui->fieldWidthSpinBox->value();
+    fieldHeight = ui->fieldHeightSpinBox->value();
+    // TODO: Do the calibration API call...
+}
+
+void SingleCalibrationWidget::deleteCalibration()
+{
+    // TODO: API call delete calibration...
 }
