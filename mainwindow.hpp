@@ -29,6 +29,9 @@ public slots:
     // Camera calibration dialogs
     void openCalibrationDialog();
 
+    // Joystick debugging
+    void openJoystickDebugDialog();
+
 private:
     Ui::MainWindow *ui;
 

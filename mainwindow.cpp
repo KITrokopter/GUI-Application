@@ -1,6 +1,7 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 #include "quadcopterdetaildialog.hpp"
+#include "joystickdebugdialog.hpp"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -25,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->untrackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));
 
     connect(ui->calibrateCamerasButton, SIGNAL(clicked()), this, SLOT(openCalibrationDialog()));
+
+    connect(ui->actionJoystick, SIGNAL(triggered()), this, SLOT(openJoystickDebugDialog()));
 }
 
 MainWindow::~MainWindow()
@@ -61,4 +64,12 @@ void MainWindow::openCalibrationDialog()
     calibrationDialog->show();
     calibrationDialog->raise();
     calibrationDialog->activateWindow();
+}
+
+void MainWindow::openJoystickDebugDialog()
+{
+    JoystickDebugDialog *dialog = new JoystickDebugDialog(this);
+    dialog->show();
+    dialog->raise();
+    dialog->activateWindow();
 }

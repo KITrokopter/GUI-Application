@@ -183,6 +183,7 @@
      <string>Debug</string>
     </property>
     <addaction name="actionQuadcopters"/>
+    <addaction name="actionJoystick"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDebug"/>
@@ -204,6 +205,11 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionJoystick">
+   <property name="text">
+    <string>Joystick</string>
    </property>
   </action>
  </widget>

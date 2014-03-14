@@ -11,6 +11,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = GUI-Application
 TEMPLATE = app
 
+INCLUDEPATH = C:\Qt\Tools\mingw48_32\include
+LIBS += -lSDL2
+
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -20,7 +23,9 @@ SOURCES += main.cpp\
     quadcopterdetaildialog.cpp \
     calibrationdialog.cpp \
     singlecalibrationwidget.cpp \
-    cameramodel.cpp
+    cameramodel.cpp \
+    joystick.cpp \
+    joystickdebugdialog.cpp
 
 HEADERS  += mainwindow.hpp \
     quadcoptermodel.hpp \
@@ -29,10 +34,13 @@ HEADERS  += mainwindow.hpp \
     quadcopterdetaildialog.hpp \
     calibrationdialog.hpp \
     singlecalibrationwidget.hpp \
-    cameramodel.hpp
+    cameramodel.hpp \
+    joystick.hpp \
+    joystickdebugdialog.hpp
 
 FORMS    += mainwindow.ui \
     quadcopterdebugdialog.ui \
     quadcopterdetaildialog.ui \
     calibrationdialog.ui \
-    singlecalibrationwidget.ui
+    singlecalibrationwidget.ui \
+    joystickdebugdialog.ui
