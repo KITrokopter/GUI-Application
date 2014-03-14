@@ -34,36 +34,30 @@ JoystickDebugDialog::~JoystickDebugDialog()
     delete ui;
 }
 
-void JoystickDebugDialog::updateAxis(int num, int val)
+template<typename T>
+void JoystickDebugDialog::updateTable(QTableWidget *table, int num, T val)
 {
-    if (ui->axisTable->rowCount() < num)
-        ui->axisTable->setRowCount(num + 1);
+    if (table->rowCount() < num)
+        table->setRowCount(num + 1);
     QTableWidgetItem *numItem, *valItem;
-    numItem = ui->axisTable->item(num, 0);
-    valItem = ui->axisTable->item(num, 1);
+    numItem = table->item(num, 0);
+    valItem = table->item(num, 1);
     if (!numItem) {
         numItem = new QTableWidgetItem();
         valItem = new QTableWidgetItem();
-        ui->axisTable->setItem(num, 0, numItem);
-        ui->axisTable->setItem(num, 1, valItem);
+        table->setItem(num, 0, numItem);
+        table->setItem(num, 1, valItem);
     }
     numItem->setText(QVariant(num).toString());
     valItem->setText(QVariant(val).toString());
 }
 
+void JoystickDebugDialog::updateAxis(int num, int val)
+{
+    updateTable(ui->axisTable, num, val);
+}
+
 void JoystickDebugDialog::updateButton(int num, bool val)
 {
-    if (ui->buttonTable->rowCount() < num)
-        ui->buttonTable->setRowCount(num + 1);
-    QTableWidgetItem *numItem, *valItem;
-    numItem = ui->buttonTable->item(num, 0);
-    valItem = ui->buttonTable->item(num, 1);
-    if (!numItem) {
-        numItem = new QTableWidgetItem();
-        valItem = new QTableWidgetItem();
-        ui->buttonTable->setItem(num, 0, numItem);
-        ui->buttonTable->setItem(num, 1, valItem);
-    }
-    numItem->setText(QVariant(num).toString());
-    valItem->setText(QVariant(val).toString());
+    updateTable(ui->buttonTable, num, val);
 }

@@ -21,6 +21,9 @@ private slots:
 
 private:
     Ui::JoystickDebugDialog *ui;
+
+    template<typename T>
+    void updateTable(QTableWidget *table, int num, T val);
 };
 
 #endif // JOYSTICKDEBUGDIALOG_HPP
