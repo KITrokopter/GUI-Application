@@ -7,7 +7,8 @@
 
 JoystickDebugDialog::JoystickDebugDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::JoystickDebugDialog)
+    ui(new Ui::JoystickDebugDialog),
+    joystick(new Joystick(this))
 {
     ui->setupUi(this);
 
@@ -19,11 +20,12 @@ JoystickDebugDialog::JoystickDebugDialog(QWidget *parent) :
     ui->axisTable->setHorizontalHeaderItem(1, valHeader);
     ui->buttonTable->setHorizontalHeaderItem(1, valHeader);
 
-    Joystick *joystick = new Joystick(this);
     bool open = joystick->open(0);
     if (!open) {
         QMessageBox::critical(this, "Joystick Error", "Could not open Joystick 0.");
     }
+
+    ui->comboBox->insertItems(0, joystick->joystickNames);
 
     connect(joystick, SIGNAL(axisValueChanged(int,int)), this, SLOT(updateAxis(int,int)));
     connect(joystick, SIGNAL(buttonValueChanged(int,bool)), this, SLOT(updateButton(int,bool)));

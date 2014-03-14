@@ -2,10 +2,13 @@
 #define JOYSTICKDEBUGDIALOG_HPP
 
 #include <QDialog>
+#include <QTableWidget>
 
 namespace Ui {
 class JoystickDebugDialog;
 }
+
+class Joystick;
 
 class JoystickDebugDialog : public QDialog
 {
@@ -21,6 +24,8 @@ private slots:
 
 private:
     Ui::JoystickDebugDialog *ui;
+
+    Joystick *joystick;
 
     template<typename T>
     void updateTable(QTableWidget *table, int num, T val);
