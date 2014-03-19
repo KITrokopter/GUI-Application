@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QMap>
 #include <QTimer>
+
+// Fix warnings about main redefinition.
+#define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 
 class Gamepad : public QObject
