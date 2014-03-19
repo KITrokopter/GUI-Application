@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     cameramodel.cpp \
     joystickdebugdialog.cpp \
     gamepad.cpp \
-    movementcontroller.cpp
+    movementcontroller.cpp \
+    globalcalibrationwidget.cpp
 
 HEADERS  += mainwindow.hpp \
     quadcoptermodel.hpp \
@@ -38,11 +39,13 @@ HEADERS  += mainwindow.hpp \
     cameramodel.hpp \
     joystickdebugdialog.hpp \
     gamepad.hpp \
-    movementcontroller.hpp
+    movementcontroller.hpp \
+    globalcalibrationwidget.hpp
 
 FORMS    += mainwindow.ui \
     quadcopterdebugdialog.ui \
     quadcopterdetaildialog.ui \
     calibrationdialog.ui \
     singlecalibrationwidget.ui \
-    joystickdebugdialog.ui
+    joystickdebugdialog.ui \
+    globalcalibrationwidget.ui
