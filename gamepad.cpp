@@ -9,7 +9,6 @@ Gamepad::Gamepad(QObject *parent) :
     if (SDL_Init(SDL_INIT_GAMECONTROLLER)) {
         throw SDL_GetError();
     }
-    SDL_GameControllerAddMapping("5e048e02000000000000504944564944,XBOX 360 For Windows (Controller),platform:Windows,x:b2,a:b0,b:b1,y:b3,back:b6,start:b7,dpleft:h0.8,dpdown:h0.0,dpdown:h0.4,dpright:h0.0,dpright:h0.2,dpup:h0.0,dpup:h0.1,leftshoulder:h0.0,leftshoulder:b4,lefttrigger:a2,rightshoulder:b5,dpup:h0.1,leftshoulder:h0.0,leftshoulder:b4,lefttrigger:a2,rightshoulder:b5,leftstick:b8,rightstick:b9,leftx:a0,lefty:a1,rightx:a3,righty:a4,");
     connect(&timer, SIGNAL(timeout()), this, SLOT(eventTick()));
 }
 
