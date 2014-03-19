@@ -3,6 +3,7 @@
 #include "quadcopterdetaildialog.hpp"
 #include "joystickdebugdialog.hpp"
 #include "gamepad.hpp"
+#include "movementcontroller.hpp"
 
 #include <QMessageBox>
 
@@ -54,6 +55,10 @@ void MainWindow::initGamepad()
         gamepad->open(it.key());
         ui->statusBar->showMessage(QString("Gamepad %1 connected.").arg(it.value()));
     }
+    // Wire up the movement controller.
+    MovementController *ctrl = new MovementController(this);
+    connect(gamepad, SIGNAL(axisValueChanged(int,int)), ctrl, SLOT(axisValueChanged(int,int)));
+    connect(gamepad, SIGNAL(buttonValueChanged(int,bool)), ctrl, SLOT(buttonValueChanged(int,bool)));
 }
 
 void MainWindow::openQuadcopterDebugDialog()
