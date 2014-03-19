@@ -57,6 +57,9 @@ void Gamepad::eventTick()
     for (int i = 0; i < SDL_CONTROLLER_AXIS_MAX; i++) {
         SDL_GameControllerAxis axis = (SDL_GameControllerAxis)i;
         Sint16 pos = SDL_GameControllerGetAxis(controller, axis);
+        // Snap axis to 0 for the two analog sticks, but not for the triggers.
+        if (abs(pos) < THRESHOLD && axis < SDL_CONTROLLER_AXIS_TRIGGERLEFT)
+            pos = 0;
         if (pos != axes[axis])
             emit axisValueChanged(axis, pos);
         axes[axis] = pos;

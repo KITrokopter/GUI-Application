@@ -10,6 +10,10 @@ class Gamepad : public QObject
 {
     Q_OBJECT
 public:
+    /// The threshold for snapping axis input to zero.
+    static const int THRESHOLD = 6000;
+
+
     explicit Gamepad(QObject *parent = 0);
     ~Gamepad();
 
