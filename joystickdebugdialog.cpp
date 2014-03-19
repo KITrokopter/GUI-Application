@@ -25,8 +25,12 @@ JoystickDebugDialog::JoystickDebugDialog(QWidget *parent) :
         QMessageBox::critical(this, "Joystick Error", "Could not open Joystick 0.");
     }
 
-    ui->comboBox->insertItems(0, joystick->getGamepadNames().values());
+    QMap<int, QString> names = joystick->getGamepadNames();
+    for (QMap<int, QString>::const_iterator it = names.constBegin(); it != names.constEnd(); ++it) {
+        ui->comboBox->addItem(it.value(), it.key());
+    }
 
+    connect(ui->comboBox, SIGNAL(activated(int)), this, SLOT(openGamepad(int)));
     connect(joystick, SIGNAL(axisValueChanged(int,int)), this, SLOT(updateAxis(int,int)));
     connect(joystick, SIGNAL(buttonValueChanged(int,bool)), this, SLOT(updateButton(int,bool)));
 }
@@ -34,6 +38,11 @@ JoystickDebugDialog::JoystickDebugDialog(QWidget *parent) :
 JoystickDebugDialog::~JoystickDebugDialog()
 {
     delete ui;
+}
+
+void JoystickDebugDialog::openGamepad(int comboBoxId)
+{
+    joystick->open(ui->comboBox->itemData(comboBoxId).toInt());
 }
 
 template<typename T>

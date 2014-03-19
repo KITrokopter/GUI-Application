@@ -19,6 +19,7 @@ public:
     ~JoystickDebugDialog();
 
 private slots:
+    void openGamepad(int);
     void updateAxis(int, int);
     void updateButton(int, bool);
 
