@@ -8,7 +8,7 @@ namespace Ui {
 class JoystickDebugDialog;
 }
 
-class Joystick;
+class Gamepad;
 
 class JoystickDebugDialog : public QDialog
 {
@@ -25,7 +25,7 @@ private slots:
 private:
     Ui::JoystickDebugDialog *ui;
 
-    Joystick *joystick;
+    Gamepad *joystick;
 
     template<typename T>
     void updateTable(QTableWidget *table, int num, T val);

@@ -3,12 +3,12 @@
 
 #include <QMessageBox>
 
-#include "joystick.hpp"
+#include "gamepad.hpp"
 
 JoystickDebugDialog::JoystickDebugDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::JoystickDebugDialog),
-    joystick(new Joystick(this))
+    joystick(new Gamepad(this))
 {
     ui->setupUi(this);
 
@@ -25,7 +25,7 @@ JoystickDebugDialog::JoystickDebugDialog(QWidget *parent) :
         QMessageBox::critical(this, "Joystick Error", "Could not open Joystick 0.");
     }
 
-    ui->comboBox->insertItems(0, joystick->joystickNames);
+    ui->comboBox->insertItems(0, joystick->getGamepadNames().values());
 
     connect(joystick, SIGNAL(axisValueChanged(int,int)), this, SLOT(updateAxis(int,int)));
     connect(joystick, SIGNAL(buttonValueChanged(int,bool)), this, SLOT(updateButton(int,bool)));
