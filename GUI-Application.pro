@@ -24,7 +24,6 @@ SOURCES += main.cpp\
     calibrationdialog.cpp \
     singlecalibrationwidget.cpp \
     cameramodel.cpp \
-    joystick.cpp \
     joystickdebugdialog.cpp \
     gamepad.cpp
 
@@ -36,7 +35,6 @@ HEADERS  += mainwindow.hpp \
     calibrationdialog.hpp \
     singlecalibrationwidget.hpp \
     cameramodel.hpp \
-    joystick.hpp \
     joystickdebugdialog.hpp \
     gamepad.hpp
 
