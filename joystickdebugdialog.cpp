@@ -1,14 +1,12 @@
 #include "joystickdebugdialog.hpp"
 #include "ui_joystickdebugdialog.h"
 
-#include <QMessageBox>
-
 #include "gamepad.hpp"
 
-JoystickDebugDialog::JoystickDebugDialog(QWidget *parent) :
+JoystickDebugDialog::JoystickDebugDialog(QWidget *parent, Gamepad *gamepad) :
     QDialog(parent),
     ui(new Ui::JoystickDebugDialog),
-    joystick(new Gamepad(this))
+    joystick(gamepad)
 {
     ui->setupUi(this);
 
@@ -19,11 +17,6 @@ JoystickDebugDialog::JoystickDebugDialog(QWidget *parent) :
     ui->buttonTable->setHorizontalHeaderItem(0, numHeader);
     ui->axisTable->setHorizontalHeaderItem(1, valHeader);
     ui->buttonTable->setHorizontalHeaderItem(1, valHeader);
-
-    bool open = joystick->open(0);
-    if (!open) {
-        QMessageBox::critical(this, "Joystick Error", "Could not open Joystick 0.");
-    }
 
     QMap<int, QString> names = joystick->getGamepadNames();
     for (QMap<int, QString>::const_iterator it = names.constBegin(); it != names.constEnd(); ++it) {

@@ -13,6 +13,8 @@ namespace Ui {
 class MainWindow;
 }
 
+class Gamepad;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -33,7 +35,12 @@ public slots:
     void openJoystickDebugDialog();
 
 private:
+    void initGamepad();
+
     Ui::MainWindow *ui;
+
+    // Gamepad input
+    Gamepad *gamepad;
 
     // Quadcopter handling
     QuadcopterModel *quadcopterModel;

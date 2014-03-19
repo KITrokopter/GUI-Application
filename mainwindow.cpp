@@ -2,10 +2,14 @@
 #include "ui_mainwindow.h"
 #include "quadcopterdetaildialog.hpp"
 #include "joystickdebugdialog.hpp"
+#include "gamepad.hpp"
+
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    gamepad(new Gamepad(this)),
     quadcopterModel(new QuadcopterModel(this)),
     quadcopterDebugDialog(0),
     trackedFilter(new QuadcopterTrackedFilter(this)),
@@ -13,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     calibrationDialog(0)
 {
     ui->setupUi(this);
+
+    initGamepad();
 
     trackedFilter->setSourceModel(quadcopterModel);
     untrackedFilter->setSourceModel(quadcopterModel);
@@ -33,6 +39,21 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+/**
+ * @brief Tries to open the first available gamepad, displaying an error message if this isn't possible.
+ */
+void MainWindow::initGamepad()
+{
+    QMap<int, QString> gamepads = gamepad->getGamepadNames();
+    if (gamepads.empty()) {
+        QMessageBox::critical(this, "Gamepad Error", "No suitable gamepad found.");
+    } else {
+        QMap<int, QString>::const_iterator it = gamepads.constBegin();
+        gamepad->open(it.key());
+        ui->statusBar->showMessage(QString("Gamepad %1 connected.").arg(it.value()));
+    }
 }
 
 void MainWindow::openQuadcopterDebugDialog()
@@ -68,7 +89,7 @@ void MainWindow::openCalibrationDialog()
 
 void MainWindow::openJoystickDebugDialog()
 {
-    JoystickDebugDialog *dialog = new JoystickDebugDialog(this);
+    JoystickDebugDialog *dialog = new JoystickDebugDialog(this, gamepad);
     dialog->show();
     dialog->raise();
     dialog->activateWindow();

@@ -15,7 +15,7 @@ class JoystickDebugDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit JoystickDebugDialog(QWidget *parent = 0);
+    explicit JoystickDebugDialog(QWidget *parent, Gamepad *gamepad);
     ~JoystickDebugDialog();
 
 private slots:
