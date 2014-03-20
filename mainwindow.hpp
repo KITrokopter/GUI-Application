@@ -34,6 +34,9 @@ public slots:
     // Gamepad debugging
     void openGamepadDebugDialog();
 
+    // About dialog
+    void openAboutDialog();
+
 private:
     void initGamepad();
 

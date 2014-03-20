@@ -4,6 +4,7 @@
 #include "gamepaddebugdialog.hpp"
 #include "gamepad.hpp"
 #include "movementcontroller.hpp"
+#include "aboutdialog.hpp"
 
 #include <QMessageBox>
 
@@ -37,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->calibrateCamerasButton, SIGNAL(clicked()), this, SLOT(openCalibrationDialog()));
 
     connect(ui->actionGamepad, SIGNAL(triggered()), this, SLOT(openGamepadDebugDialog()));
+    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(openAboutDialog()));
 }
 
 MainWindow::~MainWindow()
@@ -97,6 +99,14 @@ void MainWindow::openCalibrationDialog()
 void MainWindow::openGamepadDebugDialog()
 {
     GamepadDebugDialog *dialog = new GamepadDebugDialog(this, gamepad);
+    dialog->show();
+    dialog->raise();
+    dialog->activateWindow();
+}
+
+void MainWindow::openAboutDialog()
+{
+    AboutDialog *dialog = new AboutDialog(this);
     dialog->show();
     dialog->raise();
     dialog->activateWindow();
