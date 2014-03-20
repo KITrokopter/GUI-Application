@@ -10,13 +10,11 @@ GamepadDebugDialog::GamepadDebugDialog(QWidget *parent, Gamepad *gamepad) :
 {
     ui->setupUi(this);
 
-    QTableWidgetItem *numHeader, *valHeader;
-    numHeader = new QTableWidgetItem("Number");
-    valHeader = new QTableWidgetItem("Value");
-    ui->axisTable->setHorizontalHeaderItem(0, numHeader);
-    ui->buttonTable->setHorizontalHeaderItem(0, numHeader);
-    ui->axisTable->setHorizontalHeaderItem(1, valHeader);
-    ui->buttonTable->setHorizontalHeaderItem(1, valHeader);
+    QTableWidgetItem numHeader("Number"), valHeader("Value");
+    ui->axisTable->setHorizontalHeaderItem(0, new QTableWidgetItem(numHeader));
+    ui->axisTable->setHorizontalHeaderItem(1, new QTableWidgetItem(valHeader));
+    ui->buttonTable->setHorizontalHeaderItem(0, new QTableWidgetItem(numHeader));
+    ui->buttonTable->setHorizontalHeaderItem(1, new QTableWidgetItem(valHeader));
 
     QMap<int, QString> names = gamepad->getGamepadNames();
     for (QMap<int, QString>::const_iterator it = names.constBegin(); it != names.constEnd(); ++it) {
