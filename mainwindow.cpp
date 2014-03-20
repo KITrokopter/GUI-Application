@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->mainToolBar->hide();
+
     initGamepad();
 
     trackedFilter->setSourceModel(quadcopterModel);
