@@ -21,6 +21,10 @@ public:
 private slots:
     void renderModel();
 
+    // Input slots
+    void setFlightSelection(bool);
+    void blink();
+
 private:
     Ui::QuadcopterDetailDialog *ui;
 

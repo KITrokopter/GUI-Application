@@ -47,5 +47,15 @@ void QuadcopterDetailDialog::renderModel()
     }
 
     // Set Dialog title to the quadcopter's name.
-    setWindowTitle(model->data(model->index(row, 0)).toString());
+    setWindowTitle(QString("%1 Status").arg(model->data(model->index(row, 0)).toString()));
+}
+
+void QuadcopterDetailDialog::setFlightSelection(bool)
+{
+    // TODO: API call
+}
+
+void QuadcopterDetailDialog::blink()
+{
+    // TODO: API call
 }

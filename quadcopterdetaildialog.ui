@@ -15,8 +15,21 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-     <layout class="QGridLayout" name="attributes">
-     </layout>
+    <layout class="QGridLayout" name="attributes"/>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="selectForFlight">
+     <property name="text">
+      <string>Select for flight</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="blinkButton">
+     <property name="text">
+      <string>Blink</string>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -30,6 +43,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>selectForFlight</tabstop>
+  <tabstop>blinkButton</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
