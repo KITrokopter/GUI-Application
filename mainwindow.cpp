@@ -1,7 +1,7 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
 #include "quadcopterdetaildialog.hpp"
-#include "joystickdebugdialog.hpp"
+#include "gamepaddebugdialog.hpp"
 #include "gamepad.hpp"
 #include "movementcontroller.hpp"
 
@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->calibrateCamerasButton, SIGNAL(clicked()), this, SLOT(openCalibrationDialog()));
 
-    connect(ui->actionJoystick, SIGNAL(triggered()), this, SLOT(openJoystickDebugDialog()));
+    connect(ui->actionGamepad, SIGNAL(triggered()), this, SLOT(openGamepadDebugDialog()));
 }
 
 MainWindow::~MainWindow()
@@ -92,9 +92,9 @@ void MainWindow::openCalibrationDialog()
     calibrationDialog->activateWindow();
 }
 
-void MainWindow::openJoystickDebugDialog()
+void MainWindow::openGamepadDebugDialog()
 {
-    JoystickDebugDialog *dialog = new JoystickDebugDialog(this, gamepad);
+    GamepadDebugDialog *dialog = new GamepadDebugDialog(this, gamepad);
     dialog->show();
     dialog->raise();
     dialog->activateWindow();

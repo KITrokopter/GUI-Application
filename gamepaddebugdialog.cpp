@@ -1,12 +1,12 @@
-#include "joystickdebugdialog.hpp"
-#include "ui_joystickdebugdialog.h"
+#include "gamepaddebugdialog.hpp"
+#include "ui_gamepaddebugdialog.h"
 
 #include "gamepad.hpp"
 
-JoystickDebugDialog::JoystickDebugDialog(QWidget *parent, Gamepad *gamepad) :
+GamepadDebugDialog::GamepadDebugDialog(QWidget *parent, Gamepad *gamepad) :
     QDialog(parent),
-    ui(new Ui::JoystickDebugDialog),
-    joystick(gamepad)
+    ui(new Ui::GamepadDebugDialog),
+    gamepad(gamepad)
 {
     ui->setupUi(this);
 
@@ -18,28 +18,28 @@ JoystickDebugDialog::JoystickDebugDialog(QWidget *parent, Gamepad *gamepad) :
     ui->axisTable->setHorizontalHeaderItem(1, valHeader);
     ui->buttonTable->setHorizontalHeaderItem(1, valHeader);
 
-    QMap<int, QString> names = joystick->getGamepadNames();
+    QMap<int, QString> names = gamepad->getGamepadNames();
     for (QMap<int, QString>::const_iterator it = names.constBegin(); it != names.constEnd(); ++it) {
         ui->comboBox->addItem(it.value(), it.key());
     }
 
     connect(ui->comboBox, SIGNAL(activated(int)), this, SLOT(openGamepad(int)));
-    connect(joystick, SIGNAL(axisValueChanged(int,int)), this, SLOT(updateAxis(int,int)));
-    connect(joystick, SIGNAL(buttonValueChanged(int,bool)), this, SLOT(updateButton(int,bool)));
+    connect(gamepad, SIGNAL(axisValueChanged(int,int)), this, SLOT(updateAxis(int,int)));
+    connect(gamepad, SIGNAL(buttonValueChanged(int,bool)), this, SLOT(updateButton(int,bool)));
 }
 
-JoystickDebugDialog::~JoystickDebugDialog()
+GamepadDebugDialog::~GamepadDebugDialog()
 {
     delete ui;
 }
 
-void JoystickDebugDialog::openGamepad(int comboBoxId)
+void GamepadDebugDialog::openGamepad(int comboBoxId)
 {
-    joystick->open(ui->comboBox->itemData(comboBoxId).toInt());
+    gamepad->open(ui->comboBox->itemData(comboBoxId).toInt());
 }
 
 template<typename T>
-void JoystickDebugDialog::updateTable(QTableWidget *table, int num, T val)
+void GamepadDebugDialog::updateTable(QTableWidget *table, int num, T val)
 {
     if (table->rowCount() < num)
         table->setRowCount(num + 1);
@@ -56,12 +56,12 @@ void JoystickDebugDialog::updateTable(QTableWidget *table, int num, T val)
     valItem->setText(QVariant(val).toString());
 }
 
-void JoystickDebugDialog::updateAxis(int num, int val)
+void GamepadDebugDialog::updateAxis(int num, int val)
 {
     updateTable(ui->axisTable, num, val);
 }
 
-void JoystickDebugDialog::updateButton(int num, bool val)
+void GamepadDebugDialog::updateButton(int num, bool val)
 {
     updateTable(ui->buttonTable, num, val);
 }

@@ -31,8 +31,8 @@ public slots:
     // Camera calibration dialogs
     void openCalibrationDialog();
 
-    // Joystick debugging
-    void openJoystickDebugDialog();
+    // Gamepad debugging
+    void openGamepadDebugDialog();
 
 private:
     void initGamepad();
