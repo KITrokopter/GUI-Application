@@ -6,9 +6,11 @@
 #include "quadcoptermodel.hpp"
 #include "quadcopterdebugdialog.hpp"
 #include "quadcoptertrackedfilter.hpp"
-#include "QIrrlichtWidget.hpp"
 
 #include "calibrationdialog.hpp"
+
+#include "QIrrlichtWidget.hpp"
+#include "gui3d.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +24,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    void initializeIrrlicht();
     ~MainWindow();
 
 public slots:
@@ -56,6 +59,7 @@ private:
 
     // Irrlicht
     QIrrlichtWidget *irrlichtWidget;
+    Gui3D *gui3d;
 
 };
 

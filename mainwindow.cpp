@@ -31,8 +31,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->trackedList->setModel(trackedFilter);
     ui->untrackedList->setModel(untrackedFilter);
 
-    irrlichtWidget(new QIrrlichtWidget(superWidget));
-    superWidget->add(irrlichtWidget);
+    irrlichtWidget = new QIrrlichtWidget(ui->superWidget);
+    irrlichtWidget->setMinimumSize(QSize(640, 480));
+    ui->superWidget->layout()->addWidget(irrlichtWidget);
+    gui3d = new Gui3D(irrlichtWidget);
 
     connect(ui->actionQuadcopters, SIGNAL(triggered()), this, SLOT(openQuadcopterDebugDialog()));
     connect(ui->trackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));
@@ -42,6 +44,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionGamepad, SIGNAL(triggered()), this, SLOT(openGamepadDebugDialog()));
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(openAboutDialog()));
+}
+
+void MainWindow::initializeIrrlicht()
+{
+    gui3d->initializeIrrlicht();
 }
 
 MainWindow::~MainWindow()

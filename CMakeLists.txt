@@ -5,6 +5,8 @@
 cmake_minimum_required(VERSION 2.8.9)
 project(gui_application)
 
+SET(CMAKE_CXX_FLAGS "-std=c++0x")
+
 ##############################################################################
 # Catkin
 ##############################################################################
@@ -55,6 +57,7 @@ target_link_libraries(kitrokopter
   ${catkin_LIBRARIES}
   ${SDL2_LIBRARIES}
   api_application
+  libIrrlicht.so
 )
 install(TARGETS kitrokopter RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 

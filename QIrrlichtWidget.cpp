@@ -190,7 +190,7 @@ void QIrrlichtWidget::initialize()
     createParams.WindowId = ( void * ) winId();
 
     qDebug() << "   render size           = " << createParams.WindowSize.Width << " x " << createParams.WindowSize.Height;
-    qDebug() << "   native window ID      = " << ( irr::u32 ) createParams.WindowId;
+    qDebug() << "   native window ID      = " << /*( irr::u32 )*/ createParams.WindowId;
 
     if(( m_IrrDevice = irr::createDeviceEx( createParams )) == 0 )
         throw( "failed to create Irrlicht device" );
