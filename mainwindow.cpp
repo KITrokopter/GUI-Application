@@ -31,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->trackedList->setModel(trackedFilter);
     ui->untrackedList->setModel(untrackedFilter);
 
+    irrlichtWidget(new QIrrlichtWidget(superWidget));
+    superWidget->add(irrlichtWidget);
+
     connect(ui->actionQuadcopters, SIGNAL(triggered()), this, SLOT(openQuadcopterDebugDialog()));
     connect(ui->trackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));
     connect(ui->untrackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));

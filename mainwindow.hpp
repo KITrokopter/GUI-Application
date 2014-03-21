@@ -6,6 +6,7 @@
 #include "quadcoptermodel.hpp"
 #include "quadcopterdebugdialog.hpp"
 #include "quadcoptertrackedfilter.hpp"
+#include "QIrrlichtWidget.hpp"
 
 #include "calibrationdialog.hpp"
 
@@ -52,6 +53,9 @@ private:
 
     // Calibration
     CalibrationDialog *calibrationDialog;
+
+    // Irrlicht
+    QIrrlichtWidget *irrlichtWidget;
 
 };
 

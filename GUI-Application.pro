@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     movementcontroller.cpp \
     globalcalibrationwidget.cpp \
     gamepaddebugdialog.cpp \
-    aboutdialog.cpp
+    aboutdialog.cpp \
+    irrlichtwidget.cpp
 
 HEADERS  += mainwindow.hpp \
     quadcoptermodel.hpp \
@@ -42,7 +43,8 @@ HEADERS  += mainwindow.hpp \
     movementcontroller.hpp \
     globalcalibrationwidget.hpp \
     gamepaddebugdialog.hpp \
-    aboutdialog.hpp
+    aboutdialog.hpp \
+    irrlichtwidget.hpp
 
 FORMS    += mainwindow.ui \
     quadcopterdebugdialog.ui \
