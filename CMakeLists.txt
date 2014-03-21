@@ -59,7 +59,9 @@ target_link_libraries(kitrokopter
   api_application
   libIrrlicht.so
 )
+
 install(TARGETS kitrokopter RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+install(DIRECTORY textures/ DESTINATION lib/gui_application/textures/)
 
 qt5_use_modules(kitrokopter Widgets)
 
