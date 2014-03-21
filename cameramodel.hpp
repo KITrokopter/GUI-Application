@@ -10,7 +10,6 @@ class CameraModel : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QPixmap image READ image)
-    Q_PROPERTY(CameraImageType imageType MEMBER m_imageType WRITE setImageType)
 
 public:
     explicit CameraModel(QObject *parent = 0);
