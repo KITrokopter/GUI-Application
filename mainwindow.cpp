@@ -6,11 +6,14 @@
 #include "movementcontroller.hpp"
 #include "aboutdialog.hpp"
 
+#include "API.hpp"
+
 #include <QMessageBox>
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent, kitrokopter::API *api) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    api(api),
     gamepad(new Gamepad(this)),
     quadcopterModel(new QuadcopterModel(this)),
     quadcopterDebugDialog(0),

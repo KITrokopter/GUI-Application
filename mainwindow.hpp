@@ -13,6 +13,10 @@ namespace Ui {
 class MainWindow;
 }
 
+namespace kitrokopter {
+class API;
+}
+
 class Gamepad;
 
 class MainWindow : public QMainWindow
@@ -20,7 +24,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent, kitrokopter::API *api);
     ~MainWindow();
 
 public slots:
@@ -41,6 +45,8 @@ private:
     void initGamepad();
 
     Ui::MainWindow *ui;
+
+    kitrokopter::API *api;
 
     // Gamepad input
     Gamepad *gamepad;
