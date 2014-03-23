@@ -1,10 +1,15 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
-#include "quadcopterdetaildialog.hpp"
+
+#include "aboutdialog.hpp"
+#include "calibrationdialog.hpp"
 #include "gamepaddebugdialog.hpp"
 #include "gamepad.hpp"
 #include "movementcontroller.hpp"
-#include "aboutdialog.hpp"
+#include "quadcopterdebugdialog.hpp"
+#include "quadcopterdetaildialog.hpp"
+#include "quadcoptermodel.hpp"
+#include "quadcoptertrackedfilter.hpp"
 
 #include "API.hpp"
 

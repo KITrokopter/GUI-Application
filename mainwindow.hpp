@@ -3,12 +3,6 @@
 
 #include <QMainWindow>
 
-#include "quadcoptermodel.hpp"
-#include "quadcopterdebugdialog.hpp"
-#include "quadcoptertrackedfilter.hpp"
-
-#include "calibrationdialog.hpp"
-
 namespace Ui {
 class MainWindow;
 }
@@ -17,7 +11,11 @@ namespace kitrokopter {
 class API;
 }
 
+class CalibrationDialog;
 class Gamepad;
+class QuadcopterDebugDialog;
+class QuadcopterModel;
+class QuadcopterTrackedFilter;
 
 class MainWindow : public QMainWindow
 {
