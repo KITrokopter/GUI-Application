@@ -1,18 +1,38 @@
 #include "quadcoptermodel.hpp"
+
+#include "API.hpp"
+#include "APIQuadcopter.hpp"
+
 #include <QColor>
+
+QuadcopterModel::QuadcopterModel(QObject *parent, kitrokopter::API *api)
+    : QAbstractTableModel(parent),
+      api(api)
+{
+    timer.setInterval(100);
+    connect(&timer, SIGNAL(timeout()), this, SLOT(updateQuadcopters()));
+    timer.start();
+}
+
+void QuadcopterModel::updateQuadcopters()
+{
+    quadcopters = QuadcopterVector::fromStdVector(api->getQuadcopters());
+    // We don't track changes, so we don't really know exactly what changed.
+    emit dataChanged(index(0, 0), index(rowCount(QModelIndex()) - 1, columnCount(QModelIndex()) - 1));
+}
 
 int QuadcopterModel::rowCount(const QModelIndex &parent) const
 {
-    return 4;
+    return quadcopters.size();
 }
 
 int QuadcopterModel::columnCount(const QModelIndex &parent) const
 {
-    return 4;
+    return QUADCOPTER_COLUMNS_LAST;
 }
 
 /**
- * @brief Provides fake data about Quadcopters.
+ * @brief Provides data about Quadcopters.
  * @param index model index
  * @param role Qt::DisplayRole or Qt::DecorationRole
  * @return fake data
@@ -20,18 +40,28 @@ int QuadcopterModel::columnCount(const QModelIndex &parent) const
 QVariant QuadcopterModel::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
+    kitrokopter::APIQuadcopter *quadcopter = quadcopters.at(row);
     switch (role) {
     // "The key data to be rendered in the form of text"
     case Qt::DisplayRole:
         switch (index.column()) {
         case QUADCOPTER_NAME:
-            return QString("Q") + QString::number(row);
+            return QString("Q") + QString::number(quadcopter->getId());
         case QUADCOPTER_STATUS:
-            return row % 2 ? QString("tracked") : QString("untracked");
+            return quadcopter->isTracked() ? QString("tracked") : QString("untracked");
         case QUADCOPTER_BATTERY:
+            // TODO: API function seems to be missing.
             return QString::number(row * 5);
         case QUADCOPTER_CONNECTION:
-            return QString::number(row * 7);
+            return QString::number(quadcopter->getLinkQuality());
+        case QUADCOPTER_CHANNEL:
+            return QString::number(quadcopter->getChannel());
+        case QUADCOPTER_ROLL:
+            return QString::number(quadcopter->getStabilizerRollData());
+        case QUADCOPTER_PITCH:
+            return QString::number(quadcopter->getStabilizerPitchData());
+        case QUADCOPTER_YAW:
+            return QString::number(quadcopter->getStabilizerYawData());
         default:
             // Invalid column.
             return QVariant();
@@ -57,6 +87,14 @@ QVariant QuadcopterModel::headerData(int section, Qt::Orientation orientation, i
             return QString("Battery");
         case QUADCOPTER_CONNECTION:
             return QString("Connection");
+        case QUADCOPTER_CHANNEL:
+            return QString("Channel");
+        case QUADCOPTER_ROLL:
+            return QString("Roll");
+        case QUADCOPTER_PITCH:
+            return QString("Pitch");
+        case QUADCOPTER_YAW:
+            return QString("Yaw");
         }
     }
     // Invalid column or vertical header.

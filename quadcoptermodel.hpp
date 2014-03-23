@@ -2,6 +2,13 @@
 #define QUADCOPTERMODEL_HPP
 
 #include <QAbstractTableModel>
+#include <QVector>
+#include <QTimer>
+
+namespace kitrokopter {
+class API;
+class APIQuadcopter;
+}
 
 enum QuadcopterColumns
 {
@@ -9,14 +16,20 @@ enum QuadcopterColumns
     QUADCOPTER_STATUS,
     QUADCOPTER_BATTERY,
     QUADCOPTER_CONNECTION,
+    QUADCOPTER_CHANNEL,
+    QUADCOPTER_ROLL,
+    QUADCOPTER_PITCH,
+    QUADCOPTER_YAW,
+    QUADCOPTER_COLUMNS_LAST
 };
+
+typedef QVector<kitrokopter::APIQuadcopter*> QuadcopterVector;
 
 class QuadcopterModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
-    explicit QuadcopterModel(QObject *parent = 0)
-        : QAbstractTableModel(parent) {}
+    explicit QuadcopterModel(QObject *parent, kitrokopter::API *api);
 
     int rowCount(const QModelIndex &parent) const;
     int columnCount(const QModelIndex &parent) const;
@@ -26,6 +39,13 @@ public:
 signals:
 
 public slots:
+    void updateQuadcopters();
+
+private:
+    kitrokopter::API *api;
+    QuadcopterVector quadcopters;
+
+    QTimer timer;
 
 };
 

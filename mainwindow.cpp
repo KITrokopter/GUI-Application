@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent, kitrokopter::API *api) :
     ui(new Ui::MainWindow),
     api(api),
     gamepad(new Gamepad(this)),
-    quadcopterModel(new QuadcopterModel(this)),
+    quadcopterModel(new QuadcopterModel(this, api)),
     quadcopterDebugDialog(0),
     trackedFilter(new QuadcopterTrackedFilter(this)),
     untrackedFilter(new QuadcopterTrackedFilter(this)),
