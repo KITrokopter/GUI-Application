@@ -54,7 +54,6 @@ add_executable(kitrokopter ${QT_SOURCES} ${UI_HEADERS})
 target_link_libraries(kitrokopter
   ${catkin_LIBRARIES}
   ${SDL2_LIBRARIES}
-  api_application
 )
 install(TARGETS kitrokopter RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
