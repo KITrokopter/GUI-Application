@@ -5,11 +5,11 @@
 #include <QList>
 #include <QLabel>
 
-#include "cameramodel.hpp"
-
 namespace Ui {
 class GlobalCalibrationWidget;
 }
+
+class CameraModel;
 
 class GlobalCalibrationWidget : public QWidget
 {
