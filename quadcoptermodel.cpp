@@ -21,6 +21,16 @@ void QuadcopterModel::updateQuadcopters()
     emit dataChanged(index(0, 0), index(rowCount(QModelIndex()) - 1, columnCount(QModelIndex()) - 1));
 }
 
+int QuadcopterModel::rowFor(kitrokopter::APIQuadcopter *quadcopter)
+{
+    return quadcopters.indexOf(quadcopter);
+}
+
+kitrokopter::APIQuadcopter* QuadcopterModel::quadcopterFor(int row)
+{
+    return quadcopters.at(row);
+}
+
 int QuadcopterModel::rowCount(const QModelIndex &parent) const
 {
     return quadcopters.size();

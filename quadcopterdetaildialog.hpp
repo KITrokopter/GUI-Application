@@ -2,13 +2,19 @@
 #define QUADCOPTERDETAILDIALOG_HPP
 
 #include <QDialog>
-#include <quadcoptermodel.hpp>
+#include "quadcoptermodel.hpp"
+
+#include "APIQuadcopterListener.hpp"
 
 namespace Ui {
 class QuadcopterDetailDialog;
 }
 
-class QuadcopterDetailDialog : public QDialog
+namespace kitrokopter {
+class APIQuadcopter;
+}
+
+class QuadcopterDetailDialog : public QDialog, public kitrokopter::APIQuadcopterListener
 {
     Q_OBJECT
 
@@ -16,7 +22,8 @@ public:
     explicit QuadcopterDetailDialog(QWidget *parent = 0);
     ~QuadcopterDetailDialog();
 
-    void setSourceModel(const QAbstractItemModel *model, int row);
+    void setSourceModel(QuadcopterModel *model, kitrokopter::APIQuadcopter *quadcopter);
+    void updateQuadcopterValues(kitrokopter::APIQuadcopterUpdateEvent e);
 
 private slots:
     void renderModel();
@@ -28,8 +35,8 @@ private slots:
 private:
     Ui::QuadcopterDetailDialog *ui;
 
-    const QAbstractItemModel *model;
-    int row;
+    QuadcopterModel *model;
+    kitrokopter::APIQuadcopter *quadcopter;
 };
 
 #endif // QUADCOPTERDETAILDIALOG_HPP

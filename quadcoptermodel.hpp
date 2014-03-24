@@ -31,9 +31,12 @@ class QuadcopterModel : public QAbstractTableModel
 public:
     explicit QuadcopterModel(QObject *parent, kitrokopter::API *api);
 
+    int rowFor(kitrokopter::APIQuadcopter *quadcopter);
+    kitrokopter::APIQuadcopter* quadcopterFor(int row);
+
     int rowCount(const QModelIndex &parent) const;
     int columnCount(const QModelIndex &parent) const;
-    QVariant data(const QModelIndex &index, int role) const;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
 signals:

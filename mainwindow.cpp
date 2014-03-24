@@ -87,7 +87,7 @@ void MainWindow::openQuadcopterDebugDialog()
 void MainWindow::openQuadcopterDetailDialog(const QModelIndex &index)
 {
     QuadcopterDetailDialog *dialog = new QuadcopterDetailDialog(this);
-    dialog->setSourceModel(index.model(), index.row());
+    dialog->setSourceModel(quadcopterModel, quadcopterModel->quadcopterFor(index.row()));
     dialog->resize(dialog->minimumSize());
     dialog->show();
     dialog->raise();
