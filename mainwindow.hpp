@@ -26,6 +26,12 @@ public:
     ~MainWindow();
 
 public slots:
+    // Buttons
+    void launch();
+    void deleteCalibration();
+    void loadFormation();
+    void scanForQuadcopters();
+
     // Quadcopter dialogs
     void openQuadcopterDebugDialog();
     void openQuadcopterDetailDialog(const QModelIndex &index);

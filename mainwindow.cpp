@@ -12,6 +12,7 @@
 #include "quadcoptertrackedfilter.hpp"
 
 #include "API.hpp"
+#include "APICameraSystem.hpp"
 
 #include <QMessageBox>
 
@@ -38,6 +39,11 @@ MainWindow::MainWindow(QWidget *parent, kitrokopter::API *api) :
     untrackedFilter->filterUntracked();
     ui->trackedList->setModel(trackedFilter);
     ui->untrackedList->setModel(untrackedFilter);
+
+    connect(ui->launchButton, SIGNAL(clicked()), this, SLOT(launch()));
+    connect(ui->deleteCalibrationButton, SIGNAL(clicked()), this, SLOT(deleteCalibration()));
+    connect(ui->loadFormationButton, SIGNAL(clicked()), this, SLOT(loadFormation()));
+    connect(ui->scanButton, SIGNAL(clicked()), this, SLOT(scanForQuadcopters()));
 
     connect(ui->actionQuadcopters, SIGNAL(triggered()), this, SLOT(openQuadcopterDebugDialog()));
     connect(ui->trackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));
@@ -71,6 +77,27 @@ void MainWindow::initGamepad()
     MovementController *ctrl = new MovementController(this);
     connect(gamepad, SIGNAL(axisValueChanged(int,int)), ctrl, SLOT(axisValueChanged(int,int)));
     connect(gamepad, SIGNAL(buttonValueChanged(int,bool)), ctrl, SLOT(buttonValueChanged(int,bool)));
+}
+
+void MainWindow::launch()
+{
+    api->launchQuadcopters(ui->launchHeightSpinBox->value());
+}
+
+void MainWindow::deleteCalibration()
+{
+    // TODO: This API call does not seem to exist.
+    //api->getCameraSystem()->deleteFormation();
+}
+
+void MainWindow::loadFormation()
+{
+    // TODO: How to load a formation?
+}
+
+void MainWindow::scanForQuadcopters()
+{
+    api->scanChannels();
 }
 
 void MainWindow::openQuadcopterDebugDialog()
