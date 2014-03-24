@@ -97,7 +97,7 @@ void MainWindow::openQuadcopterDetailDialog(const QModelIndex &index)
 void MainWindow::openCalibrationDialog()
 {
     if (!calibrationDialog) {
-        calibrationDialog = new CalibrationDialog(this);
+        calibrationDialog = new CalibrationDialog(this, api->getCameraSystem());
     }
     calibrationDialog->show();
     calibrationDialog->raise();

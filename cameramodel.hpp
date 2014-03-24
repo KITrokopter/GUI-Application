@@ -4,15 +4,24 @@
 #include <QObject>
 #include <QPixmap>
 
+#include "APICameraListener.hpp"
+#include "APIImageListener.hpp"
 
-class CameraModel : public QObject
+namespace kitrokopter {
+class APICamera;
+}
+
+class CameraModel : public QObject, public kitrokopter::APICameraListener, public kitrokopter::APIImageListener
 {
     Q_OBJECT
 
     Q_PROPERTY(QPixmap image READ image)
 
 public:
-    explicit CameraModel(QObject *parent = 0);
+    explicit CameraModel(QObject *parent, kitrokopter::APICamera *camera);
+
+    void updateCameraValues(kitrokopter::APICameraUpdateEvent e);
+    void imageReceived(cv::Mat);
 
     const QPixmap& image();
 
@@ -30,6 +39,8 @@ public slots:
 private:
     QPixmap m_image;
     CameraImageType m_imageType;
+
+    kitrokopter::APICamera *camera;
 };
 
 #endif // CAMERAMODEL_HPP
