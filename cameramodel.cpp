@@ -6,7 +6,7 @@
 
 CameraModel::CameraModel(QObject *parent, kitrokopter::APICamera *camera) :
     QObject(parent),
-    camera(camera)
+    m_camera(camera)
 {
     /*
     bool result = m_image.load("C:/Source/KITrokopter/GUI-Application/image.jpg");
@@ -15,6 +15,11 @@ CameraModel::CameraModel(QObject *parent, kitrokopter::APICamera *camera) :
     */
     camera->addCameraListener(this);
     camera->addImageListener(this);
+}
+
+kitrokopter::APICamera* CameraModel::camera()
+{
+    return m_camera;
 }
 
 void CameraModel::updateCameraValues(kitrokopter::APICameraUpdateEvent e)

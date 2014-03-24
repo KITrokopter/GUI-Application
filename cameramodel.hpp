@@ -20,6 +20,8 @@ class CameraModel : public QObject, public kitrokopter::APICameraListener, publi
 public:
     explicit CameraModel(QObject *parent, kitrokopter::APICamera *camera);
 
+    kitrokopter::APICamera* camera();
+
     void updateCameraValues(kitrokopter::APICameraUpdateEvent e);
     void imageReceived(cv::Mat);
 
@@ -40,7 +42,7 @@ private:
     QPixmap m_image;
     CameraImageType m_imageType;
 
-    kitrokopter::APICamera *camera;
+    kitrokopter::APICamera *m_camera;
 };
 
 #endif // CAMERAMODEL_HPP
