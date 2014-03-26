@@ -31,6 +31,7 @@ public slots:
     void deleteCalibration();
     void loadFormation();
     void scanForQuadcopters();
+    void shutdownEverything();
 
     // Quadcopter dialogs
     void openQuadcopterDebugDialog();

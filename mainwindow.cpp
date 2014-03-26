@@ -44,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent, kitrokopter::API *api) :
     connect(ui->deleteCalibrationButton, SIGNAL(clicked()), this, SLOT(deleteCalibration()));
     connect(ui->loadFormationButton, SIGNAL(clicked()), this, SLOT(loadFormation()));
     connect(ui->scanButton, SIGNAL(clicked()), this, SLOT(scanForQuadcopters()));
+    connect(ui->actionShutdown_everything, SIGNAL(triggered()), this, SLOT(shutdownEverything()));
 
     connect(ui->actionQuadcopters, SIGNAL(triggered()), this, SLOT(openQuadcopterDebugDialog()));
     connect(ui->trackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));
@@ -98,6 +99,11 @@ void MainWindow::loadFormation()
 void MainWindow::scanForQuadcopters()
 {
     api->scanChannels();
+}
+
+void MainWindow::shutdownEverything()
+{
+    api->shutdownSystem();
 }
 
 void MainWindow::openQuadcopterDebugDialog()
