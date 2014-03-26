@@ -3,6 +3,7 @@
 
 #include <irrlicht/irrlicht.h>
 #include <vector>
+#include "API.hpp"
 
 using namespace irr;
 
@@ -20,6 +21,7 @@ public:
 
     void setRotationMatrix(std::vector<double> rotationMatrix);
     void setPositionVector(std::vector<double> positionVector);
+    void setPositionVector(kitrokopter::Vector positionVector);
 
 protected:
     ISceneNode* getSceneNode();

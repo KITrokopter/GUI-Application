@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent, kitrokopter::API *api) :
     irrlichtWidget = new QIrrlichtWidget(ui->superWidget);
     irrlichtWidget->setMinimumSize(QSize(640, 480));
     ui->superWidget->layout()->addWidget(irrlichtWidget);
-    gui3d = new Gui3D(irrlichtWidget);
+    gui3d = new Gui3D(irrlichtWidget, api);
 
     connect(ui->launchButton, SIGNAL(clicked()), this, SLOT(launch()));
     connect(ui->deleteCalibrationButton, SIGNAL(clicked()), this, SLOT(deleteCalibration()));

@@ -51,6 +51,15 @@ void GUIObject::setPositionVector(std::vector<double> positionVector)
     node->setPosition(vector3df(positionVector[0], positionVector[1], positionVector[2]));
 }
 
+void GUIObject::setPositionVector(kitrokopter::Vector positionVector)
+{
+    std::vector<double> toPass(3);
+    toPass[0] = positionVector.getX();
+    toPass[1] = positionVector.getY();
+    toPass[2] = positionVector.getZ();
+    setPositionVector(toPass);
+}
+
 ISceneNode* GUIObject::getSceneNode()
 {
     return node;
