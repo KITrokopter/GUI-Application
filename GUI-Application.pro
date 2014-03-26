@@ -30,7 +30,9 @@ SOURCES += main.cpp\
     gamepaddebugdialog.cpp \
     aboutdialog.cpp \
     irrlichtwidget.cpp \
-    gui3d.cpp
+    gui3d.cpp \
+    guicamera.cpp \
+    guiobject.cpp
 
 HEADERS  += mainwindow.hpp \
     quadcoptermodel.hpp \
@@ -46,7 +48,9 @@ HEADERS  += mainwindow.hpp \
     gamepaddebugdialog.hpp \
     aboutdialog.hpp \
     irrlichtwidget.hpp \
-    gui3d.hpp
+    gui3d.hpp \
+    guicamera.h \
+    guiobject.hpp
 
 FORMS    += mainwindow.ui \
     quadcopterdebugdialog.ui \

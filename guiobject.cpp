@@ -1,0 +1,57 @@
+#include "guiobject.hpp"
+
+#include <cmath>
+
+#include <qdebug.h>
+
+using namespace irr;
+
+using namespace core;
+using namespace scene;
+using namespace video;
+using namespace io;
+using namespace gui;
+
+GUIObject::GUIObject(std::vector<double> positionVector, std::vector<double> rotationMatrix, ISceneManager *sceneManager)
+{
+    qDebug() << "Constructing GUIObject";
+
+    node = sceneManager->addEmptySceneNode();
+
+    if (node == 0) {
+        qDebug() << "Could not create scene node";
+    }
+
+    setRotationMatrix(rotationMatrix);
+    setPositionVector(positionVector);
+
+    qDebug() << "Constructed GUIObject";
+}
+
+GUIObject::~GUIObject()
+{
+    // Node should not be dropped
+}
+
+/**
+ * Calculates the euler angles from the rotation matrix and applies them to the node.
+ *
+ * @see https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions#Conversion_formulae_between_formalisms
+ * @param rotationMatrix The 3x3 rotation matrix.
+ */
+void GUIObject::setRotationMatrix(std::vector<double> rotationMatrix)
+{
+    node->setRotation(vector3df(atan2(rotationMatrix[6], rotationMatrix[7]),
+                                acos(rotationMatrix[8]),
+                                -atan2(rotationMatrix[2], rotationMatrix[5])));
+}
+
+void GUIObject::setPositionVector(std::vector<double> positionVector)
+{
+    node->setPosition(vector3df(positionVector[0], positionVector[1], positionVector[2]));
+}
+
+ISceneNode* GUIObject::getSceneNode()
+{
+    return node;
+}

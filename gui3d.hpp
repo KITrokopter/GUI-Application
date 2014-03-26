@@ -4,6 +4,8 @@
 #include <QIrrlichtWidget.hpp>
 #include <irrlicht/IMesh.h>
 
+#include "guicamera.hpp"
+
 class Gui3D
 {
 public:
