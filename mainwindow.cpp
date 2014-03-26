@@ -1,18 +1,30 @@
 #include "mainwindow.hpp"
 #include "ui_mainwindow.h"
-#include "quadcopterdetaildialog.hpp"
+
+#include "aboutdialog.hpp"
+#include "calibrationdialog.hpp"
 #include "gamepaddebugdialog.hpp"
 #include "gamepad.hpp"
 #include "movementcontroller.hpp"
-#include "aboutdialog.hpp"
+#include "quadcopterdebugdialog.hpp"
+#include "quadcopterdetaildialog.hpp"
+#include "quadcoptermodel.hpp"
+#include "quadcoptertrackedfilter.hpp"
+
+#include "QIrrlichtWidget.hpp"
+#include "gui3d.hpp"
+
+#include "API.hpp"
+#include "APICameraSystem.hpp"
 
 #include <QMessageBox>
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent, kitrokopter::API *api) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    api(api),
     gamepad(new Gamepad(this)),
-    quadcopterModel(new QuadcopterModel(this)),
+    quadcopterModel(new QuadcopterModel(this, api)),
     quadcopterDebugDialog(0),
     trackedFilter(new QuadcopterTrackedFilter(this)),
     untrackedFilter(new QuadcopterTrackedFilter(this)),
@@ -35,6 +47,12 @@ MainWindow::MainWindow(QWidget *parent) :
     irrlichtWidget->setMinimumSize(QSize(640, 480));
     ui->superWidget->layout()->addWidget(irrlichtWidget);
     gui3d = new Gui3D(irrlichtWidget);
+
+    connect(ui->launchButton, SIGNAL(clicked()), this, SLOT(launch()));
+    connect(ui->deleteCalibrationButton, SIGNAL(clicked()), this, SLOT(deleteCalibration()));
+    connect(ui->loadFormationButton, SIGNAL(clicked()), this, SLOT(loadFormation()));
+    connect(ui->scanButton, SIGNAL(clicked()), this, SLOT(scanForQuadcopters()));
+    connect(ui->actionShutdown_everything, SIGNAL(triggered()), this, SLOT(shutdownEverything()));
 
     connect(ui->actionQuadcopters, SIGNAL(triggered()), this, SLOT(openQuadcopterDebugDialog()));
     connect(ui->trackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));
@@ -75,6 +93,32 @@ void MainWindow::initGamepad()
     connect(gamepad, SIGNAL(buttonValueChanged(int,bool)), ctrl, SLOT(buttonValueChanged(int,bool)));
 }
 
+void MainWindow::launch()
+{
+    api->launchQuadcopters(ui->launchHeightSpinBox->value());
+}
+
+void MainWindow::deleteCalibration()
+{
+    // TODO: This API call does not seem to exist.
+    //api->getCameraSystem()->deleteFormation();
+}
+
+void MainWindow::loadFormation()
+{
+    // TODO: How to load a formation?
+}
+
+void MainWindow::scanForQuadcopters()
+{
+    api->scanChannels();
+}
+
+void MainWindow::shutdownEverything()
+{
+    api->shutdownSystem();
+}
+
 void MainWindow::openQuadcopterDebugDialog()
 {
     if (!quadcopterDebugDialog) {
@@ -89,7 +133,7 @@ void MainWindow::openQuadcopterDebugDialog()
 void MainWindow::openQuadcopterDetailDialog(const QModelIndex &index)
 {
     QuadcopterDetailDialog *dialog = new QuadcopterDetailDialog(this);
-    dialog->setSourceModel(index.model(), index.row());
+    dialog->setSourceModel(quadcopterModel, quadcopterModel->quadcopterFor(index.row()));
     dialog->resize(dialog->minimumSize());
     dialog->show();
     dialog->raise();
@@ -99,7 +143,7 @@ void MainWindow::openQuadcopterDetailDialog(const QModelIndex &index)
 void MainWindow::openCalibrationDialog()
 {
     if (!calibrationDialog) {
-        calibrationDialog = new CalibrationDialog(this);
+        calibrationDialog = new CalibrationDialog(this, api->getCameraSystem());
     }
     calibrationDialog->show();
     calibrationDialog->raise();

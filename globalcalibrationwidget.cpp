@@ -1,6 +1,8 @@
 #include "globalcalibrationwidget.hpp"
 #include "ui_globalcalibrationwidget.h"
 
+#include "cameramodel.hpp"
+
 GlobalCalibrationWidget::GlobalCalibrationWidget(QWidget *parent, QList<CameraModel*> cameras) :
     QWidget(parent),
     ui(new Ui::GlobalCalibrationWidget),

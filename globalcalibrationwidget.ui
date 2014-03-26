@@ -108,7 +108,7 @@
       <item>
        <widget class="QPushButton" name="takePictureButton">
         <property name="text">
-         <string>Take Picture</string>
+         <string>&amp;Take Picture</string>
         </property>
        </widget>
       </item>

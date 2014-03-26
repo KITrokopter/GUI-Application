@@ -5,6 +5,8 @@
 
 #include "cameramodel.hpp"
 
+#include "APICamera.hpp"
+
 SingleCalibrationWidget::SingleCalibrationWidget(QWidget *parent, CameraModel *model) :
     QWidget(parent),
     ui(new Ui::SingleCalibrationWidget),
@@ -45,10 +47,12 @@ void SingleCalibrationWidget::calibrate()
     columnCount = ui->columnCountSpinBox->value();
     fieldWidth = ui->fieldWidthSpinBox->value();
     fieldHeight = ui->fieldHeightSpinBox->value();
-    // TODO: Do the calibration API call...
+
+    kitrokopter::CalibrationBoard board(rowCount * fieldWidth, columnCount * fieldHeight, (float)fieldWidth, (float)fieldHeight);
+    model->camera()->startCalibration(5, 100, board);
 }
 
 void SingleCalibrationWidget::deleteCalibration()
 {
-    // TODO: API call delete calibration...
+    model->camera()->deleteCalibration();
 }

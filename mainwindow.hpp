@@ -3,31 +3,39 @@
 
 #include <QMainWindow>
 
-#include "quadcoptermodel.hpp"
-#include "quadcopterdebugdialog.hpp"
-#include "quadcoptertrackedfilter.hpp"
-
-#include "calibrationdialog.hpp"
-
-#include "QIrrlichtWidget.hpp"
-#include "gui3d.hpp"
-
 namespace Ui {
 class MainWindow;
 }
 
+namespace kitrokopter {
+class API;
+}
+
+class CalibrationDialog;
 class Gamepad;
+class Gui3D;
+class QIrrlichtWidget;
+class QuadcopterDebugDialog;
+class QuadcopterModel;
+class QuadcopterTrackedFilter;
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent, kitrokopter::API *api);
     void initializeIrrlicht();
     ~MainWindow();
 
 public slots:
+    // Buttons
+    void launch();
+    void deleteCalibration();
+    void loadFormation();
+    void scanForQuadcopters();
+    void shutdownEverything();
+
     // Quadcopter dialogs
     void openQuadcopterDebugDialog();
     void openQuadcopterDetailDialog(const QModelIndex &index);
@@ -45,6 +53,8 @@ private:
     void initGamepad();
 
     Ui::MainWindow *ui;
+
+    kitrokopter::API *api;
 
     // Gamepad input
     Gamepad *gamepad;

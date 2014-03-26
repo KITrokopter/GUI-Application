@@ -9,6 +9,8 @@
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
+  <build_depend>api_application</build_depend>
   <run_depend>roscpp</run_depend>
+  <run_depend>api_application</run_depend>
  
 </package>
