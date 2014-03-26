@@ -28,9 +28,9 @@ void CalibrationDialog::setupTabs()
         CameraModel *model = new CameraModel(this, camera);
         cameraModels.append(model);
         SingleCalibrationWidget *widget = new SingleCalibrationWidget(this, model);
-        ui->tabWidget->addTab(widget, QString("Camera %1").arg(i));
+        ui->tabWidget->addTab(widget, QString("Camera &%1").arg(i));
     }
 
     GlobalCalibrationWidget *global = new GlobalCalibrationWidget(this, cameraModels);
-    ui->tabWidget->addTab(global, "All");
+    ui->tabWidget->addTab(global, "&All");
 }

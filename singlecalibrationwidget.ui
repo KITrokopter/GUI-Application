@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>628</width>
-    <height>540</height>
+    <height>634</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,14 +38,14 @@
         <item>
          <widget class="QPushButton" name="calibrateButton">
           <property name="text">
-           <string>Calibrate camera</string>
+           <string>&amp;Calibrate camera</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="deleteCalibrationButton">
           <property name="text">
-           <string>Delete calibration</string>
+           <string>D&amp;elete calibration</string>
           </property>
          </widget>
         </item>
@@ -59,7 +59,7 @@
         <item>
          <widget class="QRadioButton" name="showSourceRadio">
           <property name="text">
-           <string>Show source image</string>
+           <string>Show &amp;source image</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -69,7 +69,7 @@
         <item>
          <widget class="QRadioButton" name="showCorrectedRadio">
           <property name="text">
-           <string>Show corrected image</string>
+           <string>Show c&amp;orrected image</string>
           </property>
          </widget>
         </item>
