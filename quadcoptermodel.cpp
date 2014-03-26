@@ -1,4 +1,5 @@
 #include "quadcoptermodel.hpp"
+#include "colors.hpp"
 
 #include "API.hpp"
 #include "APIQuadcopter.hpp"
@@ -78,7 +79,9 @@ QVariant QuadcopterModel::data(const QModelIndex &index, int role) const
         }
     // "The data to be rendered as a decoration in the form of an icon"
     case Qt::DecorationRole:
-        return QColor(row * 20, row * 50, row * 30);
+        // Color range is [min, max].
+        // We only use the min color for visualization here.
+        return parseColor(quadcopter->getColorRange()[0]);
     default:
         // We don't implement other display roles.
         return QVariant();
