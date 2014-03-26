@@ -212,7 +212,7 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionLoad_Formation"/>
     <addaction name="actionShutdown_everything"/>
@@ -220,14 +220,14 @@
    </widget>
    <widget class="QMenu" name="menuDebug">
     <property name="title">
-     <string>Debug</string>
+     <string>&amp;Debug</string>
     </property>
     <addaction name="actionQuadcopters"/>
     <addaction name="actionGamepad"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>&amp;Help</string>
     </property>
     <addaction name="actionAbout"/>
    </widget>
@@ -246,32 +246,32 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionQuadcopters">
    <property name="text">
-    <string>Quadcopters</string>
+    <string>&amp;Quadcopters</string>
    </property>
   </action>
   <action name="actionExit">
    <property name="text">
-    <string>Exit</string>
+    <string>E&amp;xit</string>
    </property>
   </action>
   <action name="actionGamepad">
    <property name="text">
-    <string>Gamepad</string>
+    <string>&amp;Gamepad</string>
    </property>
   </action>
   <action name="actionShutdown_everything">
    <property name="text">
-    <string>Shutdown everything</string>
+    <string>&amp;Shutdown everything</string>
    </property>
   </action>
   <action name="actionLoad_Formation">
    <property name="text">
-    <string>Load formation...</string>
+    <string>&amp;Load formation...</string>
    </property>
   </action>
   <action name="actionAbout">
    <property name="text">
-    <string>About</string>
+    <string>&amp;About</string>
    </property>
   </action>
  </widget>
