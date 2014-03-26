@@ -29,6 +29,8 @@ private slots:
     void renderModel();
 
     // Input slots
+    void selectMinColor();
+    void selectMaxColor();
     void setFlightSelection(bool);
     void blink();
 

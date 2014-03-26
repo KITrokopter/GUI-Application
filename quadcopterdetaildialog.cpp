@@ -1,9 +1,11 @@
 #include "quadcopterdetaildialog.hpp"
 #include "ui_quadcopterdetaildialog.h"
+#include "colors.hpp"
 
 #include "APIQuadcopter.hpp"
 
 #include <QLabel>
+#include <QColorDialog>
 
 QuadcopterDetailDialog::QuadcopterDetailDialog(QWidget *parent) :
     QDialog(parent),
@@ -11,6 +13,9 @@ QuadcopterDetailDialog::QuadcopterDetailDialog(QWidget *parent) :
     model(NULL)
 {
     ui->setupUi(this);
+
+    connect(ui->minColorButton, SIGNAL(clicked()), this, SLOT(selectMinColor()));
+    connect(ui->maxColorButton, SIGNAL(clicked()), this, SLOT(selectMaxColor()));
 }
 
 QuadcopterDetailDialog::~QuadcopterDetailDialog()
@@ -34,6 +39,14 @@ void QuadcopterDetailDialog::setSourceModel(QuadcopterModel *model, kitrokopter:
     quadcopter->addQuadcopterListener(this);
 }
 
+void colorButton(QPushButton *button, const QColor &color)
+{
+    QPalette palette;
+    palette.setColor(QPalette::Window, color);
+    button->setAutoFillBackground(true);
+    button->setPalette(palette);
+}
+
 void QuadcopterDetailDialog::renderModel()
 {
     int labelnum;
@@ -55,6 +68,11 @@ void QuadcopterDetailDialog::renderModel()
         content->setText(model->data(index, Qt::DisplayRole).toString());
     }
 
+    // Set minimum and maximum color fields.
+    uint32_t *colors = quadcopter->getColorRange();
+    colorButton(ui->minColorButton, parseColor(colors[0]));
+    colorButton(ui->maxColorButton, parseColor(colors[1]));
+
     // Set Dialog title to the quadcopter's name.
     setWindowTitle(QString("%1 Status").arg(model->data(model->index(row, 0)).toString()));
 }
@@ -62,6 +80,22 @@ void QuadcopterDetailDialog::renderModel()
 void QuadcopterDetailDialog::updateQuadcopterValues(kitrokopter::APIQuadcopterUpdateEvent e)
 {
     renderModel();
+}
+
+void QuadcopterDetailDialog::selectMinColor()
+{
+    uint32_t *colors = quadcopter->getColorRange();
+    QColor initial = parseColor(colors[0]);
+    QColor newColor = QColorDialog::getColor(initial, this, "Select min color");
+    quadcopter->setColorRange(serializeColor(newColor), colors[1]);
+}
+
+void QuadcopterDetailDialog::selectMaxColor()
+{
+    uint32_t *colors = quadcopter->getColorRange();
+    QColor initial = parseColor(colors[1]);
+    QColor newColor = QColorDialog::getColor(initial, this, "Select max color");
+    quadcopter->setColorRange(colors[0], serializeColor(newColor));
 }
 
 void QuadcopterDetailDialog::setFlightSelection(bool select)
