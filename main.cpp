@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w(NULL, &api);
     w.show();
+    w.initializeIrrlicht();
 
     return a.exec();
 }

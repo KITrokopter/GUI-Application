@@ -13,6 +13,8 @@ class API;
 
 class CalibrationDialog;
 class Gamepad;
+class Gui3D;
+class QIrrlichtWidget;
 class QuadcopterDebugDialog;
 class QuadcopterModel;
 class QuadcopterTrackedFilter;
@@ -23,6 +25,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent, kitrokopter::API *api);
+    void initializeIrrlicht();
     ~MainWindow();
 
 public slots:
@@ -63,6 +66,10 @@ private:
 
     // Calibration
     CalibrationDialog *calibrationDialog;
+
+    // Irrlicht
+    QIrrlichtWidget *irrlichtWidget;
+    Gui3D *gui3d;
 
 };
 

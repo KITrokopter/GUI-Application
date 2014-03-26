@@ -5,6 +5,8 @@
 cmake_minimum_required(VERSION 2.8.9)
 project(gui_application)
 
+SET(CMAKE_CXX_FLAGS "-std=c++11")
+
 ##############################################################################
 # Catkin
 ##############################################################################
@@ -54,8 +56,11 @@ add_executable(kitrokopter ${QT_SOURCES} ${UI_HEADERS})
 target_link_libraries(kitrokopter
   ${catkin_LIBRARIES}
   ${SDL2_LIBRARIES}
+  libIrrlicht.so
 )
+
 install(TARGETS kitrokopter RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+install(DIRECTORY textures/ DESTINATION lib/gui_application/textures/)
 
 qt5_use_modules(kitrokopter Widgets)
 
