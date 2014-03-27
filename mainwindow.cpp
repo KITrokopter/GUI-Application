@@ -111,7 +111,10 @@ void MainWindow::loadFormation()
 
 void MainWindow::scanForQuadcopters()
 {
-    api->scanChannels();
+    bool result = api->initializeQuadcopters();
+    if (!result) {
+        QMessageBox::critical(this, "Quadcopter Error", "Could not distribute all Quadcopter channels.");
+    }
 }
 
 void MainWindow::shutdownEverything()
