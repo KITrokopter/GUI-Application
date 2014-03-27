@@ -62,16 +62,31 @@ void QIrrlichtWidget::paintEvent( QPaintEvent *event )
 
 void QIrrlichtWidget::mousePressEvent( QMouseEvent *event )
 {
+    mouseX = event->x();
+    mouseY = event->y();
+    mousePressed = true;
+
     emit( mousePress( event ));
 }
 
 void QIrrlichtWidget::mouseReleaseEvent( QMouseEvent *event )
 {
+    mouseListener->mouseDragged(event->x() - mouseX, event->y() - mouseY);
+    mouseX = event->x();
+    mouseY = event->y();
+    mousePressed = false;
+
     emit( mouseRelease( event ));
 }
 
 void QIrrlichtWidget::mouseMoveEvent( QMouseEvent *event )
 {
+    if (mousePressed) {
+        mouseListener->mouseDragged(event->x() - mouseX, event->y() - mouseY);
+        mouseX = event->x();
+        mouseY = event->y();
+    }
+
     emit( mouseMove( event ));
 }
 
@@ -83,6 +98,11 @@ void QIrrlichtWidget::keyPressEvent( QKeyEvent * event )
 void QIrrlichtWidget::keyReleaseEvent( QKeyEvent *event )
 {
     emit( keyRelease( event ));
+}
+
+void QIrrlichtWidget::wheelEvent(QWheelEvent *event)
+{
+    mouseListener->zoom(event->angleDelta().y());
 }
 
 #if linux
@@ -115,6 +135,9 @@ QIrrlichtWidget::QIrrlichtWidget( QWidget *parent, irr::video::E_DRIVER_TYPE dri
     m_DriverType = driverType;
 
     setClearColor( irr::video::SColorf( 0.2f, 0.2f, 0.2f ));
+
+    mousePressed = false;
+    mouseListener = 0;
 }
 
 QIrrlichtWidget::~QIrrlichtWidget()
@@ -196,3 +219,7 @@ void QIrrlichtWidget::initialize()
         throw( "failed to create Irrlicht device" );
 }
 
+void QIrrlichtWidget::setMouseListener(IMouseListener *listener)
+{
+    mouseListener = listener;
+}

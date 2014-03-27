@@ -8,8 +8,11 @@
 #include <QtGui/QResizeEvent>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QWheelEvent>
 
 #include <irrlicht/irrlicht.h>
+
+#include "imouselistener.hpp"
 
 #if linux
 #include <X11/Xlib.h>
@@ -31,6 +34,10 @@ private:
     irr::IrrlichtDevice *m_IrrDevice;
     irr::video::E_DRIVER_TYPE m_DriverType;
     irr::video::SColor m_ClearColor;
+    bool mousePressed;
+    int mouseX;
+    int mouseY;
+    IMouseListener *mouseListener;
 
 #if linux
     // X11 specific code to disable autorepeat
@@ -46,6 +53,7 @@ protected:
     virtual void mouseMoveEvent( QMouseEvent *event );
     virtual void keyPressEvent( QKeyEvent *event );
     virtual void keyReleaseEvent( QKeyEvent *event );
+    virtual void wheelEvent(QWheelEvent *event);
 #if linux
     virtual void focusInEvent( QFocusEvent *event );
     virtual void focusOutEvent( QFocusEvent *event );
@@ -81,6 +89,8 @@ public:
     /*! \brief Initializes the Irrlicht subsystem. You have to call this after the widget has been created
       */
     void initialize();
+
+    void setMouseListener(IMouseListener *listener);
 
 signals:
     /*! \brief Is emitted whenever the user presses a mouse button */
