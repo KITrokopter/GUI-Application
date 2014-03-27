@@ -70,7 +70,7 @@
                <item>
                 <widget class="QPushButton" name="launchButton">
                  <property name="text">
-                  <string>Launch</string>
+                  <string>&amp;Launch</string>
                  </property>
                 </widget>
                </item>
@@ -86,7 +86,7 @@
                <item>
                 <widget class="QPushButton" name="loadFormationButton">
                  <property name="text">
-                  <string>Load...</string>
+                  <string>L&amp;oad...</string>
                  </property>
                 </widget>
                </item>
@@ -131,14 +131,14 @@
                <item>
                 <widget class="QPushButton" name="calibrateCamerasButton">
                  <property name="text">
-                  <string>Calibrate Cameras...</string>
+                  <string>&amp;Calibrate Cameras...</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QPushButton" name="deleteCalibrationButton">
                  <property name="text">
-                  <string>Delete Calibration</string>
+                  <string>D&amp;elete Calibration</string>
                  </property>
                 </widget>
                </item>
@@ -187,7 +187,7 @@
             <item>
              <widget class="QPushButton" name="scanButton">
               <property name="text">
-               <string>Scan for Quadcopters</string>
+               <string>&amp;Scan for Quadcopters</string>
               </property>
              </widget>
             </item>
