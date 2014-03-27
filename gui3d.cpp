@@ -128,8 +128,6 @@ void Gui3D::mouseDragged(int deltaX, int deltaY)
 
 void Gui3D::zoom(int delta)
 {
-    qDebug() << "Zoom enter " << delta;
-
     vector3df position = cameraNode->getPosition();
     position.Z *= pow(cameraZoomStep, delta);
 
@@ -142,8 +140,6 @@ void Gui3D::zoom(int delta)
     cameraNode->setPosition(position);
 
     repaintRequested = true;
-
-    qDebug() << "Zoom exit";
 }
 
 void Gui3D::callRepaint()

@@ -37,11 +37,11 @@ private:
 
     vector3df cameraLookAt;
     vector3df cameraRotation;
-    double cameraPitchRotationStep;
-    double cameraHorizontalRotationStep;
-    double cameraDistanceStep;
-    double cameraDistance;
-    double cameraZoomStep;
+    float cameraPitchRotationStep;
+    float cameraHorizontalRotationStep;
+    float cameraDistanceStep;
+    float cameraDistance;
+    float cameraZoomStep;
     volatile bool repaintRequested;
     ICameraSceneNode *cameraNode;
     ISceneNode *cameraCenterNode;
