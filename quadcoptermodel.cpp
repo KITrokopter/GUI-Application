@@ -72,8 +72,7 @@ QVariant QuadcopterModel::data(const QModelIndex &index, int role) const
         case QUADCOPTER_STATUS:
             return quadcopter->isTracked() ? QString("tracked") : QString("untracked");
         case QUADCOPTER_BATTERY:
-            // TODO: API function seems to be missing.
-            return QString::number(row * 5);
+            return QString::number(quadcopter->getBatteryStatus());
         case QUADCOPTER_CONNECTION:
             return QString::number(quadcopter->getLinkQuality());
         case QUADCOPTER_CHANNEL:
