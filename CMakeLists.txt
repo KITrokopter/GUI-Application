@@ -61,6 +61,7 @@ target_link_libraries(kitrokopter
 
 install(TARGETS kitrokopter RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 install(DIRECTORY textures/ DESTINATION lib/gui_application/textures/)
+install(DIRECTORY models/ DESTINATION lib/gui_application/models/)
 
 qt5_use_modules(kitrokopter Widgets)
 

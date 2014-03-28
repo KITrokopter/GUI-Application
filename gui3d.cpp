@@ -57,7 +57,7 @@ void Gui3D::initializeIrrlicht()
     std::vector<double> position(3);
     std::vector<double> rotation(9);
     position[0] = 500;
-    GUICamera *cam0 = new GUICamera(simulationNode, "/home/sibbo/git/graphics/gui-3d-inside/models/gui-3d-inside-075.3ds", position, rotation, sceneManager);
+    GUICamera *cam0 = new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", position, rotation, sceneManager);
     position[0] = 0;
     position[2] = 500;
     GUIQuadcopter *q0 = new GUIQuadcopter(simulationNode, "", position, rotation, sceneManager);
