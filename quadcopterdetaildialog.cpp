@@ -16,6 +16,8 @@ QuadcopterDetailDialog::QuadcopterDetailDialog(QWidget *parent) :
 
     connect(ui->minColorButton, SIGNAL(clicked()), this, SLOT(selectMinColor()));
     connect(ui->maxColorButton, SIGNAL(clicked()), this, SLOT(selectMaxColor()));
+    connect(ui->selectForFlight, SIGNAL(toggled(bool)), this, SLOT(setFlightSelection(bool)));
+    connect(ui->blinkButton, SIGNAL(clicked()), this, SLOT(blink()));
 }
 
 QuadcopterDetailDialog::~QuadcopterDetailDialog()
@@ -42,7 +44,7 @@ void QuadcopterDetailDialog::setSourceModel(QuadcopterModel *model, kitrokopter:
 void colorButton(QPushButton *button, const QColor &color)
 {
     QPalette palette;
-    palette.setColor(QPalette::Window, color);
+    palette.setColor(QPalette::Button, color);
     button->setAutoFillBackground(true);
     button->setPalette(palette);
 }

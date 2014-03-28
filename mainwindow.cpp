@@ -112,7 +112,10 @@ void MainWindow::loadFormation()
 void MainWindow::scanForQuadcopters()
 {
     bool result = api->initializeQuadcopters();
-    if (!result) {
+    if (result) {
+        ui->statusBar->showMessage("Successfully initialized Quadcopters.");
+        ui->scanButton->setDisabled(true);
+    } else {
         QMessageBox::critical(this, "Quadcopter Error", "Could not distribute all Quadcopter channels.");
     }
 }

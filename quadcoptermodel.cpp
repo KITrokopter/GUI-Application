@@ -17,7 +17,18 @@ QuadcopterModel::QuadcopterModel(QObject *parent, kitrokopter::API *api)
 
 void QuadcopterModel::updateQuadcopters()
 {
-    quadcopters = QuadcopterVector::fromStdVector(api->getQuadcopters());
+    QuadcopterVector next = QuadcopterVector::fromStdVector(api->getQuadcopters());
+    int oldSize = quadcopters.size(), nextSize = next.size();
+    if (oldSize < nextSize)
+        beginInsertRows(QModelIndex(), oldSize, nextSize - 1);
+    else if (oldSize > nextSize)
+        beginRemoveRows(QModelIndex(), nextSize, oldSize - 1);
+    // Do the data change.
+    quadcopters = next;
+    if (oldSize < nextSize)
+        endInsertRows();
+    else if (oldSize > nextSize)
+        endRemoveRows();
     // We don't track changes, so we don't really know exactly what changed.
     emit dataChanged(index(0, 0), index(rowCount(QModelIndex()) - 1, columnCount(QModelIndex()) - 1));
 }
@@ -61,8 +72,7 @@ QVariant QuadcopterModel::data(const QModelIndex &index, int role) const
         case QUADCOPTER_STATUS:
             return quadcopter->isTracked() ? QString("tracked") : QString("untracked");
         case QUADCOPTER_BATTERY:
-            // TODO: API function seems to be missing.
-            return QString::number(row * 5);
+            return QString::number(quadcopter->getBatteryStatus());
         case QUADCOPTER_CONNECTION:
             return QString::number(quadcopter->getLinkQuality());
         case QUADCOPTER_CHANNEL:
