@@ -5,6 +5,7 @@ Build requirements:
 
  - Qt5
  - SDL2
+ - Irrlicht
  - CMake >= 2.8.9
 
 Qt5 requires the CMAKE_PREFIX_PATH to be set up correctly:
