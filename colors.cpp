@@ -1,8 +1,14 @@
 #include "colors.hpp"
 
+#include <QDebug>
+
 QColor parseColor(uint32_t color)
 {
-    return QColor::fromHsv(color & 0xFF0000, color & 0xFF00, color & 0xFF);
+    int h, s, v;
+    h = (color & 0xFF0000) >> 16;
+    s = (color & 0xFF00) >> 8;
+    v = color & 0xFF;
+    return QColor::fromHsv(h, s, v);
 }
 
 uint32_t serializeColor(QColor color)
