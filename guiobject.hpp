@@ -16,7 +16,7 @@ using namespace gui;
 class GUIObject
 {
 public:
-    GUIObject(std::vector<double> positionVector, std::vector<double> rotationMatrix, ISceneManager *sceneManager);
+    GUIObject(ISceneNode *parent, std::vector<double> positionVector, std::vector<double> rotationMatrix, ISceneManager *sceneManager);
     ~GUIObject();
 
     void setRotationMatrix(std::vector<double> rotationMatrix);

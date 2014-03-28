@@ -6,7 +6,7 @@
 class GUICamera : public GUIObject
 {
 public:
-    GUICamera(const char* meshPath, std::vector<double> positionVector, std::vector<double> rotationMatrix, ISceneManager *sceneManager);
+    GUICamera(ISceneNode *parent, const char* meshPath, std::vector<double> positionVector, std::vector<double> rotationMatrix, ISceneManager *sceneManager);
 };
 
 #endif // GUICAMERA_H

@@ -16,7 +16,7 @@ Gui3D::Gui3D(QIrrlichtWidget *iw, kitrokopter::API *api)
     this->iw = iw;
     this->api = api;
 
-    cameraDistance = 100;
+    cameraDistance = 1000;
     cameraHorizontalRotationStep = 0.5;
     cameraPitchRotationStep = -0.3;
     cameraDistanceStep = 10;
@@ -41,7 +41,15 @@ void Gui3D::initializeIrrlicht()
     cameraNode = sceneManager->addCameraSceneNode(cameraCenterNode, vector3df(0, 0, cameraDistance), vector3df(0, 0, -1));
     cameraNode->setFarValue(20000);
 
+    simulationNode = sceneManager->addEmptySceneNode();
+    simulationNode->setRotation(vector3df(-90, 0, 0));
 
+    ISceneNode *arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("x-axis", SColor(255, 255, 0, 0), SColor(255, 255, 0, 0), 4, 8, 100, 95, 5, 5), simulationNode);
+    arrowNode->setRotation(vector3df(90, 90, 0));
+    arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("y-axis", SColor(255, 0, 255, 0), SColor(255, 0, 255, 0), 4, 8, 100, 95, 5, 5), simulationNode);
+    arrowNode->setRotation(vector3df(0, 0, 0));
+    arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("z-axis", SColor(255, 0, 0, 255), SColor(255, 0, 0, 255), 4, 8, 100, 95, 5, 5), simulationNode);
+    arrowNode->setRotation(vector3df(90, 0, 0));
 
     /*const IGeometryCreator *geometryCreator = sceneManager->getGeometryCreator();
     sphere = geometryCreator->createSphereMesh();
@@ -55,7 +63,7 @@ void Gui3D::initializeIrrlicht()
     std::vector<double> position(3);
     std::vector<double> rotation(9);
     //position[0] = 50;
-    GUICamera *cam0 = new GUICamera("set me: camera mesh", position, rotation, sceneManager);
+    GUICamera *cam0 = new GUICamera(simulationNode, "set me: camera mesh", position, rotation, sceneManager);
 
     qDebug() << "InitializedIrrlicht";
 
@@ -89,7 +97,7 @@ void Gui3D::updateCameras()
 
     for (std::vector<kitrokopter::APICamera*>::iterator it = cameras.begin(); it != cameras.end(); it++) {
         if (this->cameras.count((*it)->getId())) {
-            this->cameras[(*it)->getId()] = new GUICamera("set me: camera mesh", std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
+            this->cameras[(*it)->getId()] = new GUICamera(simulationNode, "set me: camera mesh", std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
         }
 
         cameraLookAt.X += (*it)->getPosition().getX() / cameras.size();

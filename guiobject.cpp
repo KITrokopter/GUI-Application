@@ -12,11 +12,11 @@ using namespace video;
 using namespace io;
 using namespace gui;
 
-GUIObject::GUIObject(std::vector<double> positionVector, std::vector<double> rotationMatrix, ISceneManager *sceneManager)
+GUIObject::GUIObject(ISceneNode *parent, std::vector<double> positionVector, std::vector<double> rotationMatrix, ISceneManager *sceneManager)
 {
     qDebug() << "Constructing GUIObject";
 
-    node = sceneManager->addEmptySceneNode();
+    node = sceneManager->addEmptySceneNode(parent);
 
     if (node == 0) {
         qDebug() << "Could not create scene node";

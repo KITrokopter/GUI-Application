@@ -34,6 +34,7 @@ private:
 
     std::map<int, GUICamera*> cameras;
     std::map<int, GUIQuadcopter*> quadcopters;
+    ISceneNode *simulationNode;
 
     vector3df cameraLookAt;
     vector3df cameraRotation;
