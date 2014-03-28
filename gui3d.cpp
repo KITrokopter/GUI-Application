@@ -46,24 +46,21 @@ void Gui3D::initializeIrrlicht()
 
     ISceneNode *arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("x-axis", SColor(255, 255, 0, 0), SColor(255, 255, 0, 0), 4, 8, 100, 95, 5, 5), simulationNode);
     arrowNode->setRotation(vector3df(90, 90, 0));
+    arrowNode->setMaterialFlag(EMF_LIGHTING, false);
     arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("y-axis", SColor(255, 0, 255, 0), SColor(255, 0, 255, 0), 4, 8, 100, 95, 5, 5), simulationNode);
     arrowNode->setRotation(vector3df(0, 0, 0));
+    arrowNode->setMaterialFlag(EMF_LIGHTING, false);
     arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("z-axis", SColor(255, 0, 0, 255), SColor(255, 0, 0, 255), 4, 8, 100, 95, 5, 5), simulationNode);
     arrowNode->setRotation(vector3df(90, 0, 0));
-
-    /*const IGeometryCreator *geometryCreator = sceneManager->getGeometryCreator();
-    sphere = geometryCreator->createSphereMesh();
-    sphereNode = sceneManager->addMeshSceneNode(sphere);
-
-    sphereNode->setPosition(vector3df(50, 0, 0));
-    ITexture *greenTexture = iw->getIrrlichtDevice()->getVideoDriver()->getTexture("install/lib/gui_application/textures/green.png");
-    sphereNode->setMaterialTexture(0, greenTexture);
-    sphereNode->setMaterialFlag(EMF_LIGHTING, false);*/
+    arrowNode->setMaterialFlag(EMF_LIGHTING, false);
 
     std::vector<double> position(3);
     std::vector<double> rotation(9);
-    //position[0] = 50;
-    GUICamera *cam0 = new GUICamera(simulationNode, "set me: camera mesh", position, rotation, sceneManager);
+    position[0] = 500;
+    GUICamera *cam0 = new GUICamera(simulationNode, "/home/sibbo/git/graphics/gui-3d-inside/models/gui-3d-inside-075.3ds", position, rotation, sceneManager);
+    position[0] = 0;
+    position[2] = 500;
+    GUIQuadcopter *q0 = new GUIQuadcopter(simulationNode, "", position, rotation, sceneManager);
 
     qDebug() << "InitializedIrrlicht";
 
