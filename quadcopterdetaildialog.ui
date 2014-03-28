@@ -29,14 +29,14 @@
      <item>
       <widget class="QPushButton" name="minColorButton">
        <property name="text">
-        <string>min</string>
+        <string>m&amp;in</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="maxColorButton">
        <property name="text">
-        <string>max</string>
+        <string>m&amp;ax</string>
        </property>
       </widget>
      </item>
@@ -45,14 +45,14 @@
    <item>
     <widget class="QCheckBox" name="selectForFlight">
      <property name="text">
-      <string>Select for flight</string>
+      <string>&amp;Select for flight</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="blinkButton">
      <property name="text">
-      <string>Blink</string>
+      <string>&amp;Blink</string>
      </property>
     </widget>
    </item>
