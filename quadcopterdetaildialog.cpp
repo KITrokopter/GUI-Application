@@ -42,7 +42,7 @@ void QuadcopterDetailDialog::setSourceModel(QuadcopterModel *model, kitrokopter:
 void colorButton(QPushButton *button, const QColor &color)
 {
     QPalette palette;
-    palette.setColor(QPalette::Window, color);
+    palette.setColor(QPalette::Button, color);
     button->setAutoFillBackground(true);
     button->setPalette(palette);
 }
