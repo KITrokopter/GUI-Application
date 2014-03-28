@@ -16,6 +16,8 @@ QuadcopterDetailDialog::QuadcopterDetailDialog(QWidget *parent) :
 
     connect(ui->minColorButton, SIGNAL(clicked()), this, SLOT(selectMinColor()));
     connect(ui->maxColorButton, SIGNAL(clicked()), this, SLOT(selectMaxColor()));
+    connect(ui->selectForFlight, SIGNAL(toggled(bool)), this, SLOT(setFlightSelection(bool)));
+    connect(ui->blinkButton, SIGNAL(clicked()), this, SLOT(blink()));
 }
 
 QuadcopterDetailDialog::~QuadcopterDetailDialog()
