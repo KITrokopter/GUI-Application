@@ -6,6 +6,7 @@
 
 #include <QLabel>
 #include <QColorDialog>
+#include <QtConcurrentRun>
 
 QuadcopterDetailDialog::QuadcopterDetailDialog(QWidget *parent) :
     QDialog(parent),
@@ -107,5 +108,5 @@ void QuadcopterDetailDialog::setFlightSelection(bool select)
 
 void QuadcopterDetailDialog::blink()
 {
-    quadcopter->blink();
+    QtConcurrent::run(quadcopter, &kitrokopter::APIQuadcopter::blink);
 }
