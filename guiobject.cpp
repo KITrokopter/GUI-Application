@@ -48,6 +48,14 @@ void GUIObject::setRotationMatrix(std::vector<double> rotationMatrix)
 
 void GUIObject::setPositionVector(std::vector<double> positionVector)
 {
+    if (node == 0) {
+        qDebug() << "Error: Node is 0!";
+    }
+    
+    if (positionVector.size() != 3) {
+        qDebug() << "Error: Vector size is " << positionVector.size() << " but should be 3!";
+    }
+    
     node->setPosition(vector3df(positionVector[0], positionVector[1], positionVector[2]));
 }
 
