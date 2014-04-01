@@ -10,9 +10,8 @@ GlobalCalibrationWidget::GlobalCalibrationWidget(QWidget *parent, QList<CameraMo
 {
     ui->setupUi(this);
 
-    connect(ui->takePictureButton, SLOT(click()), this, SLOT(calibrate()));
-
     int size = cameras.size();
+    // We can only show up to four images.
     if (size > 4) size = 4;
     switch (size) {
     case 4:
@@ -30,11 +29,6 @@ GlobalCalibrationWidget::GlobalCalibrationWidget(QWidget *parent, QList<CameraMo
 GlobalCalibrationWidget::~GlobalCalibrationWidget()
 {
     delete ui;
-}
-
-void GlobalCalibrationWidget::calibrate()
-{
-    // TODO: Do API call.
 }
 
 void GlobalCalibrationWidget::updateImage(QLabel *label, const QPixmap &img)

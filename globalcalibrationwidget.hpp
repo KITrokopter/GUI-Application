@@ -20,8 +20,6 @@ public:
     ~GlobalCalibrationWidget();
 
 private slots:
-    void calibrate();
-
     void updateImage1(const QPixmap &img);
     void updateImage2(const QPixmap &img);
     void updateImage3(const QPixmap &img);

@@ -18,10 +18,6 @@ public:
     SingleCalibrationWidget(QWidget *parent, CameraModel *model);
     ~SingleCalibrationWidget();
 
-private slots:
-    void setSourceImageType();
-    void setCorrectedImageType();
-
 private:
     Ui::SingleCalibrationWidget *ui;
 
