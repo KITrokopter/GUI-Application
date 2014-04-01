@@ -20,6 +20,8 @@ GUIObject::GUIObject(ISceneNode *parent, std::vector<double> positionVector, std
 
     if (node == 0) {
         qDebug() << "Could not create scene node";
+    } else {
+        qDebug() << "Node has value " << node << ". There might be more than one cameras, so remember that it can have different values in the future";
     }
 
     setRotationMatrix(rotationMatrix);
@@ -50,6 +52,8 @@ void GUIObject::setPositionVector(std::vector<double> positionVector)
 {
     if (node == 0) {
         qDebug() << "Error: Node is 0!";
+    } else {
+        qDebug() << "Node is " << node << ". If this differs from what you've seen from the past, there is a memory corruption somewhere.";
     }
     
     if (positionVector.size() != 3) {
