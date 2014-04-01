@@ -23,6 +23,8 @@ public:
     ~CalibrationDialog();
 
 private slots:
+    void tabChanged(int);
+
     void startCalibration();
     void takePicture();
     void calculateCalibration();
@@ -30,6 +32,9 @@ private slots:
 
 private:
     void setupTabs();
+    void activateCamera(int cam, bool active);
+
+    int prevTab = -1;
 
     Ui::CalibrationDialog *ui;
     kitrokopter::APICameraSystem *cameraSystem;

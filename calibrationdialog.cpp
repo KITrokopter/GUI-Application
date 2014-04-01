@@ -18,6 +18,7 @@ CalibrationDialog::CalibrationDialog(QWidget *parent, kitrokopter::APICameraSyst
     ui->setupUi(this);
     setupTabs();
 
+    connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabChanged(int)));
     connect(ui->startCalibrationButton, SIGNAL(clicked()), this, SLOT(startCalibration()));
     connect(ui->takePictureButton, SIGNAL(clicked()), this, SLOT(takePicture()));
     connect(ui->calculateCalibrationButton, SIGNAL(clicked()), this, SLOT(calculateCalibration()));
@@ -41,6 +42,37 @@ void CalibrationDialog::setupTabs()
 
     GlobalCalibrationWidget *global = new GlobalCalibrationWidget(this, cameraModels);
     ui->tabWidget->addTab(global, "&All");
+}
+
+void CalibrationDialog::activateCamera(int cam, bool active)
+{
+    auto camera = cameraSystem->getCamera(cam);
+    if (camera) {
+        camera->sendPictureSendingActivation(active);
+    }
+}
+
+void CalibrationDialog::tabChanged(int tab)
+{
+    int camAmount = cameraSystem->getCameraAmount();
+    // Stop receiving images from the camera on the previous tab.
+    if (prevTab < camAmount) {
+        activateCamera(tab, false);
+    } else {
+        for (int i = 0; i < camAmount; ++i) {
+            activateCamera(i, false);
+        }
+    }
+    // Receive images from the camera on the new tab, or all cameras.
+    if (tab < camAmount) {
+        activateCamera(tab, true);
+    } else {
+        for (int i = 0; i < camAmount; ++i) {
+            activateCamera(i, true);
+        }
+    }
+    // Save previous tab for the next switch.
+    prevTab = tab;
 }
 
 void CalibrationDialog::startCalibration()
