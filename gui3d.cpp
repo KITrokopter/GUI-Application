@@ -70,7 +70,7 @@ void Gui3D::initializeIrrlicht()
     quadcopterTimer.start();
 
     cameraTimer.setInterval(1000);
-    connect(&cameraTimer, SIGNAL(timeout()), this, SLOT(updateCameras()));
+    //connect(&cameraTimer, SIGNAL(timeout()), this, SLOT(updateCameras()));
     cameraTimer.start();
 
     repaintTimer.setInterval(10);
