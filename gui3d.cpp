@@ -1,4 +1,5 @@
 #include "gui3d.hpp"
+#include "API.hpp"
 
 #include <irrlicht/IGeometryCreator.h>
 #include <cmath>

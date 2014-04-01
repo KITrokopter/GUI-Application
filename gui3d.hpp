@@ -7,11 +7,13 @@
 #include <QObject>
 #include <map>
 
-#include "API.hpp"
-
 #include "guicamera.hpp"
 #include "guiquadcopter.hpp"
 #include "imouselistener.hpp"
+
+namespace kitrokopter {
+class API;
+}
 
 class Gui3D : public QObject, public IMouseListener
 {
