@@ -49,7 +49,6 @@ MainWindow::MainWindow(QWidget *parent, kitrokopter::API *api) :
     gui3d = new Gui3D(irrlichtWidget, api);
 
     connect(ui->launchButton, SIGNAL(clicked()), this, SLOT(launch()));
-    connect(ui->deleteCalibrationButton, SIGNAL(clicked()), this, SLOT(deleteCalibration()));
     connect(ui->loadFormationButton, SIGNAL(clicked()), this, SLOT(loadFormation()));
     connect(ui->scanButton, SIGNAL(clicked()), this, SLOT(scanForQuadcopters()));
     connect(ui->actionShutdown_everything, SIGNAL(triggered()), this, SLOT(shutdownEverything()));
@@ -59,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent, kitrokopter::API *api) :
     connect(ui->untrackedList, SIGNAL(activated(QModelIndex)), this, SLOT(openQuadcopterDetailDialog(QModelIndex)));
 
     connect(ui->calibrateCamerasButton, SIGNAL(clicked()), this, SLOT(openCalibrationDialog()));
+    connect(ui->startSystemButton, SIGNAL(clicked()), this, SLOT(startSystem()));
 
     connect(ui->actionGamepad, SIGNAL(triggered()), this, SLOT(openGamepadDebugDialog()));
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(openAboutDialog()));
@@ -96,12 +96,6 @@ void MainWindow::initGamepad()
 void MainWindow::launch()
 {
     api->launchQuadcopters(ui->launchHeightSpinBox->value());
-}
-
-void MainWindow::deleteCalibration()
-{
-    // TODO: This API call does not seem to exist.
-    //api->getCameraSystem()->deleteFormation();
 }
 
 void MainWindow::loadFormation()
@@ -154,6 +148,11 @@ void MainWindow::openCalibrationDialog()
     calibrationDialog->show();
     calibrationDialog->raise();
     calibrationDialog->activateWindow();
+}
+
+void MainWindow::startSystem()
+{
+    // TODO: API call
 }
 
 void MainWindow::openGamepadDebugDialog()

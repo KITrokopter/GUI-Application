@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>890</width>
-    <height>658</height>
+    <width>843</width>
+    <height>681</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -32,6 +32,36 @@
             <string>Actions</string>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QGroupBox" name="groupBox_5">
+              <property name="title">
+               <string>Setup</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_6">
+               <item>
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>1. Select Quadcopter colors (double click Q1, ... at the bottom).</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="calibrateCamerasButton">
+                 <property name="text">
+                  <string>2. &amp;Calibrate Cameras...</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="startSystemButton">
+                 <property name="text">
+                  <string>3. Start S&amp;ystem</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
             <item>
              <widget class="QGroupBox" name="groupBox_3">
               <property name="title">
@@ -122,29 +152,6 @@
               </layout>
              </widget>
             </item>
-            <item>
-             <widget class="QGroupBox" name="groupBox_5">
-              <property name="title">
-               <string>Calibration</string>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_6">
-               <item>
-                <widget class="QPushButton" name="calibrateCamerasButton">
-                 <property name="text">
-                  <string>&amp;Calibrate Cameras...</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="deleteCalibrationButton">
-                 <property name="text">
-                  <string>D&amp;elete Calibration</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
            </layout>
           </widget>
          </item>
@@ -206,7 +213,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>890</width>
+     <width>843</width>
      <height>25</height>
     </rect>
    </property>

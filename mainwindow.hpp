@@ -31,7 +31,6 @@ public:
 public slots:
     // Buttons
     void launch();
-    void deleteCalibration();
     void loadFormation();
     void scanForQuadcopters();
     void shutdownEverything();
@@ -40,8 +39,9 @@ public slots:
     void openQuadcopterDebugDialog();
     void openQuadcopterDetailDialog(const QModelIndex &index);
 
-    // Camera calibration dialogs
+    // Setup
     void openCalibrationDialog();
+    void startSystem();
 
     // Gamepad debugging
     void openGamepadDebugDialog();
