@@ -7,6 +7,9 @@
 #include "globalcalibrationwidget.hpp"
 #include "singlecalibrationwidget.hpp"
 
+#include <QMessageBox>
+#include <QtConcurrentRun>
+
 CalibrationDialog::CalibrationDialog(QWidget *parent, kitrokopter::APICameraSystem *camsys) :
     QDialog(parent),
     ui(new Ui::CalibrationDialog),
@@ -14,6 +17,11 @@ CalibrationDialog::CalibrationDialog(QWidget *parent, kitrokopter::APICameraSyst
 {
     ui->setupUi(this);
     setupTabs();
+
+    connect(ui->startCalibrationButton, SIGNAL(clicked()), this, SLOT(startCalibration()));
+    connect(ui->takePictureButton, SIGNAL(clicked()), this, SLOT(takePicture()));
+    connect(ui->calculateCalibrationButton, SIGNAL(clicked()), this, SLOT(calculateCalibration()));
+    connect(&calculationWatcher, SIGNAL(finished()), this, SLOT(calculateCalibrationDone()));
 }
 
 CalibrationDialog::~CalibrationDialog()
@@ -33,4 +41,37 @@ void CalibrationDialog::setupTabs()
 
     GlobalCalibrationWidget *global = new GlobalCalibrationWidget(this, cameraModels);
     ui->tabWidget->addTab(global, "&All");
+}
+
+void CalibrationDialog::startCalibration()
+{
+    // Get calibration parameters.
+    int rowCount, columnCount, fieldWidth, fieldHeight;
+    rowCount = ui->rowCountSpinBox->value();
+    columnCount = ui->columnCountSpinBox->value();
+    fieldWidth = ui->fieldWidthSpinBox->value();
+    fieldHeight = ui->fieldHeightSpinBox->value();
+
+    kitrokopter::CalibrationBoard board(rowCount, columnCount, (float)fieldWidth, (float)fieldHeight);
+    bool result = cameraSystem->startCalibration(board);
+    if (!result)
+        QMessageBox::critical(this, "Calibration Error", "Could not start calibration.");
+}
+
+void CalibrationDialog::takePicture()
+{
+    int num = cameraSystem->takeCalibrationPictures();
+    ui->takePictureLabel->setText(QString("Took %1 pictures.").arg(num));
+}
+
+void CalibrationDialog::calculateCalibration()
+{
+    auto future = QtConcurrent::run(cameraSystem, &kitrokopter::APICameraSystem::calculateCalibration);
+    calculationWatcher.setFuture(future);
+    ui->calculateCalibrationLabel->setText("Calculating calibration. This may take a while...");
+}
+
+void CalibrationDialog::calculateCalibrationDone()
+{
+    ui->calculateCalibrationLabel->setText("Calibration calculated.");
 }

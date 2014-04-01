@@ -22,9 +22,6 @@ private slots:
     void setSourceImageType();
     void setCorrectedImageType();
 
-    void calibrate();
-    void deleteCalibration();
-
 private:
     Ui::SingleCalibrationWidget *ui;
 

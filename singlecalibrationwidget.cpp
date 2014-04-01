@@ -38,21 +38,3 @@ void SingleCalibrationWidget::setCorrectedImageType()
 {
     model->setImageType(CameraModel::CorrectedImage);
 }
-
-void SingleCalibrationWidget::calibrate()
-{
-    // Get calibration parameters.
-    int rowCount, columnCount, fieldWidth, fieldHeight;
-    rowCount = ui->rowCountSpinBox->value();
-    columnCount = ui->columnCountSpinBox->value();
-    fieldWidth = ui->fieldWidthSpinBox->value();
-    fieldHeight = ui->fieldHeightSpinBox->value();
-
-    kitrokopter::CalibrationBoard board(rowCount * fieldWidth, columnCount * fieldHeight, (float)fieldWidth, (float)fieldHeight);
-    model->camera()->startCalibration(5, 100, board);
-}
-
-void SingleCalibrationWidget::deleteCalibration()
-{
-    model->camera()->deleteCalibration();
-}
