@@ -34,7 +34,7 @@ QPaintEngine * QIrrlichtWidget::paintEngine() const
 
 void QIrrlichtWidget::resizeEvent( QResizeEvent *event )
 {    
-    qDebug() << "QIrrlichtWidget::resizeEvent";
+    //qDebug() << "QIrrlichtWidget::resizeEvent";
 
     if( m_IrrDevice == 0 )
         return;
@@ -48,7 +48,7 @@ void QIrrlichtWidget::resizeEvent( QResizeEvent *event )
 
 void QIrrlichtWidget::paintEvent( QPaintEvent *event )
 {
-    qDebug() << "QIrrlichtWidget::paintEvent";
+    //qDebug() << "QIrrlichtWidget::paintEvent";
 
     if( m_IrrDevice == 0 )
         return;
@@ -150,12 +150,12 @@ QIrrlichtWidget::~QIrrlichtWidget()
 
 irr::IrrlichtDevice * QIrrlichtWidget::getIrrlichtDevice()
 {
-    qDebug() << "QIrrlichtWidget::getIrrlichtDevice()";
+    //qDebug() << "QIrrlichtWidget::getIrrlichtDevice()";
 
     if( m_IrrDevice != 0 )
         return m_IrrDevice;
 
-    throw( "Irrlicht device has not been initialized");
+    throw( "QIrrlichtWidget::getIrrlichtDevice(): Irrlicht device has not been initialized");
 }
 
 irr::scene::ISceneManager * QIrrlichtWidget::getSceneManager()
@@ -165,7 +165,7 @@ irr::scene::ISceneManager * QIrrlichtWidget::getSceneManager()
     if( m_IrrDevice != 0 )
         return m_IrrDevice->getSceneManager();
 
-    throw( "Irrlicht device has not been initialized" );
+    throw( "QIrrlichtWidget::getSceneManager: Irrlicht device has not been initialized" );
 }
 
 void QIrrlichtWidget::setClearColor( const irr::video::SColorf &color )
@@ -175,7 +175,7 @@ void QIrrlichtWidget::setClearColor( const irr::video::SColorf &color )
 
 void QIrrlichtWidget::setAspectRatio( irr::f32 aspect )
 {
-    qDebug() << "QIrrlichtWidget::setAspectRatio";
+    //qDebug() << "QIrrlichtWidget::setAspectRatio";
 
     if( m_IrrDevice == 0 )
         return;
