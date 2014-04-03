@@ -116,8 +116,6 @@ void Gui3D::updateCameras()
 
 void Gui3D::mouseDragged(int deltaX, int deltaY)
 {
-    qDebug() << "Mouse dragged" << deltaX << "/" << deltaY;
-
     cameraRotation.X += deltaY * cameraPitchRotationStep;
 
     if (cameraRotation.X > 80) {
@@ -128,11 +126,7 @@ void Gui3D::mouseDragged(int deltaX, int deltaY)
         cameraRotation.X = -80;
     }
 
-    qDebug() << "Pitch: " << cameraRotation.X;
-
     cameraRotation.Y += deltaX * cameraHorizontalRotationStep;
-
-    qDebug() << "Yaw: " << cameraRotation.Y;
 
     cameraCenterNode->setPosition(cameraLookAt);
     cameraCenterNode->setRotation(cameraRotation);
