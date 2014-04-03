@@ -93,16 +93,16 @@ void Gui3D::updateCameras()
     std::vector<kitrokopter::APICamera*> cameras = api->getCameras();
     cameraLookAt = vector3df();
 
-    for (std::vector<kitrokopter::APICamera*>::iterator it = cameras.begin(); it != cameras.end(); it++) {
-        if (!this->cameras.count((*it)->getId())) {
-            this->cameras[(*it)->getId()] = new GUICamera(simulationNode, "set me: camera mesh", std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
+    for (auto camera : cameras) {
+        if (!this->cameras.count(camera->getId())) {
+            this->cameras[camera->getId()] = new GUICamera(simulationNode, "set me: camera mesh", std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
         }
 
-        cameraLookAt.X += (*it)->getPosition().getX() / cameras.size();
-        cameraLookAt.Y += (*it)->getPosition().getY() / cameras.size();
-        cameraLookAt.Z += (*it)->getPosition().getZ() / cameras.size();
-        this->cameras[(*it)->getId()]->setPositionVector((*it)->getPosition());
-        //this->cameras[(*it)->getId()]->setRotationMatrix((*it)->getOrientation());
+        cameraLookAt.X += camera->getPosition().getX() / cameras.size();
+        cameraLookAt.Y += camera->getPosition().getY() / cameras.size();
+        cameraLookAt.Z += camera->getPosition().getZ() / cameras.size();
+        this->cameras[camera->getId()]->setPositionVector(camera->getPosition());
+        //this->cameras[camera->getId()]->setRotationMatrix(camera->getOrientation());
     }
 }
 
