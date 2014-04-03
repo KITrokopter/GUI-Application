@@ -3,6 +3,7 @@
 #include "APICamera.hpp"
 
 #include <QMessageBox>
+#include <QDebug>
 
 CameraModel::CameraModel(QObject *parent, kitrokopter::APICamera *camera) :
     QObject(parent),
@@ -30,6 +31,7 @@ void CameraModel::updateCameraValues(kitrokopter::APICameraUpdateEvent e)
 void CameraModel::imageReceived(cv::Mat image)
 {
     m_image = QPixmap::fromImage(QImage(image.data, image.cols, image.rows, image.step, QImage::Format_RGB32));
+    qDebug() << "New image: " << image.cols << "x" << image.rows;
     emit imageChanged(m_image);
 }
 
