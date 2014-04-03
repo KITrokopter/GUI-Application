@@ -22,6 +22,9 @@ public:
     explicit CalibrationDialog(QWidget *parent, kitrokopter::APICameraSystem *camsys);
     ~CalibrationDialog();
 
+public slots:
+    void setupTabs();
+
 private slots:
     void tabChanged(int);
 
@@ -31,7 +34,6 @@ private slots:
     void calculateCalibrationDone();
 
 private:
-    void setupTabs();
     void activateCamera(int cam, bool active);
 
     int prevTab = -1;
@@ -39,6 +41,8 @@ private:
     Ui::CalibrationDialog *ui;
     kitrokopter::APICameraSystem *cameraSystem;
     QList<CameraModel*> cameraModels;
+
+    QList<QWidget*> tabPages;
 
     // Watches the calibration calculation.
     QFutureWatcher<void> calculationWatcher;

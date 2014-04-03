@@ -34,6 +34,15 @@ CalibrationDialog::~CalibrationDialog()
 
 void CalibrationDialog::setupTabs()
 {
+    // Clear all tab pages.
+    ui->tabWidget->clear();
+    for (QWidget *widget : tabPages)
+        delete widget;
+    for (auto camera : cameraModels)
+        delete camera;
+    cameraModels.clear();
+
+    // Create tabs for single cameras.
     for (int i = 0; i < cameraSystem->getCameraAmount(); ++i) {
         kitrokopter::APICamera *camera = cameraSystem->getCamera(i);
         CameraModel *model = new CameraModel(this, camera);
@@ -42,6 +51,7 @@ void CalibrationDialog::setupTabs()
         ui->tabWidget->addTab(widget, QString("Camera &%1").arg(i));
     }
 
+    // Create a tab showing all cameras.
     GlobalCalibrationWidget *global = new GlobalCalibrationWidget(this, cameraModels);
     ui->tabWidget->addTab(global, "&All");
 }
