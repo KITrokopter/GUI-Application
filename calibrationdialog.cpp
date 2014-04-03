@@ -16,9 +16,11 @@ CalibrationDialog::CalibrationDialog(QWidget *parent, kitrokopter::APICameraSyst
     cameraSystem(camsys)
 {
     ui->setupUi(this);
+
+    // Connect the tab change signal before setting up the tabs to capture the change to the first tab.
+    connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabChanged(int)));
     setupTabs();
 
-    connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(tabChanged(int)));
     connect(ui->startCalibrationButton, SIGNAL(clicked()), this, SLOT(startCalibration()));
     connect(ui->takePictureButton, SIGNAL(clicked()), this, SLOT(takePicture()));
     connect(ui->calculateCalibrationButton, SIGNAL(clicked()), this, SLOT(calculateCalibration()));
