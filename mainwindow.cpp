@@ -145,6 +145,8 @@ void MainWindow::openCalibrationDialog()
     if (!calibrationDialog) {
         calibrationDialog = new CalibrationDialog(this, api->getCameraSystem());
     } else {
+        // Close the dialog while changing these things.
+        calibrationDialog->close();
         // Make sure that the tabs are up to date when reopening the dialog.
         calibrationDialog->setupTabs();
     }
