@@ -32,6 +32,7 @@ void CameraModel::imageReceived(cv::Mat image)
 {
     m_image = QPixmap::fromImage(QImage(image.data, image.cols, image.rows, image.step, QImage::Format_RGB888).rgbSwapped());
     qDebug() << "New image: " << image.cols << "x" << image.rows;
+    qDebug() << "Image data: " << image.data[42];
     emit imageChanged(m_image);
 }
 
