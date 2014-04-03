@@ -33,7 +33,10 @@ GlobalCalibrationWidget::~GlobalCalibrationWidget()
 
 void GlobalCalibrationWidget::updateImage(QLabel *label, const QPixmap &img)
 {
-    label->setPixmap(img);
+    QSize size;
+    size.setWidth(qMin(label->width(), img.width()));
+    size.setHeight(qMin(label->height(), img.height()));
+    label->setPixmap(img.scaled(size, Qt::KeepAspectRatio));
 }
 
 void GlobalCalibrationWidget::updateImage1(const QPixmap &img)
