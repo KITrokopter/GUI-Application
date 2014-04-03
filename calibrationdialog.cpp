@@ -51,6 +51,7 @@ void CalibrationDialog::activateCamera(int cam, bool active)
     auto camera = cameraSystem->getCamera(cam);
     if (camera) {
         camera->sendPictureSendingActivation(active);
+        qDebug() << "active camera: " << cam << " " << active;
     }
 }
 
