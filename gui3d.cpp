@@ -70,7 +70,7 @@ void Gui3D::initializeIrrlicht()
     quadcopterTimer.start();
 
     cameraTimer.setInterval(1000);
-    //connect(&cameraTimer, SIGNAL(timeout()), this, SLOT(updateCameras()));
+    connect(&cameraTimer, SIGNAL(timeout()), this, SLOT(updateCameras()));
     cameraTimer.start();
 
     repaintTimer.setInterval(10);
@@ -94,7 +94,7 @@ void Gui3D::updateCameras()
     cameraLookAt = vector3df();
 
     for (std::vector<kitrokopter::APICamera*>::iterator it = cameras.begin(); it != cameras.end(); it++) {
-        if (this->cameras.count((*it)->getId())) {
+        if (!this->cameras.count((*it)->getId())) {
             this->cameras[(*it)->getId()] = new GUICamera(simulationNode, "set me: camera mesh", std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
         }
 
