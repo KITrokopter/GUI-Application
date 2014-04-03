@@ -95,7 +95,7 @@ void Gui3D::updateCameras()
 
     for (auto camera : cameras) {
         if (!this->cameras.count(camera->getId())) {
-            this->cameras[camera->getId()] = new GUICamera(simulationNode, "set me: camera mesh", std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
+            this->cameras[camera->getId()] = new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
         }
 
         cameraLookAt.X += camera->getPosition().getX() / cameras.size();
