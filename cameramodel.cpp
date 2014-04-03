@@ -30,7 +30,7 @@ void CameraModel::updateCameraValues(kitrokopter::APICameraUpdateEvent e)
 
 void CameraModel::imageReceived(cv::Mat image)
 {
-    m_image = QPixmap::fromImage(QImage(image.data, image.cols, image.rows, image.step, QImage::Format_RGB32));
+    m_image = QPixmap::fromImage(QImage(image.data, image.cols, image.rows, image.step, QImage::Format_RGB888).rgbSwapped());
     qDebug() << "New image: " << image.cols << "x" << image.rows;
     emit imageChanged(m_image);
 }
