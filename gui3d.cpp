@@ -61,7 +61,7 @@ void Gui3D::initializeIrrlicht()
     GUICamera *cam0 = new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", position, rotation, sceneManager);
     position[0] = 0;
     position[2] = 500;
-    GUIQuadcopter *q0 = new GUIQuadcopter(simulationNode, "", position, rotation, sceneManager);
+    GUIQuadcopter *q0 = new GUIQuadcopter(simulationNode, position, rotation, sceneManager);
 
     qDebug() << "InitializedIrrlicht";
 
@@ -83,8 +83,16 @@ void Gui3D::updateQuadcopters()
     std::vector<kitrokopter::APIQuadcopter*> quadcopters = api->getQuadcopters();
 
     for (std::vector<kitrokopter::APIQuadcopter*>::iterator it = quadcopters.begin(); it != quadcopters.end(); it++) {
-        // TODO
-        (*it)->getCurrentPosition();
+        if (this->quadcopters.count((*it)->getId()) == 0) {
+            this->quadcopters[(*it)->getId()] = new GUIQuadcopter(simulationNode, std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
+        }
+
+        this->quadcopters[(*it)->getId()]->setPositionVector((*it)->getCurrentPosition());
+
+        // TODO correct signs?
+        this->quadcopters[(*it)->getId()]->setEulerRotation(vector3df((*it)->getStabilizerYawData(),
+                                                                      (*it)->getStabilizerPitchData(),
+                                                                      (*it)->getStabilizerRollData()));
     }
 }
 

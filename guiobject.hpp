@@ -21,6 +21,9 @@ public:
     ~GUIObject();
 
     void setRotationMatrix(std::vector<double> rotationMatrix);
+    void setEulerRotation(std::vector<double> eulerAngles);
+    void setEulerRotation(kitrokopter::Vector eulerAngles);
+    void setEulerRotation(vector3df eulerAngles);
     void setPositionVector(std::vector<double> positionVector);
     void setPositionVector(kitrokopter::Vector positionVector);
 
