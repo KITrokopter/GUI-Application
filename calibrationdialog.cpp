@@ -124,7 +124,7 @@ void CalibrationDialog::asyncTakePicture()
             calibrationPictureCount[cs.first]++;
         statusText.append(QString("Camera %1: %2 (%3)\n")
                           .arg(cs.first)
-                          .arg(cs.second ? QString::fromUtf8("\u2713") : QString::fromUtf8("\u2717"))
+                          .arg(cs.second ? QString::fromUtf8("<span style='color: green'>\u2713</span>") : QString::fromUtf8("<span style='color: red'>\u2717</span>"))
                           .arg(calibrationPictureCount[cs.first]));
     }
     ui->takePictureLabel->setText(statusText);
