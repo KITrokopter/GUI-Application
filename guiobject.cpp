@@ -71,8 +71,6 @@ void GUIObject::setPositionVector(std::vector<double> positionVector)
 {
     if (node == 0) {
         qDebug() << "Error: Node is 0!";
-    } else {
-        qDebug() << "Node is " << node << ". If this differs from what you've seen from the past, there is a memory corruption somewhere.";
     }
     
     if (positionVector.size() != 3) {
