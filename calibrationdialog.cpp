@@ -134,7 +134,7 @@ void CalibrationDialog::calculateCalibration()
 {
     auto future = QtConcurrent::run(cameraSystem, &kitrokopter::APICameraSystem::calculateCalibration);
     calculationWatcher.setFuture(future);
-    ui->calculateCalibrationLabel->setText("Calculating calibration. This may take a while...");
+    ui->calculateCalibrationLabel->setText("Calculating calibration.\nThis may take a while...");
 }
 
 void CalibrationDialog::calculateCalibrationDone()
