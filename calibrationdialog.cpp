@@ -104,8 +104,12 @@ void CalibrationDialog::startCalibration()
 
 void CalibrationDialog::takePicture()
 {
-    int num = cameraSystem->takeCalibrationPictures();
-    ui->takePictureLabel->setText(QString("Took %1 pictures.").arg(num));
+    auto status = cameraSystem->takeCalibrationPictures();
+    QString statusText;
+    for (auto& cs : status) {
+        statusText.append(QString("Camera %1: %2\n").arg(cs.first).arg(cs.second ? QString::fromUtf8("\u2713") : QString::fromUtf8("\u2717")));
+    }
+    ui->takePictureLabel->setText(statusText);
 }
 
 void CalibrationDialog::calculateCalibration()
