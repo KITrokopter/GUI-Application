@@ -124,7 +124,7 @@ void CalibrationDialog::takePictureDone()
     for (auto& cs : status) {
         if (cs.second)
             calibrationPictureCount[cs.first]++;
-        statusText.append(QString("Camera %1: %2 (%3)\n")
+        statusText.append(QString("Camera %1: %2 (%3)<br>")
                           .arg(cs.first)
                           .arg(cs.second ? QString::fromUtf8("<span style='color: green'>\u2713</span>") : QString::fromUtf8("<span style='color: red'>\u2717</span>"))
                           .arg(calibrationPictureCount[cs.first]));
