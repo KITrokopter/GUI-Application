@@ -5,14 +5,17 @@
 #include <QVector3D>
 #include <stdint.h>
 
+namespace kitrokopter {
+class API;
+}
+
 class MovementController : public QObject
 {
     Q_OBJECT
 public:
-    explicit MovementController(QObject *parent = 0);
+    explicit MovementController(kitrokopter::API *api, QObject *parent = 0);
 
     QVector3D movementVector();
-    QVector3D rotationVector();
 
 signals:
 
@@ -21,8 +24,12 @@ public slots:
     void buttonValueChanged(int, bool);
 
 private:
+    void notifyAPI();
+
     int16_t xmov, ymov, zmov;
     int16_t rot;
+
+    kitrokopter::API *api;
 
 };
 

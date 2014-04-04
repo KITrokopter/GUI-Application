@@ -1,16 +1,30 @@
 #define __STDC_LIMIT_MACROS 1
 #include "movementcontroller.hpp"
 
+#include "API.hpp"
+
 #include <SDL2/SDL_gamecontroller.h>
 
-MovementController::MovementController(QObject *parent) :
-    QObject(parent)
+MovementController::MovementController(kitrokopter::API *api, QObject *parent) :
+    QObject(parent),
+    api(api)
 {
 }
 
 QVector3D MovementController::movementVector()
 {
     return QVector3D((float)xmov / INT16_MAX, (float)ymov / INT16_MAX, (float)zmov / INT16_MAX);
+}
+
+void MovementController::notifyAPI()
+{
+    auto vector = movementVector();
+    api->moveFormation(kitrokopter::Vector(vector.x(), vector.y(), vector.z()));
+
+    if (rot) {
+        // TODO: directional turning
+        api->rotateFormation();
+    }
 }
 
 /*
@@ -39,6 +53,8 @@ void MovementController::axisValueChanged(int axis, int value)
         rot = +value;
         break;
     }
+
+    notifyAPI();
 }
 
 /*
@@ -46,4 +62,5 @@ void MovementController::axisValueChanged(int axis, int value)
  */
 void MovementController::buttonValueChanged(int, bool)
 {
+    notifyAPI();
 }

@@ -88,7 +88,7 @@ void MainWindow::initGamepad()
         ui->statusBar->showMessage(QString("Gamepad %1 connected.").arg(it.value()));
     }
     // Wire up the movement controller.
-    MovementController *ctrl = new MovementController(this);
+    MovementController *ctrl = new MovementController(api, this);
     connect(gamepad, SIGNAL(axisValueChanged(int,int)), ctrl, SLOT(axisValueChanged(int,int)));
     connect(gamepad, SIGNAL(buttonValueChanged(int,bool)), ctrl, SLOT(buttonValueChanged(int,bool)));
 }
