@@ -1,6 +1,6 @@
 #include "guiquadcopter.hpp"
 
-GUIQuadcopter::GUIQuadcopter(ISceneNode *parent, const char* meshPath, std::vector<double> positionVector, std::vector<double> rotationMatrix, ISceneManager *sceneManager)
+GUIQuadcopter::GUIQuadcopter(ISceneNode *parent, std::vector<double> positionVector, std::vector<double> rotationMatrix, ISceneManager *sceneManager)
     : GUIObject(parent, positionVector, rotationMatrix, sceneManager)
 {
     ISceneNode *node = sceneManager->addMeshSceneNode(sceneManager->addSphereMesh("Sphere", 10), getSceneNode());
