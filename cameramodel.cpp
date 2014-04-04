@@ -17,6 +17,12 @@ CameraModel::CameraModel(QObject *parent, kitrokopter::APICamera *camera) :
     camera->addImageListener(this);
 }
 
+CameraModel::~CameraModel()
+{
+    m_camera->removeCameraListener(this);
+    m_camera->removeImageListener(this);
+}
+
 kitrokopter::APICamera* CameraModel::camera()
 {
     return m_camera;

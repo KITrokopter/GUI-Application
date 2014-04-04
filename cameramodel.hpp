@@ -19,6 +19,7 @@ class CameraModel : public QObject, public kitrokopter::APICameraListener, publi
 
 public:
     explicit CameraModel(QObject *parent, kitrokopter::APICamera *camera);
+    ~CameraModel();
 
     kitrokopter::APICamera* camera();
 
