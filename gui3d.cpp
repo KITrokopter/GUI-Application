@@ -86,6 +86,8 @@ void Gui3D::updateQuadcopters()
         // TODO
         (*it)->getCurrentPosition();
     }
+
+    repaintRequested = true;
 }
 
 void Gui3D::updateCameras()
@@ -104,6 +106,8 @@ void Gui3D::updateCameras()
         this->cameras[camera->getId()]->setPositionVector(camera->getPosition());
         //this->cameras[camera->getId()]->setRotationMatrix(camera->getOrientation());
     }
+
+    repaintRequested = true;
 }
 
 void Gui3D::mouseDragged(int deltaX, int deltaY)
