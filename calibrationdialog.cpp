@@ -114,7 +114,12 @@ void CalibrationDialog::takePicture()
     }
     QString statusText;
     for (auto& cs : status) {
-        statusText.append(QString("Camera %1: %2\n").arg(cs.first).arg(cs.second ? QString::fromUtf8("\u2713") : QString::fromUtf8("\u2717")));
+        if (cs.second)
+            calibrationPictureCount[cs.first]++;
+        statusText.append(QString("Camera %1: %2 (%3)\n")
+                          .arg(cs.first)
+                          .arg(cs.second ? QString::fromUtf8("\u2713") : QString::fromUtf8("\u2717"))
+                          .arg(calibrationPictureCount[cs.first]));
     }
     ui->takePictureLabel->setText(statusText);
 }

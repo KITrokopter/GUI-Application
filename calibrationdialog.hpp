@@ -44,6 +44,8 @@ private:
 
     QList<QWidget*> tabPages;
 
+    QMap<uint32_t, unsigned int> calibrationPictureCount;
+
     // Watches the calibration calculation.
     QFutureWatcher<void> calculationWatcher;
 };
