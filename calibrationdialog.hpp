@@ -30,12 +30,12 @@ private slots:
 
     void startCalibration();
     void takePicture();
+    void takePictureDone();
     void calculateCalibration();
     void calculateCalibrationDone();
 
 private:
     void activateCamera(int cam, bool active);
-    void asyncTakePicture();
 
     int prevTab = -1;
 
@@ -47,6 +47,8 @@ private:
 
     QMap<uint32_t, unsigned int> calibrationPictureCount;
 
+    // Watches the takePicture call
+    QFutureWatcher< std::map<uint32_t, bool> > takePicturesWatcher;
     // Watches the calibration calculation.
     QFutureWatcher<void> calculationWatcher;
 };

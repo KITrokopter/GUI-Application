@@ -24,6 +24,7 @@ CalibrationDialog::CalibrationDialog(QWidget *parent, kitrokopter::APICameraSyst
     connect(ui->startCalibrationButton, SIGNAL(clicked()), this, SLOT(startCalibration()));
     connect(ui->takePictureButton, SIGNAL(clicked()), this, SLOT(takePicture()));
     connect(ui->calculateCalibrationButton, SIGNAL(clicked()), this, SLOT(calculateCalibration()));
+    connect(&takePicturesWatcher, SIGNAL(finished()), this, SLOT(takePictureDone()));
     connect(&calculationWatcher, SIGNAL(finished()), this, SLOT(calculateCalibrationDone()));
 }
 
@@ -105,17 +106,18 @@ void CalibrationDialog::startCalibration()
 void CalibrationDialog::takePicture()
 {
     ui->takePictureLabel->setText("Taking picture...");
-    QtConcurrent::run(this, &CalibrationDialog::asyncTakePicture);
+    auto future = QtConcurrent::run(cameraSystem, &kitrokopter::APICameraSystem::takeCalibrationPictures);
+    takePicturesWatcher.setFuture(future);
 }
 
-void CalibrationDialog::asyncTakePicture()
+void CalibrationDialog::takePictureDone()
 {
     std::map<uint32_t, bool> status;
     try {
-        status = cameraSystem->takeCalibrationPictures();
-    } catch (std::runtime_error &e) {
+        status = takePicturesWatcher.future().result();
+    } catch (QUnhandledException &e) {
         ui->takePictureLabel->setText("No pictures taken due to error.");
-        QMessageBox::critical(this, "Take Picture Error", e.what());
+        QMessageBox::critical(this, "Take Picture Error", "There was an error in the ROS call.");
         return;
     }
     QString statusText;
