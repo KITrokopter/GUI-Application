@@ -104,7 +104,14 @@ void CalibrationDialog::startCalibration()
 
 void CalibrationDialog::takePicture()
 {
-    auto status = cameraSystem->takeCalibrationPictures();
+    std::map<uint32_t, bool> status;
+    try {
+        status = cameraSystem->takeCalibrationPictures();
+    } catch (std::runtime_error &e) {
+        ui->takePictureLabel->setText("No pictures taken due to error.");
+        QMessageBox::critical(this, "Take Picture Error", e.what());
+        return;
+    }
     QString statusText;
     for (auto& cs : status) {
         statusText.append(QString("Camera %1: %2\n").arg(cs.first).arg(cs.second ? QString::fromUtf8("\u2713") : QString::fromUtf8("\u2717")));
