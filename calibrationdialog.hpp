@@ -35,6 +35,7 @@ private slots:
 
 private:
     void activateCamera(int cam, bool active);
+    void asyncTakePicture();
 
     int prevTab = -1;
 

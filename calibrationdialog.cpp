@@ -104,6 +104,12 @@ void CalibrationDialog::startCalibration()
 
 void CalibrationDialog::takePicture()
 {
+    ui->takePictureLabel->setText("Taking picture...");
+    QtConcurrent::run(this, &CalibrationDialog::asyncTakePicture);
+}
+
+void CalibrationDialog::asyncTakePicture()
+{
     std::map<uint32_t, bool> status;
     try {
         status = cameraSystem->takeCalibrationPictures();
