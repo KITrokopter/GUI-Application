@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 2.8.9)
 project(gui_application)
 
-SET(CMAKE_CXX_FLAGS "-std=c++11")
+SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra")
 
 ##############################################################################
 # Catkin

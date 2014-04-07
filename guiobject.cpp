@@ -48,12 +48,29 @@ void GUIObject::setRotationMatrix(std::vector<double> rotationMatrix)
                                 -atan2(rotationMatrix[2], rotationMatrix[5])));
 }
 
+void GUIObject::setEulerRotation(vector3df eulerAngles)
+{
+    node->setRotation(eulerAngles);
+}
+
+void GUIObject::setEulerRotation(std::vector<double> eulerAngles)
+{
+    setEulerRotation(vector3df(eulerAngles[0], eulerAngles[1], eulerAngles[2]));
+}
+
+void GUIObject::setEulerRotation(kitrokopter::Vector eulerAngles)
+{
+    std::vector<double> toPass(3);
+    toPass[0] = eulerAngles.getX();
+    toPass[1] = eulerAngles.getY();
+    toPass[2] = eulerAngles.getZ();
+    setEulerRotation(toPass);
+}
+
 void GUIObject::setPositionVector(std::vector<double> positionVector)
 {
     if (node == 0) {
         qDebug() << "Error: Node is 0!";
-    } else {
-        qDebug() << "Node is " << node << ". If this differs from what you've seen from the past, there is a memory corruption somewhere.";
     }
     
     if (positionVector.size() != 3) {

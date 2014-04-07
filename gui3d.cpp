@@ -99,8 +99,16 @@ void Gui3D::updateQuadcopters()
     std::vector<kitrokopter::APIQuadcopter*> quadcopters = api->getQuadcopters();
 
     for (std::vector<kitrokopter::APIQuadcopter*>::iterator it = quadcopters.begin(); it != quadcopters.end(); it++) {
-        // TODO
-        (*it)->getCurrentPosition();
+        if (this->quadcopters.count((*it)->getId()) == 0) {
+            this->quadcopters[(*it)->getId()] = new GUIQuadcopter(simulationNode, std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
+        }
+
+        this->quadcopters[(*it)->getId()]->setPositionVector((*it)->getCurrentPosition());
+
+        // TODO correct signs?
+        this->quadcopters[(*it)->getId()]->setEulerRotation(vector3df((*it)->getStabilizerYawData(),
+                                                                      (*it)->getStabilizerPitchData(),
+                                                                      (*it)->getStabilizerRollData()));
     }
 
     q0->setPositionVector(vector3df(q0->getPositionVector().X + 1, 0, 0));
@@ -130,8 +138,6 @@ void Gui3D::updateCameras()
 
 void Gui3D::mouseDragged(int deltaX, int deltaY)
 {
-    qDebug() << "Mouse dragged" << deltaX << "/" << deltaY;
-
     cameraRotation.X += deltaY * cameraPitchRotationStep;
 
     if (cameraRotation.X > 80) {
@@ -142,11 +148,7 @@ void Gui3D::mouseDragged(int deltaX, int deltaY)
         cameraRotation.X = -80;
     }
 
-    qDebug() << "Pitch: " << cameraRotation.X;
-
     cameraRotation.Y += deltaX * cameraHorizontalRotationStep;
-
-    qDebug() << "Yaw: " << cameraRotation.Y;
 
     cameraCenterNode->setPosition(cameraLookAt);
     cameraCenterNode->setRotation(cameraRotation);

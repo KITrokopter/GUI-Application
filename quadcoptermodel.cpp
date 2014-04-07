@@ -43,12 +43,12 @@ kitrokopter::APIQuadcopter* QuadcopterModel::quadcopterFor(int row)
     return quadcopters.at(row);
 }
 
-int QuadcopterModel::rowCount(const QModelIndex &parent) const
+int QuadcopterModel::rowCount(const QModelIndex& /*parent*/) const
 {
     return quadcopters.size();
 }
 
-int QuadcopterModel::columnCount(const QModelIndex &parent) const
+int QuadcopterModel::columnCount(const QModelIndex& /*parent*/) const
 {
     return QUADCOPTER_COLUMNS_LAST;
 }
@@ -98,7 +98,7 @@ QVariant QuadcopterModel::data(const QModelIndex &index, int role) const
     }
 }
 
-QVariant QuadcopterModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant QuadcopterModel::headerData(int section, Qt::Orientation orientation, int /*role*/) const
 {
     if (orientation == Qt::Horizontal) {
         switch (section) {
