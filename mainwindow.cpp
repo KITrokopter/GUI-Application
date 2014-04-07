@@ -72,6 +72,8 @@ void MainWindow::initializeIrrlicht()
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete irrlichtWidget;
+    delete gui3d;
 }
 
 /**
@@ -163,7 +165,7 @@ void MainWindow::openCalibrationDialog()
 
 void MainWindow::startSystem()
 {
-    // TODO: API call
+    api->startSystem();
 }
 
 void MainWindow::openGamepadDebugDialog()

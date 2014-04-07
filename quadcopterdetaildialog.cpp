@@ -72,7 +72,7 @@ void QuadcopterDetailDialog::renderModel()
     }
 
     // Set minimum and maximum color fields.
-    uint32_t *colors = quadcopter->getColorRange();
+    const uint32_t *colors = quadcopter->getColorRange();
     colorButton(ui->minColorButton, parseColor(colors[0]));
     colorButton(ui->maxColorButton, parseColor(colors[1]));
 
@@ -87,7 +87,7 @@ void QuadcopterDetailDialog::updateQuadcopterValues(kitrokopter::APIQuadcopterUp
 
 void QuadcopterDetailDialog::selectMinColor()
 {
-    uint32_t *colors = quadcopter->getColorRange();
+    const uint32_t *colors = quadcopter->getColorRange();
     QColor initial = parseColor(colors[0]);
     QColor newColor = QColorDialog::getColor(initial, this, "Select min color");
     quadcopter->setColorRange(serializeColor(newColor), colors[1]);
@@ -95,7 +95,7 @@ void QuadcopterDetailDialog::selectMinColor()
 
 void QuadcopterDetailDialog::selectMaxColor()
 {
-    uint32_t *colors = quadcopter->getColorRange();
+    const uint32_t *colors = quadcopter->getColorRange();
     QColor initial = parseColor(colors[1]);
     QColor newColor = QColorDialog::getColor(initial, this, "Select max color");
     quadcopter->setColorRange(colors[0], serializeColor(newColor));
