@@ -105,7 +105,13 @@ void MainWindow::loadFormation()
 
 void MainWindow::scanForQuadcopters()
 {
-    bool result = api->initializeQuadcopters();
+    bool result;
+    try {
+        result = api->initializeQuadcopters();
+    } catch (std::runtime_error &e) {
+        QMessageBox::critical(this, "Quadcopter Error", e.what());
+        return;
+    }
     if (result) {
         ui->statusBar->showMessage("Successfully initialized Quadcopters.");
         ui->scanButton->setDisabled(true);
