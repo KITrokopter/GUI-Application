@@ -165,7 +165,7 @@ void MainWindow::openCalibrationDialog()
 
 void MainWindow::startSystem()
 {
-    // TODO: API call
+    api->startSystem();
 }
 
 void MainWindow::openGamepadDebugDialog()
