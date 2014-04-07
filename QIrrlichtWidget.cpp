@@ -27,7 +27,7 @@ void QIrrlichtWidget::setAutoRepeatKeys( bool mode )
 
 QPaintEngine * QIrrlichtWidget::paintEngine() const
 {
-    qDebug() << "QIrrlichtWidget::paintEngine";
+    //qDebug() << "QIrrlichtWidget::paintEngine";
 
     return 0;
 }
@@ -160,7 +160,7 @@ irr::IrrlichtDevice * QIrrlichtWidget::getIrrlichtDevice()
 
 irr::scene::ISceneManager * QIrrlichtWidget::getSceneManager()
 {
-    qDebug() << "QIrrlichtWidget::getSceneManager";
+    //qDebug() << "QIrrlichtWidget::getSceneManager";
 
     if( m_IrrDevice != 0 )
         return m_IrrDevice->getSceneManager();
