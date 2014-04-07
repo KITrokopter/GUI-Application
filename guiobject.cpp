@@ -67,6 +67,11 @@ void GUIObject::setEulerRotation(kitrokopter::Vector eulerAngles)
     setEulerRotation(toPass);
 }
 
+void GUIObject::setPositionVector(vector3df positionVector)
+{
+    node->setPosition(positionVector);
+}
+
 void GUIObject::setPositionVector(std::vector<double> positionVector)
 {
     if (node == 0) {

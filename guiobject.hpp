@@ -24,6 +24,7 @@ public:
     void setEulerRotation(std::vector<double> eulerAngles);
     void setEulerRotation(kitrokopter::Vector eulerAngles);
     void setEulerRotation(vector3df eulerAngles);
+    void setPositionVector(vector3df positionVector);
     void setPositionVector(std::vector<double> positionVector);
     void setPositionVector(kitrokopter::Vector positionVector);
 

@@ -64,7 +64,7 @@ void Gui3D::initializeIrrlicht()
     GUICamera *cam0 = new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", position, rotation, sceneManager);
     position[0] = 0;
     position[2] = 500;
-    q0 = new GUIQuadcopter(simulationNode, "", position, rotation, sceneManager);
+    q0 = new GUIQuadcopter(simulationNode, position, rotation, sceneManager);
 
     createBackground(simulationNode);
 
