@@ -72,6 +72,8 @@ void MainWindow::initializeIrrlicht()
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete irrlichtWidget;
+    delete gui3d;
 }
 
 /**
