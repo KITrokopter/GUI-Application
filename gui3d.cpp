@@ -89,7 +89,11 @@ void Gui3D::createBackground(ISceneNode *parent)
 
     sceneManager->setShadowColor(SColor(150, 0, 0, 0));
 
-    ISceneNode *groundNode = sceneManager->addMeshSceneNode(sceneManager->getGeometryCreator()->createPlaneMesh(dimension2df(10000, 10000), dimension2du(100, 100), 0, dimension2df(1, 1)), parent);
+    int tileCount = 3;
+    int textureCount = tileCount * 10;
+    IMesh *groundMesh = sceneManager->getGeometryCreator()->createPlaneMesh(dimension2df(1000, 1000), dimension2du(tileCount, tileCount), 0, dimension2df(textureCount, textureCount));
+    IMeshSceneNode *groundNode = sceneManager->addMeshSceneNode(groundMesh, parent);
+    groundNode->setMaterialTexture(0, sceneManager->getVideoDriver()->getTexture("install/lib/gui_application/textures/grid.png"));
     groundNode->setRotation(vector3df(90, 0, 0));
     groundNode->setPosition(vector3df(0, 0, -50));
 }

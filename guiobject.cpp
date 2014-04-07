@@ -20,8 +20,6 @@ GUIObject::GUIObject(ISceneNode *parent, std::vector<double> positionVector, std
 
     if (node == 0) {
         qDebug() << "Could not create scene node";
-    } else {
-        qDebug() << "Node has value " << node << ". There might be more than one cameras, so remember that it can have different values in the future";
     }
 
     setRotationMatrix(rotationMatrix);
