@@ -55,13 +55,14 @@ void Gui3D::initializeIrrlicht()
     arrowNode->setRotation(vector3df(90, 0, 0));
     arrowNode->setMaterialFlag(EMF_LIGHTING, false);
 
+    // TODO: Remove this paragraph.
     std::vector<double> position(3);
     std::vector<double> rotation(9);
     position[0] = 500;
-    GUICamera *cam0 = new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", position, rotation, sceneManager);
+    new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", position, rotation, sceneManager);
     position[0] = 0;
     position[2] = 500;
-    GUIQuadcopter *q0 = new GUIQuadcopter(simulationNode, position, rotation, sceneManager);
+    new GUIQuadcopter(simulationNode, position, rotation, sceneManager);
 
     qDebug() << "InitializedIrrlicht";
 

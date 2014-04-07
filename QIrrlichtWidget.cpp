@@ -46,7 +46,7 @@ void QIrrlichtWidget::resizeEvent( QResizeEvent *event )
     setAspectRatio();
 }
 
-void QIrrlichtWidget::paintEvent( QPaintEvent *event )
+void QIrrlichtWidget::paintEvent( QPaintEvent */*event*/ )
 {
     //qDebug() << "QIrrlichtWidget::paintEvent";
 
