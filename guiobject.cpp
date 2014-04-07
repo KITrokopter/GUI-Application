@@ -76,3 +76,8 @@ ISceneNode* GUIObject::getSceneNode()
 {
     return node;
 }
+
+vector3df GUIObject::getPositionVector()
+{
+    return node->getPosition();
+}

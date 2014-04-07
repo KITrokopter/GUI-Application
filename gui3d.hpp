@@ -31,6 +31,8 @@ public slots:
     void callRepaint();
 
 private:
+    void createBackground(ISceneNode *parent);
+
     QIrrlichtWidget *iw;
     kitrokopter::API *api;
 

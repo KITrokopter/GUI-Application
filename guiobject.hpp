@@ -24,6 +24,8 @@ public:
     void setPositionVector(std::vector<double> positionVector);
     void setPositionVector(kitrokopter::Vector positionVector);
 
+    vector3df getPositionVector();
+
 protected:
     ISceneNode* getSceneNode();
 

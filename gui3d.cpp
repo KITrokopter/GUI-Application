@@ -28,6 +28,9 @@ Gui3D::Gui3D(QIrrlichtWidget *iw, kitrokopter::API *api)
     cameraCenterNode = 0;
 }
 
+// TODO: REMOVE!!!
+GUIQuadcopter *q0;
+
 void Gui3D::initializeIrrlicht()
 {
     iw->initialize();
@@ -35,8 +38,8 @@ void Gui3D::initializeIrrlicht()
 
     ISceneManager *sceneManager = iw->getSceneManager();
 
-    sceneManager->getGUIEnvironment()->addStaticText(L"TestText", rect<s32>(10, 10, 200, 22));
-    sceneManager->addLightSceneNode(0, vector3df(0, 2000, 0), SColorf(1, 1, 1), 10000);
+    ILightSceneNode *light = sceneManager->addLightSceneNode(0, vector3df(0, 2000, 0), SColorf(1, 1, 1), 10000);
+    light->enableCastShadow(true);
 
     cameraCenterNode = sceneManager->addEmptySceneNode();
     cameraNode = sceneManager->addCameraSceneNode(cameraCenterNode, vector3df(0, 0, cameraDistance), vector3df(0, 0, -1));
@@ -61,7 +64,9 @@ void Gui3D::initializeIrrlicht()
     GUICamera *cam0 = new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", position, rotation, sceneManager);
     position[0] = 0;
     position[2] = 500;
-    GUIQuadcopter *q0 = new GUIQuadcopter(simulationNode, "", position, rotation, sceneManager);
+    q0 = new GUIQuadcopter(simulationNode, "", position, rotation, sceneManager);
+
+    createBackground(simulationNode);
 
     qDebug() << "InitializedIrrlicht";
 
@@ -78,6 +83,17 @@ void Gui3D::initializeIrrlicht()
     repaintTimer.start();
 }
 
+void Gui3D::createBackground(ISceneNode *parent)
+{
+    ISceneManager *sceneManager = iw->getSceneManager();
+
+    sceneManager->setShadowColor(SColor(150, 0, 0, 0));
+
+    ISceneNode *groundNode = sceneManager->addMeshSceneNode(sceneManager->getGeometryCreator()->createPlaneMesh(dimension2df(10000, 10000), dimension2du(100, 100), 0, dimension2df(1, 1)), parent);
+    groundNode->setRotation(vector3df(90, 0, 0));
+    groundNode->setPosition(vector3df(0, 0, -50));
+}
+
 void Gui3D::updateQuadcopters()
 {
     std::vector<kitrokopter::APIQuadcopter*> quadcopters = api->getQuadcopters();
@@ -86,6 +102,8 @@ void Gui3D::updateQuadcopters()
         // TODO
         (*it)->getCurrentPosition();
     }
+
+    q0->setPositionVector(vector3df(q0->getPositionVector().X + 1, 0, 0));
 
     repaintRequested = true;
 }
