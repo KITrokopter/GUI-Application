@@ -80,7 +80,7 @@ void QuadcopterDetailDialog::renderModel()
     setWindowTitle(QString("%1 Status").arg(model->data(model->index(row, 0)).toString()));
 }
 
-void QuadcopterDetailDialog::updateQuadcopterValues(kitrokopter::APIQuadcopterUpdateEvent e)
+void QuadcopterDetailDialog::updateQuadcopterValues(kitrokopter::APIQuadcopterUpdateEvent)
 {
     renderModel();
 }

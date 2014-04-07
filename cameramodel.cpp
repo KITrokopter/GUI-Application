@@ -28,7 +28,7 @@ kitrokopter::APICamera* CameraModel::camera()
     return m_camera;
 }
 
-void CameraModel::updateCameraValues(kitrokopter::APICameraUpdateEvent e)
+void CameraModel::updateCameraValues(kitrokopter::APICameraUpdateEvent)
 {
     // TODO - is there anything to update here?
 }
