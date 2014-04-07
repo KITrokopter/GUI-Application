@@ -17,6 +17,8 @@ Gui3D::Gui3D(QIrrlichtWidget *iw, kitrokopter::API *api)
     this->iw = iw;
     this->api = api;
 
+    simulationNode = 0;
+
     cameraDistance = 1000;
     cameraHorizontalRotationStep = 0.5;
     cameraPitchRotationStep = -0.3;
@@ -27,9 +29,6 @@ Gui3D::Gui3D(QIrrlichtWidget *iw, kitrokopter::API *api)
     cameraNode = 0;
     cameraCenterNode = 0;
 }
-
-// TODO: REMOVE!!!
-GUIQuadcopter *q0;
 
 void Gui3D::initializeIrrlicht()
 {
@@ -57,14 +56,6 @@ void Gui3D::initializeIrrlicht()
     arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("z-axis", SColor(255, 0, 0, 255), SColor(255, 0, 0, 255), 4, 8, 100, 95, 5, 5), simulationNode);
     arrowNode->setRotation(vector3df(90, 0, 0));
     arrowNode->setMaterialFlag(EMF_LIGHTING, false);
-
-    std::vector<double> position(3);
-    std::vector<double> rotation(9);
-    position[0] = 500;
-    GUICamera *cam0 = new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", position, rotation, sceneManager);
-    position[0] = 0;
-    position[2] = 500;
-    q0 = new GUIQuadcopter(simulationNode, position, rotation, sceneManager);
 
     createBackground(simulationNode);
 
@@ -94,6 +85,9 @@ void Gui3D::createBackground(ISceneNode *parent)
     IMesh *groundMesh = sceneManager->getGeometryCreator()->createPlaneMesh(dimension2df(1000, 1000), dimension2du(tileCount, tileCount), 0, dimension2df(textureCount, textureCount));
     IMeshSceneNode *groundNode = sceneManager->addMeshSceneNode(groundMesh, parent);
     groundNode->setMaterialTexture(0, sceneManager->getVideoDriver()->getTexture("install/lib/gui_application/textures/grid.png"));
+    groundNode->setMaterialFlag(EMF_BILINEAR_FILTER, false);
+    groundNode->setMaterialFlag(EMF_TRILINEAR_FILTER, true);
+    groundNode->setMaterialFlag(EMF_ANISOTROPIC_FILTER, true);
     groundNode->setRotation(vector3df(90, 0, 0));
     groundNode->setPosition(vector3df(0, 0, -50));
 }
@@ -114,8 +108,6 @@ void Gui3D::updateQuadcopters()
                                                                       (*it)->getStabilizerPitchData(),
                                                                       (*it)->getStabilizerRollData()));
     }
-
-    q0->setPositionVector(vector3df(q0->getPositionVector().X + 1, 0, 0));
 
     repaintRequested = true;
 }
