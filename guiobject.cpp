@@ -20,8 +20,6 @@ GUIObject::GUIObject(ISceneNode *parent, std::vector<double> positionVector, std
 
     if (node == 0) {
         qDebug() << "Could not create scene node";
-    } else {
-        qDebug() << "Node has value " << node << ". There might be more than one cameras, so remember that it can have different values in the future";
     }
 
     setRotationMatrix(rotationMatrix);
@@ -67,6 +65,11 @@ void GUIObject::setEulerRotation(kitrokopter::Vector eulerAngles)
     setEulerRotation(toPass);
 }
 
+void GUIObject::setPositionVector(vector3df positionVector)
+{
+    node->setPosition(positionVector);
+}
+
 void GUIObject::setPositionVector(std::vector<double> positionVector)
 {
     if (node == 0) {
@@ -92,4 +95,9 @@ void GUIObject::setPositionVector(kitrokopter::Vector positionVector)
 ISceneNode* GUIObject::getSceneNode()
 {
     return node;
+}
+
+vector3df GUIObject::getPositionVector()
+{
+    return node->getPosition();
 }

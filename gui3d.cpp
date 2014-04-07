@@ -17,6 +17,8 @@ Gui3D::Gui3D(QIrrlichtWidget *iw, kitrokopter::API *api)
     this->iw = iw;
     this->api = api;
 
+    simulationNode = 0;
+
     cameraDistance = 1000;
     cameraHorizontalRotationStep = 0.5;
     cameraPitchRotationStep = -0.3;
@@ -35,8 +37,8 @@ void Gui3D::initializeIrrlicht()
 
     ISceneManager *sceneManager = iw->getSceneManager();
 
-    sceneManager->getGUIEnvironment()->addStaticText(L"TestText", rect<s32>(10, 10, 200, 22));
-    sceneManager->addLightSceneNode(0, vector3df(0, 2000, 0), SColorf(1, 1, 1), 10000);
+    ILightSceneNode *light = sceneManager->addLightSceneNode(0, vector3df(0, 2000, 0), SColorf(1, 1, 1), 10000);
+    light->enableCastShadow(true);
 
     cameraCenterNode = sceneManager->addEmptySceneNode();
     cameraNode = sceneManager->addCameraSceneNode(cameraCenterNode, vector3df(0, 0, cameraDistance), vector3df(0, 0, -1));
@@ -55,14 +57,7 @@ void Gui3D::initializeIrrlicht()
     arrowNode->setRotation(vector3df(90, 0, 0));
     arrowNode->setMaterialFlag(EMF_LIGHTING, false);
 
-    // TODO: Remove this paragraph.
-    std::vector<double> position(3);
-    std::vector<double> rotation(9);
-    position[0] = 500;
-    new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", position, rotation, sceneManager);
-    position[0] = 0;
-    position[2] = 500;
-    new GUIQuadcopter(simulationNode, position, rotation, sceneManager);
+    createBackground(simulationNode);
 
     qDebug() << "InitializedIrrlicht";
 
@@ -77,6 +72,24 @@ void Gui3D::initializeIrrlicht()
     repaintTimer.setInterval(10);
     connect(&repaintTimer, SIGNAL(timeout()), this, SLOT(callRepaint()));
     repaintTimer.start();
+}
+
+void Gui3D::createBackground(ISceneNode *parent)
+{
+    ISceneManager *sceneManager = iw->getSceneManager();
+
+    sceneManager->setShadowColor(SColor(150, 0, 0, 0));
+
+    int tileCount = 3;
+    int textureCount = tileCount * 10;
+    IMesh *groundMesh = sceneManager->getGeometryCreator()->createPlaneMesh(dimension2df(1000, 1000), dimension2du(tileCount, tileCount), 0, dimension2df(textureCount, textureCount));
+    IMeshSceneNode *groundNode = sceneManager->addMeshSceneNode(groundMesh, parent);
+    groundNode->setMaterialTexture(0, sceneManager->getVideoDriver()->getTexture("install/lib/gui_application/textures/grid.png"));
+    groundNode->setMaterialFlag(EMF_BILINEAR_FILTER, false);
+    groundNode->setMaterialFlag(EMF_TRILINEAR_FILTER, true);
+    groundNode->setMaterialFlag(EMF_ANISOTROPIC_FILTER, true);
+    groundNode->setRotation(vector3df(90, 0, 0));
+    groundNode->setPosition(vector3df(0, 0, -50));
 }
 
 void Gui3D::updateQuadcopters()
