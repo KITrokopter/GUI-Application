@@ -127,7 +127,7 @@ void Gui3D::updateQuadcopters()
         // TODO correct signs?
         this->quadcopters[(*it)->getId()]->setEulerRotation(vector3df((*it)->getStabilizerRollData(),
                                                                       (*it)->getStabilizerPitchData(),
-                                                                      (*it)->getStabilizerYawData()));
+                                                                      -(*it)->getStabilizerYawData()));
     }
 
     #ifdef DEBUG
