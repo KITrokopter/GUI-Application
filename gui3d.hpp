@@ -12,7 +12,7 @@
 #include "imouselistener.hpp"
 
 // Use this to add a debug quadcopter and camera
-#define DEBUG
+//#define DEBUG
 
 namespace kitrokopter {
 class API;

@@ -49,13 +49,13 @@ void Gui3D::initializeIrrlicht()
     simulationNode = sceneManager->addEmptySceneNode();
     simulationNode->setRotation(vector3df(-90, 0, 0));
 
-    ISceneNode *arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("x-axis", SColor(255, 255, 0, 0), SColor(255, 255, 0, 0), 4, 8, 100, 95, 5, 5), simulationNode);
+    ISceneNode *arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("x-axis", SColor(255, 255, 0, 0), SColor(255, 255, 0, 0), 4, 8, 150, 140, 8, 8), simulationNode);
     arrowNode->setRotation(vector3df(90, 90, 0));
     arrowNode->setMaterialFlag(EMF_LIGHTING, false);
-    arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("y-axis", SColor(255, 0, 255, 0), SColor(255, 0, 255, 0), 4, 8, 100, 95, 5, 5), simulationNode);
+    arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("y-axis", SColor(255, 0, 255, 0), SColor(255, 0, 255, 0), 4, 8, 150, 140, 8, 8), simulationNode);
     arrowNode->setRotation(vector3df(0, 0, 0));
     arrowNode->setMaterialFlag(EMF_LIGHTING, false);
-    arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("z-axis", SColor(255, 0, 0, 255), SColor(255, 0, 0, 255), 4, 8, 100, 95, 5, 5), simulationNode);
+    arrowNode = sceneManager->addMeshSceneNode(sceneManager->addArrowMesh("z-axis", SColor(255, 0, 0, 255), SColor(255, 0, 0, 255), 4, 8, 150, 140, 8, 8), simulationNode);
     arrowNode->setRotation(vector3df(90, 0, 0));
     arrowNode->setMaterialFlag(EMF_LIGHTING, false);
 
@@ -102,7 +102,7 @@ void Gui3D::createBackground(ISceneNode *parent)
     groundNode->setMaterialFlag(EMF_TRILINEAR_FILTER, true);
     groundNode->setMaterialFlag(EMF_ANISOTROPIC_FILTER, true);
     groundNode->setRotation(vector3df(90, 0, 0));
-    groundNode->setPosition(vector3df(0, 0, -20));
+    groundNode->setPosition(vector3df(0, 0, -25));
 }
 
 void Gui3D::updateQuadcopters()

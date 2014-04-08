@@ -25,5 +25,10 @@ void GUICamera::createMesh(ISceneManager *sceneManager, const char* meshPath)
     node->setMaterialTexture(0, greenTexture);
     node->setScale(vector3df(50, 50, 50));
     node->setRotation(vector3df(0, 90, -90));
+    //addShadowVolumeSceneNode(node->addShadowVolumeSceneNode());
+
+    mesh = sceneManager->addArrowMesh("Support", SColor(255, 100, 100, 150), SColor(255, 100, 100, 150), 4, 8, 10000, 9999, 3, 3);
+    node = sceneManager->addAnimatedMeshSceneNode(mesh, getRotationFreeSceneNode(), -1, vector3df(0, 0, 0));
+    node->setRotation(vector3df(-90, 0, 0));
     addShadowVolumeSceneNode(node->addShadowVolumeSceneNode());
 }
