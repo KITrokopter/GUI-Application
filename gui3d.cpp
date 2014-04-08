@@ -30,9 +30,6 @@ Gui3D::Gui3D(QIrrlichtWidget *iw, kitrokopter::API *api)
     cameraCenterNode = 0;
 }
 
-// TODO REMOVE
-GUIQuadcopter *q0;
-
 void Gui3D::initializeIrrlicht()
 {
     iw->initialize();
@@ -61,12 +58,6 @@ void Gui3D::initializeIrrlicht()
     arrowNode->setMaterialFlag(EMF_LIGHTING, false);
 
     createBackground(simulationNode);
-
-    std::vector<double> positionVector(3);
-    std::vector<double> rotationMatrix(9);
-    positionVector[1] = 100;
-    positionVector[2] = 500;
-    q0 = new GUIQuadcopter(simulationNode, positionVector, rotationMatrix, sceneManager);
 
     qDebug() << "InitializedIrrlicht";
 
@@ -117,8 +108,6 @@ void Gui3D::updateQuadcopters()
                                                                       (*it)->getStabilizerPitchData(),
                                                                       (*it)->getStabilizerRollData()));
     }
-
-    q0->setPositionVector(vector3df(q0->getPositionVector().X + 1, 100, 500));
 
     repaintRequested = true;
 }
