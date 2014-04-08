@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/3d">
+        <file>models/camera.3ds</file>
+        <file>textures/green.png</file>
+        <file>textures/grid.png</file>
+    </qresource>
+</RCC>

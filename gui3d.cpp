@@ -1,5 +1,6 @@
 #include "gui3d.hpp"
 #include "API.hpp"
+#include "lib/CQtReadFile.h"
 
 #include <irrlicht/IGeometryCreator.h>
 #include <cmath>
@@ -85,7 +86,9 @@ void Gui3D::createBackground(ISceneNode *parent)
     int textureCount = tileCount * 10;
     IMesh *groundMesh = sceneManager->getGeometryCreator()->createPlaneMesh(dimension2df(1000, 1000), dimension2du(tileCount, tileCount), 0, dimension2df(textureCount, textureCount));
     groundNode = sceneManager->addMeshSceneNode(groundMesh, parent);
-    groundNode->setMaterialTexture(0, sceneManager->getVideoDriver()->getTexture("install/lib/gui_application/textures/grid.png"));
+    auto texture = new CQtReadFile(":/3d/textures/grid.png");
+    groundNode->setMaterialTexture(0, sceneManager->getVideoDriver()->getTexture(texture));
+    texture->drop();
     groundNode->setMaterialFlag(EMF_BILINEAR_FILTER, false);
     groundNode->setMaterialFlag(EMF_TRILINEAR_FILTER, true);
     groundNode->setMaterialFlag(EMF_ANISOTROPIC_FILTER, true);
@@ -128,7 +131,7 @@ void Gui3D::updateCameras()
 
     for (auto camera : cameras) {
         if (this->cameras.count(camera->getId()) == 0) {
-            this->cameras[camera->getId()] = new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
+            this->cameras[camera->getId()] = new GUICamera(simulationNode,  ":/3d/models/camera.3ds", std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
         }
 
         cameraLookAt.X += camera->getPosition().getX() / cameras.size();
