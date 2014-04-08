@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent, kitrokopter::API *api) :
 {
     ui->setupUi(this);
 
+    setWindowIcon(QIcon(":/icons/images/Logo64.png"));
     ui->mainToolBar->hide();
 
     initGamepad();
