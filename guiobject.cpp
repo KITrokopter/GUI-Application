@@ -16,13 +16,40 @@ GUIObject::GUIObject(ISceneNode *parent, std::vector<double> positionVector, std
 {
     qDebug() << "Constructing GUIObject";
 
-    node = sceneManager->addEmptySceneNode(parent);
+    rotationFreeNode = sceneManager->addEmptySceneNode(parent);
+
+    if (rotationFreeNode == 0) {
+        qDebug() << "Could not create rotation free scene node";
+    }
+
+    node = sceneManager->addEmptySceneNode(rotationFreeNode);
 
     if (node == 0) {
         qDebug() << "Could not create scene node";
     }
 
     setRotationMatrix(rotationMatrix);
+    setPositionVector(positionVector);
+
+    qDebug() << "Constructed GUIObject";
+}
+
+GUIObject::GUIObject(ISceneNode *parent, vector3df positionVector, ISceneManager *sceneManager)
+{
+    qDebug() << "Constructing GUIObject";
+
+    rotationFreeNode = sceneManager->addEmptySceneNode(parent);
+
+    if (rotationFreeNode == 0) {
+        qDebug() << "Could not create rotation free scene node";
+    }
+
+    node = sceneManager->addEmptySceneNode(rotationFreeNode);
+
+    if (node == 0) {
+        qDebug() << "Could not create scene node";
+    }
+
     setPositionVector(positionVector);
 
     qDebug() << "Constructed GUIObject";
@@ -58,37 +85,33 @@ void GUIObject::setEulerRotation(std::vector<double> eulerAngles)
 
 void GUIObject::setEulerRotation(kitrokopter::Vector eulerAngles)
 {
-    std::vector<double> toPass(3);
-    toPass[0] = eulerAngles.getX();
-    toPass[1] = eulerAngles.getY();
-    toPass[2] = eulerAngles.getZ();
+    vector3df toPass(3);
+    toPass.X = eulerAngles.getX();
+    toPass.Y = eulerAngles.getY();
+    toPass.Z = eulerAngles.getZ();
     setEulerRotation(toPass);
 }
 
 void GUIObject::setPositionVector(vector3df positionVector)
 {
-    node->setPosition(positionVector);
+    rotationFreeNode->setPosition(positionVector);
 }
 
 void GUIObject::setPositionVector(std::vector<double> positionVector)
 {
-    if (node == 0) {
-        qDebug() << "Error: Node is 0!";
-    }
-    
     if (positionVector.size() != 3) {
         qDebug() << "Error: Vector size is " << positionVector.size() << " but should be 3!";
     }
     
-    node->setPosition(vector3df(positionVector[0], positionVector[1], positionVector[2]));
+    setPositionVector(vector3df(positionVector[0], positionVector[1], positionVector[2]));
 }
 
 void GUIObject::setPositionVector(kitrokopter::Vector positionVector)
 {
-    std::vector<double> toPass(3);
-    toPass[0] = positionVector.getX();
-    toPass[1] = positionVector.getY();
-    toPass[2] = positionVector.getZ();
+    vector3df toPass;
+    toPass.X = positionVector.getX();
+    toPass.Y = positionVector.getY();
+    toPass.Z = positionVector.getZ();
     setPositionVector(toPass);
 }
 
@@ -97,7 +120,24 @@ ISceneNode* GUIObject::getSceneNode()
     return node;
 }
 
+ISceneNode* GUIObject::getRotationFreeSceneNode()
+{
+    return rotationFreeNode;
+}
+
 vector3df GUIObject::getPositionVector()
 {
-    return node->getPosition();
+    return rotationFreeNode->getPosition();
+}
+
+void GUIObject::addShadowVolumeSceneNode(IShadowVolumeSceneNode *shadowVolumeSceneNode)
+{
+    shadowVolumes.push_back(shadowVolumeSceneNode);
+}
+
+void GUIObject::updateShadowVolumes()
+{
+    for (auto shadowVolume : shadowVolumes) {
+        shadowVolume->updateShadowVolumes();
+    }
 }

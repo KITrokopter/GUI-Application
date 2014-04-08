@@ -60,6 +60,11 @@ void Gui3D::initializeIrrlicht()
 
     createBackground(simulationNode);
 
+    #ifdef DEBUG
+    q0 = new GUIQuadcopter(simulationNode, vector3df(100, 0, 500), sceneManager);
+    c0 = new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", vector3df(0, 500, 0), sceneManager);
+    #endif
+
     qDebug() << "InitializedIrrlicht";
 
     quadcopterTimer.setInterval(100);
@@ -73,6 +78,10 @@ void Gui3D::initializeIrrlicht()
     repaintTimer.setInterval(10);
     connect(&repaintTimer, SIGNAL(timeout()), this, SLOT(callRepaint()));
     repaintTimer.start();
+
+    shadowFixTimer.setInterval(1000);
+    connect(&shadowFixTimer, SIGNAL(timeout()), this, SLOT(updateShadows()));
+    shadowFixTimer.start();
 }
 
 void Gui3D::createBackground(ISceneNode *parent)
@@ -117,6 +126,12 @@ void Gui3D::updateQuadcopters()
                                                                       (*it)->getStabilizerPitchData(),
                                                                       (*it)->getStabilizerRollData()));
     }
+
+    #ifdef DEBUG
+    vector3df position = q0->getPositionVector();
+    position.Y -= 1;
+    q0->setPositionVector(position);
+    #endif
 
     repaintRequested = true;
 }
@@ -182,5 +197,16 @@ void Gui3D::callRepaint()
     if (repaintRequested) {
         iw->repaint();
         repaintRequested = false;
+    }
+}
+
+void Gui3D::updateShadows()
+{
+    for (std::pair<int, GUICamera*> camera : cameras) {
+        camera.second->updateShadowVolumes();
+    }
+
+    for (std::pair<int, GUIQuadcopter*> quadcopter : quadcopters) {
+        quadcopter.second->updateShadowVolumes();
     }
 }

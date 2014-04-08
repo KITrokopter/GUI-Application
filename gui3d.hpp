@@ -11,6 +11,9 @@
 #include "guiquadcopter.hpp"
 #include "imouselistener.hpp"
 
+// Use this to add a debug quadcopter and camera
+#define DEBUG
+
 namespace kitrokopter {
 class API;
 }
@@ -29,6 +32,7 @@ public slots:
     void updateQuadcopters();
     void updateCameras();
     void callRepaint();
+    void updateShadows();
 
 private:
     void createBackground(ISceneNode *parent);
@@ -55,6 +59,12 @@ private:
     QTimer quadcopterTimer;
     QTimer cameraTimer;
     QTimer repaintTimer;
+    QTimer shadowFixTimer;
+
+    #ifdef DEBUG
+    GUIQuadcopter *q0 = 0;
+    GUICamera *c0 = 0;
+    #endif
 };
 
 #endif // GUI3D_HPP

@@ -18,6 +18,7 @@ class GUIObject
 {
 public:
     GUIObject(ISceneNode *parent, std::vector<double> positionVector, std::vector<double> rotationMatrix, ISceneManager *sceneManager);
+    GUIObject(ISceneNode *parent, vector3df positionVector, ISceneManager *sceneManager);
     ~GUIObject();
 
     void setRotationMatrix(std::vector<double> rotationMatrix);
@@ -30,11 +31,17 @@ public:
 
     vector3df getPositionVector();
 
+    void updateShadowVolumes();
+
 protected:
     ISceneNode* getSceneNode();
+    ISceneNode* getRotationFreeSceneNode();
+    void addShadowVolumeSceneNode(IShadowVolumeSceneNode* shadowVolumeSceneNode);
 
 private:
     ISceneNode *node;
+    ISceneNode *rotationFreeNode;
+    std::vector<IShadowVolumeSceneNode*> shadowVolumes;
 };
 
 #endif // GUIOBJECT_HPP
