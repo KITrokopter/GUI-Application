@@ -48,11 +48,13 @@ file(GLOB_RECURSE QT_UI RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS *.u
 
 qt5_wrap_ui(UI_HEADERS ${QT_UI})
 
+qt5_add_resources(RESOURCES icons.qrc 3d.qrc)
+
 ##############################################################################
 # Binaries
 ##############################################################################
 
-add_executable(kitrokopter ${QT_SOURCES} ${UI_HEADERS})
+add_executable(kitrokopter ${QT_SOURCES} ${UI_HEADERS} ${RESOURCES})
 target_link_libraries(kitrokopter
   ${catkin_LIBRARIES}
   ${SDL2_LIBRARIES}
@@ -60,8 +62,6 @@ target_link_libraries(kitrokopter
 )
 
 install(TARGETS kitrokopter RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
-install(DIRECTORY textures/ DESTINATION lib/gui_application/textures/)
-install(DIRECTORY models/ DESTINATION lib/gui_application/models/)
 
 qt5_use_modules(kitrokopter Widgets Concurrent)
 
