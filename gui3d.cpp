@@ -18,6 +18,7 @@ Gui3D::Gui3D(QIrrlichtWidget *iw, kitrokopter::API *api)
     this->api = api;
 
     simulationNode = 0;
+    groundNode = 0;
 
     cameraDistance = 1000;
     cameraHorizontalRotationStep = 0.5;
@@ -83,7 +84,7 @@ void Gui3D::createBackground(ISceneNode *parent)
     int tileCount = 3;
     int textureCount = tileCount * 10;
     IMesh *groundMesh = sceneManager->getGeometryCreator()->createPlaneMesh(dimension2df(1000, 1000), dimension2du(tileCount, tileCount), 0, dimension2df(textureCount, textureCount));
-    IMeshSceneNode *groundNode = sceneManager->addMeshSceneNode(groundMesh, parent);
+    groundNode = sceneManager->addMeshSceneNode(groundMesh, parent);
     groundNode->setMaterialTexture(0, sceneManager->getVideoDriver()->getTexture("install/lib/gui_application/textures/grid.png"));
     groundNode->setMaterialFlag(EMF_BILINEAR_FILTER, false);
     groundNode->setMaterialFlag(EMF_TRILINEAR_FILTER, true);
@@ -103,6 +104,14 @@ void Gui3D::updateQuadcopters()
 
         this->quadcopters[(*it)->getId()]->setPositionVector((*it)->getCurrentPosition());
 
+        float z = (*it)->getCurrentPosition().getZ();
+        vector3df groundPosition = groundNode->getPosition();
+
+        if (z < groundPosition.Z) {
+            groundPosition.Z = z;
+            groundNode->setPosition(groundPosition);
+        }
+
         // TODO correct signs?
         this->quadcopters[(*it)->getId()]->setEulerRotation(vector3df((*it)->getStabilizerYawData(),
                                                                       (*it)->getStabilizerPitchData(),
@@ -118,7 +127,7 @@ void Gui3D::updateCameras()
     cameraLookAt = vector3df();
 
     for (auto camera : cameras) {
-        if (!this->cameras.count(camera->getId())) {
+        if (this->cameras.count(camera->getId()) == 0) {
             this->cameras[camera->getId()] = new GUICamera(simulationNode, "install/lib/gui_application/models/camera.3ds", std::vector<double>(3), std::vector<double>(9), iw->getSceneManager());
         }
 

@@ -9,5 +9,5 @@ GUICamera::GUICamera(ISceneNode *parent, const char* meshPath, std::vector<doubl
     node->setMaterialTexture(0, greenTexture);
     node->setScale(vector3df(50, 50, 50));
     node->setRotation(vector3df(0, 90, -90));
-    node->addShadowVolumeSceneNode();
+    node->addShadowVolumeSceneNode()->updateShadowVolumes();
 }
