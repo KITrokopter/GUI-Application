@@ -10,26 +10,25 @@ class GamepadDebugDialog;
 
 class Gamepad;
 
-class GamepadDebugDialog : public QDialog
-{
-    Q_OBJECT
+class GamepadDebugDialog : public QDialog {
+	Q_OBJECT
 
 public:
-    explicit GamepadDebugDialog(QWidget *parent, Gamepad *gamepad);
-    ~GamepadDebugDialog();
+	explicit GamepadDebugDialog(QWidget *parent, Gamepad *gamepad);
+	~GamepadDebugDialog();
 
 private slots:
-    void openGamepad(int);
-    void updateAxis(int, int);
-    void updateButton(int, bool);
+	void openGamepad(int);
+	void updateAxis(int, int);
+	void updateButton(int, bool);
 
 private:
-    Ui::GamepadDebugDialog *ui;
+	Ui::GamepadDebugDialog *ui;
 
-    Gamepad *gamepad;
+	Gamepad *gamepad;
 
-    template<typename T>
-    void updateTable(QTableWidget *table, int num, T val);
+	template<typename T>
+	void updateTable(QTableWidget *table, int num, T val);
 };
 
 #endif // GAMEPADDEBUGDIALOG_HPP

@@ -19,58 +19,57 @@ class QuadcopterDebugDialog;
 class QuadcopterModel;
 class QuadcopterTrackedFilter;
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+	Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent, kitrokopter::API *api);
-    void initializeIrrlicht();
-    ~MainWindow();
+	explicit MainWindow(QWidget *parent, kitrokopter::API *api);
+	void initializeIrrlicht();
+
+	~MainWindow();
 
 public slots:
-    // Buttons
-    void launch();
-    void loadFormation();
-    void scanForQuadcopters();
-    void shutdownEverything();
+	// Buttons
+	void launch();
+	void loadFormation();
+	void scanForQuadcopters();
+	void shutdownEverything();
 
-    // Quadcopter dialogs
-    void openQuadcopterDebugDialog();
-    void openQuadcopterDetailDialog(const QModelIndex &index);
+	// Quadcopter dialogs
+	void openQuadcopterDebugDialog();
+	void openQuadcopterDetailDialog(const QModelIndex &index);
 
-    // Setup
-    void openCalibrationDialog();
-    void startSystem();
+	// Setup
+	void openCalibrationDialog();
+	void startSystem();
 
-    // Gamepad debugging
-    void openGamepadDebugDialog();
+	// Gamepad debugging
+	void openGamepadDebugDialog();
 
-    // About dialog
-    void openAboutDialog();
+	// About dialog
+	void openAboutDialog();
 
 private:
-    void initGamepad();
+	void initGamepad();
 
-    Ui::MainWindow *ui;
+	Ui::MainWindow *ui;
 
-    kitrokopter::API *api;
+	kitrokopter::API *api;
 
-    // Gamepad input
-    Gamepad *gamepad;
+	// Gamepad input
+	Gamepad *gamepad;
 
-    // Quadcopter handling
-    QuadcopterModel *quadcopterModel;
-    QuadcopterDebugDialog *quadcopterDebugDialog;
-    QuadcopterTrackedFilter *trackedFilter, *untrackedFilter;
+	// Quadcopter handling
+	QuadcopterModel *quadcopterModel;
+	QuadcopterDebugDialog *quadcopterDebugDialog;
+	QuadcopterTrackedFilter *trackedFilter, *untrackedFilter;
 
-    // Calibration
-    CalibrationDialog *calibrationDialog;
+	// Calibration
+	CalibrationDialog *calibrationDialog;
 
-    // Irrlicht
-    QIrrlichtWidget *irrlichtWidget;
-    Gui3D *gui3d;
-
+	// Irrlicht
+	QIrrlichtWidget *irrlichtWidget;
+	Gui3D *gui3d;
 };
 
 #endif // MAINWINDOW_HPP

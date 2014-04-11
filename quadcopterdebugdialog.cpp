@@ -2,18 +2,19 @@
 #include "ui_quadcopterdebugdialog.h"
 
 QuadcopterDebugDialog::QuadcopterDebugDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::QuadcopterDebugDialog)
+	QDialog(parent),
+	ui(new Ui::QuadcopterDebugDialog)
 {
-    ui->setupUi(this);
+	ui->setupUi(this);
 }
 
 QuadcopterDebugDialog::~QuadcopterDebugDialog()
 {
-    delete ui;
+	delete ui;
 }
 
 void QuadcopterDebugDialog::setModel(QuadcopterModel *model)
 {
-    ui->tableView->setModel(model);
+	ui->tableView->setModel(model);
 }
+

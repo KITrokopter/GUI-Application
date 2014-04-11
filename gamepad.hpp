@@ -9,36 +9,34 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
 
-class Gamepad : public QObject
-{
-    Q_OBJECT
+class Gamepad : public QObject {
+	Q_OBJECT
 public:
-    /// The threshold for snapping axis input to zero.
-    static const int THRESHOLD = 6000;
+	/// The threshold for snapping axis input to zero.
+	static const int THRESHOLD = 6000;
 
 
-    explicit Gamepad(QObject *parent = 0);
-    ~Gamepad();
+	explicit Gamepad(QObject *parent = 0);
+	~Gamepad();
 
-    QMap<int, QString> getGamepadNames();
+	QMap<int, QString> getGamepadNames();
 
-    bool open(int);
-    void close();
+	bool open(int);
+	void close();
 
 signals:
-    void axisValueChanged(int axis, int value);
-    void buttonValueChanged(int button, bool value);
+	void axisValueChanged(int axis, int value);
+	void buttonValueChanged(int button, bool value);
 
 private slots:
-    void eventTick();
+	void eventTick();
 
 private:
-    SDL_GameController *controller;
-    QTimer timer;
+	SDL_GameController *controller;
+	QTimer timer;
 
-    QMap<SDL_GameControllerAxis, Sint16> axes;
-    QMap<SDL_GameControllerButton, Uint8> buttons;
-
+	QMap<SDL_GameControllerAxis, Sint16> axes;
+	QMap<SDL_GameControllerButton, Uint8> buttons;
 };
 
 #endif // GAMEPAD_HPP

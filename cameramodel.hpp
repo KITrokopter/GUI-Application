@@ -11,39 +11,40 @@ namespace kitrokopter {
 class APICamera;
 }
 
-class CameraModel : public QObject, public kitrokopter::APICameraListener, public kitrokopter::APIImageListener
-{
-    Q_OBJECT
+class CameraModel : public QObject, public kitrokopter::APICameraListener, public kitrokopter::APIImageListener {
+	Q_OBJECT
 
-    Q_PROPERTY(QPixmap image READ image)
+	Q_PROPERTY(QPixmap image READ image)
 
 public:
-    explicit CameraModel(QObject *parent, kitrokopter::APICamera *camera);
-    ~CameraModel();
+	explicit CameraModel(QObject *parent, kitrokopter::APICamera *camera);
 
-    kitrokopter::APICamera* camera();
+	~CameraModel();
 
-    void updateCameraValues(kitrokopter::APICameraUpdateEvent e);
-    void imageReceived(cv::Mat);
+	kitrokopter::APICamera* camera();
 
-    const QPixmap& image();
+	void updateCameraValues(kitrokopter::APICameraUpdateEvent e);
+	void imageReceived(cv::Mat);
 
-    enum CameraImageType {
-        SourceImage,
-        CorrectedImage,
-    };
+	const QPixmap& image();
+
+	enum CameraImageType
+	{
+		SourceImage,
+		CorrectedImage,
+	};
 
 signals:
-    void imageChanged(const QPixmap&);
+	void imageChanged(const QPixmap&);
 
 public slots:
-    void setImageType(CameraImageType type);
+	void setImageType(CameraImageType type);
 
 private:
-    QPixmap m_image;
-    CameraImageType m_imageType;
+	QPixmap m_image;
+	CameraImageType m_imageType;
 
-    kitrokopter::APICamera *m_camera;
+	kitrokopter::APICamera *m_camera;
 };
 
 #endif // CAMERAMODEL_HPP

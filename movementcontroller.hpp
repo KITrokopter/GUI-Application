@@ -9,28 +9,26 @@ namespace kitrokopter {
 class API;
 }
 
-class MovementController : public QObject
-{
-    Q_OBJECT
+class MovementController : public QObject {
+	Q_OBJECT
 public:
-    explicit MovementController(kitrokopter::API *api, QObject *parent = 0);
+	explicit MovementController(kitrokopter::API *api, QObject *parent = 0);
 
-    QVector3D movementVector();
+	QVector3D movementVector();
 
 signals:
 
 public slots:
-    void axisValueChanged(int, int);
-    void buttonValueChanged(int, bool);
+	void axisValueChanged(int, int);
+	void buttonValueChanged(int, bool);
 
 private:
-    void notifyAPI();
+	void notifyAPI();
 
-    int16_t xmov, ymov, zmov;
-    int16_t rot;
+	int16_t xmov, ymov, zmov;
+	int16_t rot;
 
-    kitrokopter::API *api;
-
+	kitrokopter::API *api;
 };
 
 #endif // MOVEMENTCONTROLLER_HPP

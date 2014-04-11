@@ -3,14 +3,14 @@
 
 #include "guiobject.hpp"
 
-class GUICamera : public GUIObject
-{
+class GUICamera : public GUIObject {
 public:
-    GUICamera(ISceneNode *parent, const char* meshPath, std::vector<double> positionVector, std::vector<double> rotationMatrix, ISceneManager *sceneManager);
-    GUICamera(ISceneNode *parent, const char* meshPath, vector3df positionVector, ISceneManager *sceneManager);
+	GUICamera(ISceneNode *parent, const char *meshPath, std::vector<double> positionVector,
+	          std::vector<double> rotationMatrix, ISceneManager *sceneManager);
+	GUICamera(ISceneNode *parent, const char *meshPath, vector3df positionVector, ISceneManager *sceneManager);
 
 protected:
-    void createMesh(ISceneManager *sceneManager, const char* meshPath);
+	void createMesh(ISceneManager *sceneManager, const char *meshPath);
 };
 
 #endif // GUICAMERA_H

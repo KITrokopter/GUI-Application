@@ -10,18 +10,17 @@ class SingleCalibrationWidget;
 
 class CameraModel;
 
-class SingleCalibrationWidget : public QWidget
-{
-    Q_OBJECT
+class SingleCalibrationWidget : public QWidget {
+	Q_OBJECT
 
 public:
-    SingleCalibrationWidget(QWidget *parent, CameraModel *model);
-    ~SingleCalibrationWidget();
+	SingleCalibrationWidget(QWidget *parent, CameraModel *model);
+	~SingleCalibrationWidget();
 
 private:
-    Ui::SingleCalibrationWidget *ui;
+	Ui::SingleCalibrationWidget *ui;
 
-    CameraModel *model;
+	CameraModel *model;
 };
 
 #endif // SINGLECALIBRATIONWIDGET_HPP

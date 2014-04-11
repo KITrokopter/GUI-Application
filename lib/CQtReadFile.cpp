@@ -1,51 +1,55 @@
 // Copyright (C) 2012 Fabian Beutel (hedgeware)
 // www.hedgeware.net
-// This code is licenced under the "Irrlicht Engine License" (details: http://irrlicht.sourceforge.net/license/)
+// This code is licenced under the "Irrlicht Engine License" (details:
+// http://irrlicht.sourceforge.net/license/)
 
 #include "CQtReadFile.h"
 #include <QFile>
 
-CQtReadFile::CQtReadFile(const irr::io::path& fileName)
-    : IODevice(NULL), FileName(fileName)
+CQtReadFile::CQtReadFile(const irr::io::path &fileName)
+	: IODevice(NULL), FileName(fileName)
 {
 	IODevice = new QFile(fileName.c_str());
 	IODevice->open(QIODevice::ReadOnly);
 }
 
-CQtReadFile::CQtReadFile(QIODevice* qtDevice, const irr::io::path& name)
+CQtReadFile::CQtReadFile(QIODevice *qtDevice, const irr::io::path &name)
 	: IODevice(qtDevice), FileName(name)
 {
-	if(IODevice) {
-		if(IODevice->parent())
+	if (IODevice) {
+		if (IODevice->parent()) {
 			IODevice->setParent(NULL);
+		}
 
-		if(!IODevice->isOpen())
+		if (!IODevice->isOpen()) {
 			IODevice->open(QIODevice::ReadOnly);
+		}
 	}
 }
 
 CQtReadFile::~CQtReadFile()
 {
-	if(IODevice)
+	if (IODevice) {
 		delete IODevice;
+	}
 }
 
-irr::s32 CQtReadFile::read(void* buffer, irr::u32 sizeToRead)
+irr::s32 CQtReadFile::read(void *buffer, irr::u32 sizeToRead)
 {
-	if(IODevice) {
+	if (IODevice) {
 		return (irr::s32)IODevice->read((char*)buffer, (qint64)sizeToRead);
-	}
-	else
+	} else   {
 		return -1;
+	}
 }
 
 bool CQtReadFile::seek(long finalPos, bool relativeMovement)
 {
-	if(IODevice) {
+	if (IODevice) {
 		return IODevice->seek(relativeMovement ? (qint64)(finalPos + getPos()) : (qint64)finalPos);
-	}
-	else
+	} else   {
 		return false;
+	}
 }
 
 long CQtReadFile::getSize() const

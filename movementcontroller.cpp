@@ -6,25 +6,25 @@
 #include <SDL2/SDL_gamecontroller.h>
 
 MovementController::MovementController(kitrokopter::API *api, QObject *parent) :
-    QObject(parent),
-    api(api)
+	QObject(parent),
+	api(api)
 {
 }
 
 QVector3D MovementController::movementVector()
 {
-    return QVector3D((float)xmov / INT16_MAX, (float)ymov / INT16_MAX, (float)zmov / INT16_MAX);
+	return QVector3D((float)xmov / INT16_MAX, (float)ymov / INT16_MAX, (float)zmov / INT16_MAX);
 }
 
 void MovementController::notifyAPI()
 {
-    auto vector = movementVector();
-    api->moveFormation(kitrokopter::Vector(vector.x(), vector.y(), vector.z()));
+	auto vector = movementVector();
+	api->moveFormation(kitrokopter::Vector(vector.x(), vector.y(), vector.z()));
 
-    if (rot) {
-        // TODO: directional turning
-        api->rotateFormation();
-    }
+	if (rot) {
+		// TODO: directional turning
+		api->rotateFormation();
+	}
 }
 
 /*
@@ -36,25 +36,25 @@ void MovementController::notifyAPI()
  */
 void MovementController::axisValueChanged(int axis, int value)
 {
-    switch (axis) {
-    case SDL_CONTROLLER_AXIS_LEFTX:
-        xmov = value;
-        break;
-    case SDL_CONTROLLER_AXIS_LEFTY:
-        ymov = value;
-        break;
-    case SDL_CONTROLLER_AXIS_RIGHTY:
-        zmov = value;
-        break;
-    case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
-        rot = -value;
-        break;
-    case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
-        rot = +value;
-        break;
-    }
+	switch (axis) {
+	case SDL_CONTROLLER_AXIS_LEFTX:
+		xmov = value;
+		break;
+	case SDL_CONTROLLER_AXIS_LEFTY:
+		ymov = value;
+		break;
+	case SDL_CONTROLLER_AXIS_RIGHTY:
+		zmov = value;
+		break;
+	case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
+		rot = -value;
+		break;
+	case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
+		rot = +value;
+		break;
+	}
 
-    notifyAPI();
+	notifyAPI();
 }
 
 /*
@@ -62,5 +62,6 @@ void MovementController::axisValueChanged(int axis, int value)
  */
 void MovementController::buttonValueChanged(int, bool)
 {
-    notifyAPI();
+	notifyAPI();
 }
+

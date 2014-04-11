@@ -14,31 +14,30 @@ namespace kitrokopter {
 class APIQuadcopter;
 }
 
-class QuadcopterDetailDialog : public QDialog, public kitrokopter::APIQuadcopterListener
-{
-    Q_OBJECT
+class QuadcopterDetailDialog : public QDialog, public kitrokopter::APIQuadcopterListener {
+	Q_OBJECT
 
 public:
-    explicit QuadcopterDetailDialog(QWidget *parent = 0);
-    ~QuadcopterDetailDialog();
+	explicit QuadcopterDetailDialog(QWidget *parent = 0);
+	~QuadcopterDetailDialog();
 
-    void setSourceModel(QuadcopterModel *model, kitrokopter::APIQuadcopter *quadcopter);
-    void updateQuadcopterValues(kitrokopter::APIQuadcopterUpdateEvent e);
+	void setSourceModel(QuadcopterModel *model, kitrokopter::APIQuadcopter *quadcopter);
+	void updateQuadcopterValues(kitrokopter::APIQuadcopterUpdateEvent e);
 
 private slots:
-    void renderModel();
+	void renderModel();
 
-    // Input slots
-    void selectMinColor();
-    void selectMaxColor();
-    void setFlightSelection(bool);
-    void blink();
+	// Input slots
+	void selectMinColor();
+	void selectMaxColor();
+	void setFlightSelection(bool);
+	void blink();
 
 private:
-    Ui::QuadcopterDetailDialog *ui;
+	Ui::QuadcopterDetailDialog *ui;
 
-    QuadcopterModel *model;
-    kitrokopter::APIQuadcopter *quadcopter;
+	QuadcopterModel *model;
+	kitrokopter::APIQuadcopter *quadcopter;
 };
 
 #endif // QUADCOPTERDETAILDIALOG_HPP

@@ -14,43 +14,42 @@ namespace kitrokopter {
 class APICameraSystem;
 }
 
-class CalibrationDialog : public QDialog
-{
-    Q_OBJECT
+class CalibrationDialog : public QDialog {
+	Q_OBJECT
 
 public:
-    explicit CalibrationDialog(QWidget *parent, kitrokopter::APICameraSystem *camsys);
-    ~CalibrationDialog();
+	explicit CalibrationDialog(QWidget *parent, kitrokopter::APICameraSystem *camsys);
+	~CalibrationDialog();
 
 public slots:
-    void setupTabs();
+	void setupTabs();
 
 private slots:
-    void tabChanged(int);
+	void tabChanged(int);
 
-    void startCalibration();
-    void takePicture();
-    void takePictureDone();
-    void calculateCalibration();
-    void calculateCalibrationDone();
+	void startCalibration();
+	void takePicture();
+	void takePictureDone();
+	void calculateCalibration();
+	void calculateCalibrationDone();
 
 private:
-    void activateCamera(int cam, bool active);
+	void activateCamera(int cam, bool active);
 
-    int prevTab = -1;
+	int prevTab = -1;
 
-    Ui::CalibrationDialog *ui;
-    kitrokopter::APICameraSystem *cameraSystem;
-    QList<CameraModel*> cameraModels;
+	Ui::CalibrationDialog *ui;
+	kitrokopter::APICameraSystem *cameraSystem;
+	QList<CameraModel*> cameraModels;
 
-    QList<QWidget*> tabPages;
+	QList<QWidget*> tabPages;
 
-    QMap<uint32_t, unsigned int> calibrationPictureCount;
+	QMap<uint32_t, unsigned int> calibrationPictureCount;
 
-    // Watches the takePicture call
-    QFutureWatcher< std::map<uint32_t, bool> > takePicturesWatcher;
-    // Watches the calibration calculation.
-    QFutureWatcher<void> calculationWatcher;
+	// Watches the takePicture call
+	QFutureWatcher<std::map<uint32_t, bool> > takePicturesWatcher;
+	// Watches the calibration calculation.
+	QFutureWatcher<void> calculationWatcher;
 };
 
 #endif // CALIBRATIONDIALOG_HPP
