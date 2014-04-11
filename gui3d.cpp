@@ -109,9 +109,9 @@ void Gui3D::createBackground(ISceneNode *parent)
 	sceneManager->setShadowColor(SColor(150, 0, 0, 0));
 
 	int tileCount = 3;
-	int textureCount = tileCount * 10;
+    int textureCount = tileCount * 20;
 	IMesh *groundMesh =
-	    sceneManager->getGeometryCreator()->createPlaneMesh(dimension2df(1000, 1000), dimension2du(tileCount,
+        sceneManager->getGeometryCreator()->createPlaneMesh(dimension2df(2000, 2000), dimension2du(tileCount,
 	                                                                                               tileCount), 0,
 	                                                        dimension2df(textureCount, textureCount));
 	groundNode = sceneManager->addMeshSceneNode(groundMesh, parent);
