@@ -20,12 +20,14 @@
 #include <xcb/xcb.h>
 #endif
 
-/*!
- * \brief QIrrlichtWidget: Irrlicht Engine Widget
+/**
+ * Irrlicht Engine Widget.
  *
  * This class can be used to display a Irrlicht 3D Engine powered scene in your
- * Qt
- * application.
+ * Qt application.
+ *
+ * @author jcfalcone (http://irrlicht.sourceforge.net/forum/viewtopic.php?f=1&t=48694)
+ * @author Sebastian Schmidt
  */
 class QIrrlichtWidget : public QWidget {
 	Q_OBJECT
@@ -63,57 +65,57 @@ protected:
 #endif
 
 public:
-	/*! \brief Constructor for the Widget. At least you have to specify the
+	/** Constructor for the Widget. At least you have to specify the
 	 * parent. Per default OpenGL is used
-	 *    for the rendering
+	 *    for the rendering.
 	 */
 	QIrrlichtWidget(QWidget *parent, irr::video::E_DRIVER_TYPE driverType = irr::video::EDT_OPENGL);
 	virtual ~QIrrlichtWidget();
 
-	/*! \brief Retrieve the Irrlicht Device
-	 *    \returns The Irrlicht Device used in this Widget
+	/** Retrieve the Irrlicht Device.
+	 *    @return The Irrlicht Device used in this Widget
 	 */
 	irr::IrrlichtDevice* getIrrlichtDevice();
 
-	/*! \brief Retrieve the Scene Manager
-	 *    \returns The Scene Manager used in this Widget
+	/** Retrieve the Scene Manager
+	 *    @return The Scene Manager used in this Widget
 	 */
 	irr::scene::ISceneManager* getSceneManager();
 
-	/*! \brief Sets the Color used to clear the screen (Background color).
-	 * Default is a dark gray (0.2 0.2 0.2)
-	 *    \param color Color (RGB)
+	/** Sets the Color used to clear the screen (Background color).
+	 * Default is a dark gray (0.2 0.2 0.2).
+	 *    @param color Color (RGB)
 	 */
 	void setClearColor(const irr::video::SColorf &color);
 
-	/*! \brief Set the aspect ratio of the active camera. Per default this is
-	 * set to window width / window height every time the widget is resized
-	 *    \param aspect Aspect Ratio to set
+	/** Set the aspect ratio of the active camera. Per default this is
+	 * set to window width / window height every time the widget is resized.
+	 *    @param aspect Aspect Ratio to set
 	 */
 	void setAspectRatio(irr::f32 aspect = -1.0f);
 
-	/*! \brief Initializes the Irrlicht subsystem. You have to call this after
-	 * the widget has been created
+	/** Initializes the Irrlicht subsystem. You have to call this after
+	 * the widget has been created.
 	 */
 	void initialize();
 
 	void setMouseListener(IMouseListener *listener);
 
 signals:
-	/*! \brief Is emitted whenever the user presses a mouse button */
+	/** Is emitted whenever the user presses a mouse button. */
 	void mousePress(QMouseEvent *event);
 
-	/*! \brief Is emitted whenever the user releases a mouse button */
+	/** Is emitted whenever the user releases a mouse button. */
 	void mouseRelease(QMouseEvent *event);
 
-	/*! \brief Is emitted whenever the user moves the mouse. Mouse Tracking is
-	 * active per default, call setMouseTracking(bool) to disable this */
+	/** Is emitted whenever the user moves the mouse. Mouse Tracking is
+	 * active per default, call setMouseTracking(bool) to disable this. */
 	void mouseMove(QMouseEvent *event);
 
-	/*! \brief Is emitted whenever the user pressed a Key */
+	/**Is emitted whenever the user pressed a Key. */
 	void keyPress(QKeyEvent *event);
 
-	/*! \brief Is emitted whenever the user releases a Key */
+	/** Is emitted whenever the user releases a Key. */
 	void keyRelease(QKeyEvent *event);
 };
 

@@ -3,6 +3,11 @@
 
 #include "guiobject.hpp"
 
+/**
+ * Displays a quadcopter in the 3D view.
+ *
+ * @author Sebastian Schmidt
+ */
 class GUIQuadcopter : public GUIObject {
 public:
 	GUIQuadcopter(ISceneNode *parent, std::vector<double> positionVector, std::vector<double> rotationMatrix,

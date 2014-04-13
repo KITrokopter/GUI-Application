@@ -14,6 +14,12 @@ using namespace video;
 using namespace io;
 using namespace gui;
 
+/**
+ * Generalized object to be displayed in the 3D view. Can be freely positioned and rotated.
+ * This class should be inherited for usage.
+ *
+ * @author Sebastian Schmidt
+ */
 class GUIObject {
 public:
 	GUIObject(ISceneNode *parent, std::vector<double> positionVector, std::vector<double> rotationMatrix,

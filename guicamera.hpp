@@ -3,6 +3,11 @@
 
 #include "guiobject.hpp"
 
+/**
+ * Displays a camera in the 3D view.
+ *
+ * @author Sebastian Schmidt
+ */
 class GUICamera : public GUIObject {
 public:
 	GUICamera(ISceneNode *parent, const char *meshPath, std::vector<double> positionVector,

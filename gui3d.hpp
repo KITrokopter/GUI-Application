@@ -18,6 +18,11 @@ namespace kitrokopter {
 class API;
 }
 
+/**
+ * Controller for the 3D view.
+ *
+ * @author Sebastian Schmidt
+ */
 class Gui3D : public QObject, public IMouseListener {
 	Q_OBJECT
 
