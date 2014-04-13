@@ -14,6 +14,11 @@ namespace kitrokopter {
 class APIQuadcopter;
 }
 
+/**
+ * Shows detail information for a single quadcopter.
+ *
+ * Additionally, allows setting tracking colors, blinking and flight selection.
+ */
 class QuadcopterDetailDialog : public QDialog, public kitrokopter::APIQuadcopterListener {
 	Q_OBJECT
 

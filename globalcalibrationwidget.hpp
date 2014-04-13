@@ -11,10 +11,22 @@ class GlobalCalibrationWidget;
 
 class CameraModel;
 
+/**
+ * The global calibration widget shows up to four camera live images.
+ *
+ * It is intended to be used as a tab page.
+ *
+ * @see CalibrationDialog
+ */
 class GlobalCalibrationWidget : public QWidget {
 	Q_OBJECT
 
 public:
+	/**
+	 * Constructs a widget for the given cameras.
+	 *
+	 * Only the first four (or less) cameras are used.
+	 */
 	explicit GlobalCalibrationWidget(QWidget *parent, QList<CameraModel*> cameras);
 	~GlobalCalibrationWidget();
 

@@ -10,10 +10,19 @@ class GamepadDebugDialog;
 
 class Gamepad;
 
+/**
+ * The gamepad debug dialog allows testing the controller binding as well as
+ * selecting which controller should be used.
+ *
+ * @see Gamepad
+ */
 class GamepadDebugDialog : public QDialog {
 	Q_OBJECT
 
 public:
+	/**
+	 * Constructs a gamepad debug dialog for the given gamepad.
+	 */
 	explicit GamepadDebugDialog(QWidget *parent, Gamepad *gamepad);
 	~GamepadDebugDialog();
 

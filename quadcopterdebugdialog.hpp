@@ -9,6 +9,11 @@ namespace Ui {
 class QuadcopterDebugDialog;
 }
 
+/**
+ * Shows all quadcopter data in a single table.
+ *
+ * @see QuadcopterModel
+ */
 class QuadcopterDebugDialog : public QDialog {
 	Q_OBJECT
 

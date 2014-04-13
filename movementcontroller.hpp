@@ -9,6 +9,11 @@ namespace kitrokopter {
 class API;
 }
 
+/**
+ * Listens for gamepad input and forwards it to the API.
+ *
+ * @see Gamepad
+ */
 class MovementController : public QObject {
 	Q_OBJECT
 public:

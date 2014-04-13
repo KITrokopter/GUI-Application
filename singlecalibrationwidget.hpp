@@ -10,6 +10,9 @@ class SingleCalibrationWidget;
 
 class CameraModel;
 
+/**
+ * Shows live video for a single camera.
+ */
 class SingleCalibrationWidget : public QWidget {
 	Q_OBJECT
 

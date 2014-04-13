@@ -25,6 +25,9 @@ enum QuadcopterColumns
 
 typedef QVector<kitrokopter::APIQuadcopter*> QuadcopterVector;
 
+/**
+ * The quadcopter model adapts the API's quadcopters to a Qt table model.
+ */
 class QuadcopterModel : public QAbstractTableModel {
 	Q_OBJECT
 public:

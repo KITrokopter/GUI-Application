@@ -7,6 +7,11 @@ namespace Ui {
 class AboutDialog;
 }
 
+/**
+ * The dialog shown via the Help menu.
+ *
+ * @see MainWindow
+ */
 class AboutDialog : public QDialog {
 	Q_OBJECT
 

@@ -19,11 +19,20 @@ class QuadcopterDebugDialog;
 class QuadcopterModel;
 class QuadcopterTrackedFilter;
 
+/**
+ * The main window of the KITrokopter GUI.
+ */
 class MainWindow : public QMainWindow {
 	Q_OBJECT
 
 public:
+	/**
+	 * Constructs a main window with the given API.
+	 */
 	explicit MainWindow(QWidget *parent, kitrokopter::API *api);
+	/**
+	 * Initializes Irrlicht for the 3d view.
+	 */
 	void initializeIrrlicht();
 
 	~MainWindow();
