@@ -14,6 +14,11 @@
  *
  * It uses polling with a fixed interval to check for input. The analog stick
  * axes are snapped to zero if they fall under THRESHOLD.
+ *
+ * Use SDL_GameControllerAddMapping if your gamepad isn't supported by SDL
+ * natively.
+ *
+ * @see https://wiki.libsdl.org/SDL_GameControllerAddMapping
  */
 class Gamepad : public QObject {
 	Q_OBJECT
